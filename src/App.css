@@ -4,6 +4,8 @@
   margin: 0;
   padding: 0 rem;
   text-align: center;
+  background-color: black;
+  color: white;
 }
 
 .item_container {
