@@ -1,0 +1,141 @@
+/* Layout general */
+.cap-body {
+  min-height: 100vh;
+  padding: 24px 16px;
+  box-sizing: border-box;
+  background: #020617;
+  color: #e5e7eb;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+}
+
+.cap-body h1 {
+  font-size: 1.6rem;
+  margin-bottom: 8px;
+}
+
+.cap-body h2 {
+  margin-top: 16px;
+  margin-bottom: 8px;
+}
+
+/* Reutilizá el mismo estilo de formula-block y tag
+   que ya tenés en potenciaMotorTrifasico / inductor:
+   .formula-block, .tag, etc.
+   Si no lo tenés, algo así: */
+
+.formula-block {
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid #1f2937;
+  background: #020617;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+  margin-bottom: 10px;
+}
+
+.formula-block .tag {
+  display: inline-block;
+  margin-bottom: 6px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: 1px solid #1f2937;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #a5b4fc;
+}
+
+/* ============================
+   Calculadora de capacitor
+   ============================ */
+
+.cap-calc {
+  margin-top: 8px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid #1f2937;
+  background: #020617;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+  font-size: 0.9rem;
+  color: #e5e7eb;
+}
+
+.cap-calc > p {
+  margin-bottom: 10px;
+}
+
+.cap-calc-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+@media (max-width: 600px) {
+  .cap-calc-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.cap-calc-grid label {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.8rem;
+  color: #cbd5f5;
+}
+
+.cap-calc-grid input {
+  margin-top: 3px;
+  padding: 6px 8px;
+  border-radius: 8px;
+  border: 1px solid #1f2937;
+  background: #020617;
+  color: #e5e7eb;
+  font-size: 0.85rem;
+  box-sizing: border-box;
+}
+
+.cap-calc-grid input:focus {
+  outline: none;
+  border-color: #38bdf8;
+  box-shadow: 0 0 0 1px rgba(56, 189, 248, 0.5);
+}
+
+/* Resultados */
+
+.cap-calc-results {
+  border-top: 1px solid #1f2937;
+  padding-top: 8px;
+}
+
+.cap-calc-results h3 {
+  margin: 0 0 6px 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #e5e7eb;
+}
+
+.cap-calc-results ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 0.85rem;
+}
+
+.cap-calc-results li {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 4px 0;
+  border-bottom: 1px solid #0b1120;
+}
+
+.cap-calc-results li:last-child {
+  border-bottom: none;
+}
+
+.cap-calc-note {
+  margin-top: 6px;
+  font-size: 0.75rem;
+  color: #9ca3af;
+}

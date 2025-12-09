@@ -4,6 +4,10 @@ import PotenciaMotorTrifasico from "../componentes/PotenciaMotorTrifasico";
 import MotorTrifasicoParVelocidad from "../componentes/MotorTrifasicoParVelocidad";
 import CosenoPhi from "../componentes/CosenoPhi";
 import EnsayosMotorTrifasico from "../componentes/EnsayosMotorTrifasico";
+import InductorCheatSheet from "../componentes/InductorCheatSheet";
+import CapacitorCheatSheet from "../componentes/CapacitorCheatSheet";
+import RlcSerieCheatSheet from "../componentes/RlcSerieCheatSheet";
+import CablePotenciaCobre from "../componentes/CablePotenciaCobre";
 import "./MenuFormulas.css";
 
 const MenuFormulas: React.FC = () => {
@@ -62,6 +66,42 @@ const MenuFormulas: React.FC = () => {
                 Ensayo en vacío y rotor bloqueado para obtener parámetros.
               </span>
             </li>
+            <li
+              className="formulas-list-item"
+              onClick={() => setSelectedFormula("inductorCheatSheet")}
+            >
+              <span className="formulas-item-title">Inductor ideal: fórmulas clave</span>
+              <span className="formulas-item-desc">
+                Resumen de fórmulas esenciales para el análisis de inductores ideales.
+                </span>
+            </li>
+            <li
+              className="formulas-list-item"
+              onClick={() => setSelectedFormula("capacitorCheatSheet")}
+            >
+              <span className="formulas-item-title">Capacitor ideal: fórmulas clave</span>
+              <span className="formulas-item-desc">
+                Resumen de fórmulas esenciales para el análisis de capacitores ideales.
+                </span>
+            </li>
+            <li
+              className="formulas-list-item"
+              onClick={() => setSelectedFormula("rlcSerieCheatSheet")}
+            >
+              <span className="formulas-item-title">Circuito RLC serie: fórmulas clave</span>
+              <span className="formulas-item-desc">
+                Resumen de fórmulas esenciales para el análisis de circuitos RLC serie.
+                </span>
+            </li>
+            <li
+              className="formulas-list-item"
+              onClick={() => setSelectedFormula("cablePotenciaCobre")}
+            >
+              <span className="formulas-item-title">Cable de potencia de cobre</span>
+              <span className="formulas-item-desc">
+                Cálculo simplificado de sección de cable según potencia e intensidad.
+                </span>
+            </li>
           </ul>
         )}
 
@@ -117,6 +157,46 @@ const MenuFormulas: React.FC = () => {
               Ensayo en vacío y rotor bloqueado para determinar el circuito equivalente.
             </p>
             <EnsayosMotorTrifasico />
+          </section>
+        )}
+
+        {selectedFormula === "inductorCheatSheet" && (
+          <section className="formulas-section">
+            <h3 className="formulas-section-title">Inductor ideal: fórmulas clave</h3>
+            <p className="formulas-section-subtitle">
+              Resumen de fórmulas esenciales para el análisis de inductores ideales.
+            </p>
+            <InductorCheatSheet />
+          </section>
+        )}
+
+        {selectedFormula === "capacitorCheatSheet" && (
+          <section className="formulas-section">
+            <h3 className="formulas-section-title">Capacitor ideal: fórmulas clave</h3>
+            <p className="formulas-section-subtitle">
+              Resumen de fórmulas esenciales para el análisis de capacitores ideales.
+            </p>
+            <CapacitorCheatSheet />
+          </section>
+        )}
+
+        {selectedFormula === "rlcSerieCheatSheet" && (
+          <section className="formulas-section">
+            <h3 className="formulas-section-title">Circuito RLC serie: fórmulas clave</h3>
+            <p className="formulas-section-subtitle">
+              Resumen de fórmulas esenciales para el análisis de circuitos RLC serie.
+            </p>
+            <RlcSerieCheatSheet />
+          </section>
+        )}
+
+        {selectedFormula === "cablePotenciaCobre" && (
+          <section className="formulas-section">
+            <h3 className="formulas-section-title">Cable de potencia de cobre</h3>
+            <p className="formulas-section-subtitle">
+              Cálculo simplificado de sección de cable según potencia e intensidad.
+            </p>
+            <CablePotenciaCobre />
           </section>
         )}
       </div>

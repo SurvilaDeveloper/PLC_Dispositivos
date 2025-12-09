@@ -1,0 +1,253 @@
+/* src/componentes/InductorCheatSheet.css */
+
+.inductor-wrapper {
+  min-height: 100vh;
+  padding: 24px 16px;
+  box-sizing: border-box;
+  background: #020617; /* fondo oscuro general */
+  color: #e5e7eb;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.inductor-panel {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 18px 20px 24px 20px;
+  border-radius: 16px;
+  border: 1px solid #1f2937;
+  background: rgba(15, 23, 42, 0.98);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+}
+
+/* Header */
+
+.inductor-header {
+  margin-bottom: 20px;
+}
+
+.inductor-pill {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid #1f2937;
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #a5b4fc;
+  background: rgba(15, 23, 42, 0.95);
+}
+
+.inductor-title {
+  margin: 10px 0 4px 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #f9fafb;
+}
+
+.inductor-subtitle {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #cbd5f5;
+}
+
+/* Contenido general */
+
+.inductor-content {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.inductor-section {
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid #1f2937;
+  background: #020617;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+}
+
+.inductor-section-title {
+  margin: 0 0 6px 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #f9fafb;
+}
+
+.inductor-text {
+  margin: 4px 0 6px 0;
+  font-size: 0.9rem;
+  color: #e5e7eb;
+}
+
+.inductor-note {
+  margin: 6px 0 0 0;
+  font-size: 0.8rem;
+  color: #9ca3af;
+}
+
+/* Ecuaciones */
+
+.inductor-equation-block {
+  margin: 6px 0;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: #020617;
+  border: 1px solid #1f2937;
+}
+
+.inductor-equation {
+  font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
+  font-size: 0.9rem;
+  color: #bfdbfe;
+}
+
+.inductor-equation + .inductor-equation {
+  margin-top: 4px;
+}
+
+.inductor-equation-desc {
+  margin-top: 4px;
+  font-size: 0.8rem;
+  color: #9ca3af;
+}
+
+/* Código inline / variables */
+
+.inductor-code-inline {
+  display: inline-block;
+  padding: 2px 6px;
+  border-radius: 6px;
+  background: #020617;
+  color: #bfdbfe;
+  font-size: 0.8rem;
+  font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
+  border: 1px solid #1f2937;
+}
+
+/* Listas */
+
+.inductor-list {
+  margin: 4px 0 0 14px;
+  padding: 0;
+  font-size: 0.85rem;
+  color: #e5e7eb;
+}
+
+.inductor-list li {
+  margin-bottom: 3px;
+}
+
+/* Footer */
+
+.inductor-footer {
+  margin-top: 10px;
+  padding-top: 8px;
+  border-top: 1px solid #1f2937;
+  font-size: 0.75rem;
+  color: #9ca3af;
+}
+
+/* Responsive */
+
+@media (max-width: 600px) {
+  .inductor-panel {
+    padding: 14px 12px 18px 12px;
+  }
+
+  .inductor-title {
+    font-size: 1.3rem;
+  }
+}
+
+/* ============================
+   Calculadora de inductor
+   ============================ */
+
+.ind-calc {
+  margin-top: 8px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid #1f2937;
+  background: #020617;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+  font-size: 0.9rem;
+  color: #e5e7eb;
+}
+
+.ind-calc > p {
+  margin-bottom: 10px;
+}
+
+/* 👉 ESTA ES LA CLASE QUE FALTABA 👇 */
+.ind-calc-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+@media (max-width: 600px) {
+  .ind-calc-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.ind-calc-grid label {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.8rem;
+  color: #cbd5f5;
+}
+
+.ind-calc-grid input {
+  margin-top: 3px;
+  padding: 6px 8px;
+  border-radius: 8px;
+  border: 1px solid #1f2937;
+  background: #020617;
+  color: #e5e7eb;
+  font-size: 0.85rem;
+  box-sizing: border-box;
+}
+
+.ind-calc-grid input:focus {
+  outline: none;
+  border-color: #38bdf8;
+  box-shadow: 0 0 0 1px rgba(56, 189, 248, 0.5);
+}
+
+/* Resultados */
+
+.ind-calc-results {
+  border-top: 1px solid #1f2937;
+  padding-top: 8px;
+}
+
+.ind-calc-results h3 {
+  margin: 0 0 6px 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #e5e7eb;
+}
+
+.ind-calc-results ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 0.85rem;
+}
+
+.ind-calc-results li {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 4px 0;
+  border-bottom: 1px solid #0b1120;
+}
+
+.ind-calc-results li:last-child {
+  border-bottom: none;
+}
+

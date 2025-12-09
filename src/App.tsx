@@ -3,6 +3,7 @@ import './App.css'
 import Menu from './Menu'
 import MenuFormulas from './pages/menuFormulas'
 import LadderPlcCheatSheet from './componentes/LadderCheatSheet'
+import InstalacionesDomesticas from './pages/InstalacionesDomesticas'
 
 function App() {
 
@@ -24,12 +25,14 @@ function App() {
         <button onClick={() => setPage('componentes')}>Componentes</button>
         <button onClick={() => setPage('ladder')}>Comandos Ladder</button>
         <button onClick={() => setPage('formulas')}>Fórmulas</button>
+        <button onClick={() => setPage('instalacionesDom')}>Instalaciones Domésticas</button>
         </div>
 
         <hr />
 {page === 'componentes' && <Menu />}
 {page === 'ladder' && <LadderPlcCheatSheet />}
 {page === 'formulas' && <MenuFormulas />}
+{page === 'instalacionesDom' && <InstalacionesDomesticas />}
       </div>
     </>
   )

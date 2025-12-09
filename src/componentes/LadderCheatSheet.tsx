@@ -7,7 +7,7 @@ export default function LadderPlcCheatSheet() {
       {/* Encabezado */}
       <header className="plc-header">
         <div className="plc-header-pill">PLC · Lenguaje Ladder</div>
-        <h1 className="plc-title">Chuleta de comandos Ladder para PLC</h1>
+        <h1 className="plc-title">Apuntes de comandos Ladder para PLC</h1>
         <p className="plc-subtitle">
           Resumen de contactos, bobinas, temporizadores, contadores y bloques típicos según IEC 61131-3.
           Útil como referencia cuando estás programando PLC (Siemens, Allen-Bradley, Schneider, etc.).
@@ -27,6 +27,11 @@ export default function LadderPlcCheatSheet() {
         <a href="#casting" className="plc-nav-item">Casting</a>
         <a href="#flujo" className="plc-nav-item">Flujo de programa</a>
         <a href="#especiales" className="plc-nav-item">Bloques especiales</a>
+        <a href="#scan" className="plc-nav-item">Ciclo de scan</a>
+        <a href="#direccionamiento" className="plc-nav-item">Direccionamiento</a>
+        <a href="#tipos-datos" className="plc-nav-item">Tipos de datos</a>
+        <a href="#ejemplos" className="plc-nav-item">Ejemplos Ladder</a>
+        <a href="#buenas-practicas" className="plc-nav-item">Buenas prácticas</a>
       </nav>
 
       {/* Contenido */}
@@ -109,25 +114,25 @@ export default function LadderPlcCheatSheet() {
           </p>
           <ul className="plc-list">
             <li>
-              <strong>TON — Timer On-Delay</strong>  
+              <strong>TON — Timer On-Delay</strong>
               <div className="plc-text-small">
                 Q pasa a 1 cuando IN se mantiene en 1 durante PT.
               </div>
             </li>
             <li>
-              <strong>TOF — Timer Off-Delay</strong>  
+              <strong>TOF — Timer Off-Delay</strong>
               <div className="plc-text-small">
                 Q se mantiene en 1 un tiempo PT después de que IN pasa a 0.
               </div>
             </li>
             <li>
-              <strong>TP — Timer Pulse</strong>  
+              <strong>TP — Timer Pulse</strong>
               <div className="plc-text-small">
                 Ante el flanco 0→1 de IN, Q se pone en 1 durante PT y luego vuelve a 0.
               </div>
             </li>
             <li>
-              <strong>TONR / RTO — Timer acumulativo / retentivo</strong>  
+              <strong>TONR / RTO — Timer acumulativo / retentivo</strong>
               <div className="plc-text-small">
                 Acumula tiempo mientras IN está en 1; solo se resetea con una señal de reset.
               </div>
@@ -268,14 +273,177 @@ export default function LadderPlcCheatSheet() {
             <li><strong>PWM</strong> — generación de señales PWM.</li>
           </ul>
         </section>
+
+        {/* 12. Ciclo de scan */}
+        <section id="scan" className="plc-section">
+          <h2 className="plc-section-title">12. Ciclo de scan del PLC</h2>
+          <ul className="plc-list">
+            <li>
+              <strong>Lectura de entradas físicas</strong> — el PLC copia el estado de entradas digitales/analógicas a la imagen de proceso.
+            </li>
+            <li>
+              <strong>Ejecución del programa</strong> — se evalúan los peldaños Ladder, bloques y funciones usando la imagen de entradas.
+            </li>
+            <li>
+              <strong>Actualización de salidas</strong> — el resultado (bits internos, salidas, registros) se vuelca a las salidas físicas.
+            </li>
+          </ul>
+          <p className="plc-text-small">
+            Esto se repite cada ciclo de scan. Un cambio en una entrada puede reflejarse
+            en la salida recién en el siguiente ciclo.
+          </p>
+        </section>
+
+        {/* 13. Direccionamiento */}
+        <section id="direccionamiento" className="plc-section">
+          <h2 className="plc-section-title">13. Direccionamiento típico (ejemplos)</h2>
+          <div className="plc-two-columns">
+            <div>
+              <h3 className="plc-section-subtitle">Siemens (S7, TIA Portal)</h3>
+              <ul className="plc-list">
+                <li><code>I0.0</code> — Entrada digital 0, bit 0</li>
+                <li><code>Q0.0</code> — Salida digital 0, bit 0</li>
+                <li><code>M0.0</code> — Marca (bit interno)</li>
+                <li><code>DB10.DBW0</code> — Palabra en Data Block 10, offset 0</li>
+                <li><code>DB20.DBD4</code> — Doble palabra (REAL/DINT) en DB20, offset 4</li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="plc-section-subtitle">Allen-Bradley (Logix)</h3>
+              <ul className="plc-list">
+                <li><code>I:1/0</code> — Entrada módulo 1, bit 0</li>
+                <li><code>O:2/1</code> — Salida módulo 2, bit 1</li>
+                <li><code>B3:0/0</code> — Bit interno (archivo B3)</li>
+                <li><code>N7:0</code> — Entero (archivo N7)</li>
+                <li><code>F8:0</code> — Float (archivo F8)</li>
+              </ul>
+            </div>
+          </div>
+          <p className="plc-text-small">
+            El nombre real de las direcciones depende de la familia de PLC y del proyecto,
+            pero la idea es similar: entradas, salidas, marcas y datos en bloques/archivos.
+          </p>
+        </section>
+
+        {/* 16. Tipos de datos y variables */}
+        <section id="tipos-datos" className="plc-section">
+          <h2 className="plc-section-title">14. Tipos de datos y tipo de variable</h2>
+
+          <div className="plc-two-columns">
+            <div>
+              <h3 className="plc-section-subtitle">Tipos de datos IEC 61131-3</h3>
+              <ul className="plc-list">
+                <li><strong>BOOL</strong> — lógico TRUE/FALSE (entradas, salidas, flags).</li>
+                <li><strong>SINT, INT, DINT</strong> — enteros con signo (8/16/32 bits).</li>
+                <li><strong>USINT, UINT, UDINT</strong> — enteros sin signo.</li>
+                <li><strong>REAL, LREAL</strong> — números reales (coma flotante).</li>
+                <li><strong>TIME</strong> — tiempos (ms, s, etc.), usado en TON/TOF/TP.</li>
+                <li><strong>DATE, TIME_OF_DAY, DATE_AND_TIME</strong> — fechas y horas.</li>
+                <li><strong>BYTE, WORD, DWORD</strong> — grupos de bits (8/16/32).</li>
+                <li><strong>STRING[n]</strong> — cadenas de texto.</li>
+              </ul>
+            </div>
+
+            <div>
+              <h3 className="plc-section-subtitle">Tipo de variable en el programa</h3>
+              <ul className="plc-list">
+                <li>
+                  <strong>Entradas físicas</strong> — terminales de campo (sensores).
+                  Ej.: Siemens <code>I0.0</code>, AB <code>I:1/0</code>.
+                </li>
+                <li>
+                  <strong>Salidas físicas</strong> — actuadores, relés, bobinas.
+                  Ej.: Siemens <code>Q0.0</code>, AB <code>O:2/0</code>.
+                </li>
+                <li>
+                  <strong>Marcas / internas</strong> — bits o palabras auxiliares (memoria).
+                  Ej.: Siemens <code>M0.0</code>, AB <code>B3:0/0</code>.
+                </li>
+                <li>
+                  <strong>Locales de bloque</strong> — declaradas dentro de un FB/FC, solo visibles allí.
+                </li>
+                <li>
+                  <strong>Globales</strong> — visibles desde varios bloques (según la configuración del proyecto).
+                </li>
+                <li>
+                  <strong>Retentivas</strong> — conservan valor al apagar/encender PLC (según marca/configuración).
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <p className="plc-text-small">
+            En Ladder, verás el tipo de dato en la declaración de variables (ej. <code>Nivel_Tanque : REAL</code>,
+            <code>Marcha_Motor : BOOL</code>) y el “tipo de variable” según dónde esté vinculada: entrada, salida,
+            marca interna, global, etc.
+          </p>
+        </section>
+
+
+        {/* 14. Ejemplos Ladder */}
+        <section id="ejemplos" className="plc-section">
+          <h2 className="plc-section-title">15. Ejemplos de peldaños típicos</h2>
+
+          <h3 className="plc-section-subtitle">14.1. Arranque/parada de motor con enclavamiento</h3>
+          <p className="plc-text-small">
+            Lógica clásica de marcha–paro con realimentación del contactor:
+          </p>
+          <ul className="plc-list">
+            <li>
+              <strong>Entradas:</strong> <code>Start</code> (pulsador NO),
+              <code>Stop</code> (pulsador NC), <code>KM</code> (realimentación del contactor).
+            </li>
+            <li>
+              <strong>Salida:</strong> <code>KM</code> (bobina del contactor).
+            </li>
+          </ul>
+          <p className="plc-text-small">
+            Peldaño lógico: <code>Stop</code> en serie con (<code>Start</code> en paralelo con
+            el contacto de realimentación de <code>KM</code>), y al final la bobina de <code>KM</code>.
+          </p>
+
+          <h3 className="plc-section-subtitle">14.2. Temporizado de arranque</h3>
+          <p className="plc-text-small">
+            Uso de TON para arrancar un motor unos segundos después de una orden:
+          </p>
+          <ul className="plc-list">
+            <li>Peldaño 1: <code>Start</code> → <strong>TON</strong> con <code>PT = 5 s</code>.</li>
+            <li>Peldaño 2: <code>TON.Q</code> → bobina <code>KM</code>.</li>
+          </ul>
+        </section>
+
+        {/* 15. Buenas prácticas */}
+        <section id="buenas-practicas" className="plc-section">
+          <h2 className="plc-section-title">16. Buenas prácticas de programación en Ladder</h2>
+          <ul className="plc-list">
+            <li>
+              <strong>Nombra bien las variables</strong> — evitá <code>M0.0</code> sin descripción;
+              usá nombres tipo <code>Marcha_Banda1</code>, <code>Alarma_Nivel_Alto</code>, etc.
+            </li>
+            <li>
+              <strong>Comentá los peldaños</strong> — explicá qué hace cada peldaño (función,
+              condición de seguridad, etc.).
+            </li>
+            <li>
+              <strong>Separá en secciones</strong> — por máquina, zona o función (seguridad, arranques, alarmas, etc.).
+            </li>
+            <li>
+              <strong>Evitá lógica excesivamente anidada</strong> — si el peldaño es muy largo, dividilo en varios.
+            </li>
+            <li>
+              <strong>Usá bloques reutilizables</strong> — FB/FC para secuencias, PID, gestión de alarmas, etc.
+            </li>
+            <li>
+              <strong>Probá en simulador</strong> cuando sea posible antes de descargar en la planta real.
+            </li>
+          </ul>
+        </section>
       </main>
 
       <footer className="plc-footer">
-        Chuleta pensada como guía rápida mientras programás PLC en Ladder.
-        Podés adaptarla a cada marca cambiando nombres de bloques.
+        Apuntes pensados como guía rápida mientras programás PLC en Ladder.
+        Podés adaptarlos a cada marca cambiando nombres de bloques y direcciones.
       </footer>
     </div>
   );
 }
-
-

@@ -1,0 +1,106 @@
+.regla-wrapper {
+  min-height: 100vh;
+  padding: 24px 16px;
+  box-sizing: border-box;
+  background: #020617;
+  color: #e5e7eb;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.regla-header {
+  max-width: 900px;
+  margin: 0 auto 16px auto;
+}
+
+.regla-pill {
+  display: inline-block;
+  padding: 2px 10px;
+  margin-bottom: 6px;
+  border-radius: 999px;
+  border: 1px solid #1f2937;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #a5b4fc;
+}
+
+.regla-title {
+  font-size: 1.6rem;
+  margin: 0 0 6px 0;
+}
+
+.regla-subtitle {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #9ca3af;
+}
+
+.regla-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 16px auto;
+  max-width: 900px;
+}
+
+.regla-nav-item {
+  font-size: 0.8rem;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid #1f2937;
+  text-decoration: none;
+  color: #e5e7eb;
+}
+
+.regla-nav-item:hover {
+  background: #111827;
+}
+
+.regla-content {
+  max-width: 900px;
+  margin: 0 auto 32px auto;
+}
+
+.regla-section {
+  margin-bottom: 18px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid #1f2937;
+  background: #020617;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.4);
+}
+
+.regla-section-title {
+  margin: 0 0 8px 0;
+  font-size: 1.05rem;
+}
+
+.regla-text {
+  font-size: 0.9rem;
+  margin: 0 0 6px 0;
+}
+
+.regla-text-small {
+  font-size: 0.8rem;
+  color: #9ca3af;
+}
+
+.regla-list {
+  list-style: disc;
+  padding-left: 20px;
+  margin: 0 0 6px 0;
+  font-size: 0.9rem;
+}
+
+.regla-list li + li {
+  margin-top: 4px;
+}
+
+.regla-footer {
+  max-width: 900px;
+  margin: 0 auto;
+  padding-top: 8px;
+  border-top: 1px solid #1f2937;
+  font-size: 0.8rem;
+  color: #9ca3af;
+}
