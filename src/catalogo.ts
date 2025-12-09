@@ -1345,3 +1345,4 @@ export const componentType = [
     'Infraestructura / Montaje',
     'Instrumentación de proceso'
 ]
+
