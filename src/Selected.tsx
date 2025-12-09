@@ -85,10 +85,11 @@ function Selected({
           <span>&nbsp;&nbsp;&nbsp;</span>
           <span className="item_descript">{componente[7]}</span>
           <br />
+          <div className="button-group">
+          <button onClick={() => handleClickG(componente)} className='button-nav'>Buscar en Google</button>
+          <button onClick={() => handleClickM(componente)} className='button-nav'>Buscar en Mercado Libre</button>
+          </div>
 
-          <button onClick={() => handleClickG(componente)}>Buscar en Google</button>
-          <br />
-          <button onClick={() => handleClickM(componente)}>Buscar en Mercado Libre</button>
         </div>
       ))}
     </div>

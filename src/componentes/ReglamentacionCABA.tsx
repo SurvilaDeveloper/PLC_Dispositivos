@@ -15,6 +15,7 @@ const ReglamentacionCABA: React.FC = () => {
           Edenor/Edesur. Este material es sólo informativo y no reemplaza normas,
           reglamentos ni el trabajo de profesionales habilitados.
         </p>
+        <a href="https://drive.google.com/file/d/1V-wxAOlz50sWMIj-qDGDa-Pho2U_1DJo/view?usp=sharing" target="_blank" rel="noopener noreferrer" className="linkNormativa">Ver Reglamentación AEA 90364</a>
       </header>
 
       <nav className="regla-nav">
@@ -204,6 +205,7 @@ const ReglamentacionCABA: React.FC = () => {
             correspondientes.
           </p>
         </section>
+        <a href="https://drive.google.com/file/d/1V-wxAOlz50sWMIj-qDGDa-Pho2U_1DJo/view?usp=sharing" target="_blank" rel="noopener noreferrer" className="linkNormativa">Ver Reglamentación AEA 90364</a>
       </main>
 
       <footer className="regla-footer">

@@ -1,0 +1,8 @@
+.temaButtons {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin: 12px 0;
+  padding: 0.5rem;
+  background-color: #121212;
+}

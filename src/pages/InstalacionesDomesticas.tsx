@@ -14,9 +14,9 @@ const InstalacionesDomesticas: React.FC = () => {
     return (
         <main className="instalaciones-body">
             <h1>Instalaciones Domésticas</h1>
-            <div>
+            <div className="temaButtons">
                 <button onClick={()=>handleClick('dispositivos')}>Dispositivos eléctricos</button>
-                <button onClick={()=>handleClick('reglamentacion')}>Reglamentación CABA</button>
+                <button onClick={()=>handleClick('reglamentacion')}>Reglamentación AMBA</button>
             </div>
 
             {(selectedSection === 'dispositivos' && (
