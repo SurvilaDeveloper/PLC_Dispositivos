@@ -1,0 +1,178 @@
+.cable-wrapper {
+  min-height: 100vh;
+  padding: 24px 16px;
+  box-sizing: border-box;
+  background: #020617;
+  color: #e5e7eb;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+}
+
+.cable-header {
+  max-width: 900px;
+  margin: 0 auto 16px auto;
+}
+
+.cable-pill {
+  display: inline-block;
+  padding: 2px 10px;
+  margin-bottom: 6px;
+  border-radius: 999px;
+  border: 1px solid #1f2937;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #a5b4fc;
+}
+
+.cable-title {
+  font-size: 1.6rem;
+  margin: 0 0 6px 0;
+}
+
+.cable-subtitle {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #9ca3af;
+}
+
+.cable-content {
+  max-width: 900px;
+  margin: 0 auto 32px auto;
+}
+
+.cable-section {
+  margin-top: 16px;
+  margin-bottom: 18px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid #1f2937;
+  background: #020617;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.45);
+}
+
+.cable-section-title {
+  margin: 0 0 8px 0;
+  font-size: 1.05rem;
+}
+
+.cable-list {
+  list-style: disc;
+  padding-left: 20px;
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.cable-list li + li {
+  margin-top: 4px;
+}
+
+.cable-table-container {
+  width: 100%;
+  overflow-x: auto;
+  margin-top: 8px;
+}
+
+.cable-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.cable-table th,
+.cable-table td {
+  border: 1px solid #1f2937;
+  padding: 6px 8px;
+  text-align: left;
+}
+
+.cable-table th {
+  background: #030712;
+  font-weight: 600;
+}
+
+.cable-table tbody tr:nth-child(even) {
+  background: #020817;
+}
+
+.cable-table tbody tr:hover {
+  background: #0b1220;
+}
+
+.cable-note {
+  font-size: 0.8rem;
+  color: #9ca3af;
+  margin-top: 4px;
+}
+
+/* === Calculadora === */
+
+.cable-calc-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 10px 14px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.cable-calc-grid label {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.85rem;
+  gap: 4px;
+}
+
+.cable-calc-grid input,
+.cable-calc-grid select {
+  padding: 4px 6px;
+  border-radius: 8px;
+  border: 1px solid #374151;
+  background: #020617;
+  color: #e5e7eb;
+  font-size: 0.85rem;
+}
+
+.cable-calc-grid input:focus,
+.cable-calc-grid select:focus {
+  outline: none;
+  border-color: #4b5563;
+  box-shadow: 0 0 0 1px #4b5563;
+}
+
+.cable-calc-button {
+  margin-top: 6px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid #4b5563;
+  background: #111827;
+  color: #e5e7eb;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.05s ease,
+    box-shadow 0.15s ease;
+}
+
+.cable-calc-button:hover {
+  background: #1f2937;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.cable-calc-button:active {
+  transform: translateY(1px);
+}
+
+.cable-result {
+  margin-top: 8px;
+  font-size: 0.9rem;
+}
+
+/* Footer */
+
+.cable-footer {
+  max-width: 900px;
+  margin: 0 auto;
+  padding-top: 8px;
+  border-top: 1px solid #1f2937;
+  font-size: 0.8rem;
+  color: #9ca3af;
+}
