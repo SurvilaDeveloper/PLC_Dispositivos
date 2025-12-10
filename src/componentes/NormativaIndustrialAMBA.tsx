@@ -18,6 +18,7 @@ const NormativaIndustrialAMBA: React.FC = () => {
           de Buenos Aires (AMBA). Contenido de carácter informativo, no sustituye
           normas, reglamentos ni proyectos de ingeniería.
         </p>
+        <a href="https://drive.google.com/file/d/1V-wxAOlz50sWMIj-qDGDa-Pho2U_1DJo/view?usp=sharing" target="_blank" rel="noopener noreferrer" className="linkNormativa">Ver Reglamentación AEA 90364</a>
       </header>
 
       {/* Navegación rápida */}
@@ -260,6 +261,7 @@ const NormativaIndustrialAMBA: React.FC = () => {
             eléctricas industriales.
           </p>
         </section>
+        <a href="https://drive.google.com/file/d/1V-wxAOlz50sWMIj-qDGDa-Pho2U_1DJo/view?usp=sharing" target="_blank" rel="noopener noreferrer" className="linkNormativa">Ver Reglamentación AEA 90364</a>
       </main>
 
       <footer className="ind-regla-footer">
