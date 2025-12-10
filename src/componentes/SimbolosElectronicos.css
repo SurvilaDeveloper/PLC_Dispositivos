@@ -1,0 +1,44 @@
+img {
+    background-color: white;
+}
+
+/* Enlaces normales */
+a {
+  color: white;          /* texto blanco */
+  text-decoration: none; /* opcional: sin subrayado */
+}
+
+/* Enlaces ya visitados */
+a:visited {
+  color: yellow;         /* texto amarillo después de hacer clic */
+}
+
+/* Opcional: al pasar el mouse */
+a:hover {
+  text-decoration: underline;
+}
+
+/* Opcional: mientras hacés clic */
+a:active {
+  color: rgb(184, 119, 0);
+}
+
+.table-container {
+  overflow-x: auto;
+  background-color: rgb(63, 52, 30);
+  color:rgb(255, 255, 255);
+}
+
+.dtable {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.dtable tr {
+  border-bottom: 1px solid #8b8b8b; /* línea bajo cada fila */
+}
+
+.dtable th,
+.dtable td {
+  padding: 0.4rem 0.6rem;
+}

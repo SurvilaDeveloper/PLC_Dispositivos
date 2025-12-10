@@ -14,6 +14,7 @@ import EnsayosMotorTrifasico from './componentes/EnsayosMotorTrifasico'
 import CosenoPhi from './componentes/CosenoPhi'
 import ComponentesElectronicosCheatSheet from './componentes/ComponentesElectronicosCheatSheet'
 import TablaCorrienteCable from './componentes/TablaCorrienteCable'
+import SimbolosElectronicos from './componentes/simbolosElectronicos'
 
 function App() {
 
@@ -173,7 +174,15 @@ function App() {
                 Tabla de corriente admisible según sección del cable de cobre.
               </span>
             </li>
-
+            <li
+              className="formulas-list-item"
+              onClick={() => setPage("simbolosElectronicos")}
+            >
+              <span className="formulas-item-title">Símbolos electrónicos</span>
+              <span className="formulas-item-desc">
+                Tabla con símbolos normalizados de componentes electrónicos.
+              </span>
+            </li>
 
 
 
@@ -191,6 +200,7 @@ function App() {
         {page === 'instalacionesInd' && <InstalacionesIndustriales />}
         {page === 'componentesElectronicos' && <ComponentesElectronicosCheatSheet />}
         {page === 'tablaCorrienteCable' && <TablaCorrienteCable />}
+        {page === 'simbolosElectronicos' && <SimbolosElectronicos />}
         {page === 'presentacion' && (
           <div>
             <section className="home-hero">
