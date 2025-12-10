@@ -57,7 +57,7 @@ const ComponentesElectronicosCheatSheet: React.FC = () => {
                             que permiten ajustar niveles (por ejemplo, volumen, contraste,
                             puntos de ajuste en circuitos).
                         </li>
-                        <li className="link-item" onClick={() => handleClickW(['Trimmer'])}>
+                        <li className="link-item" onClick={() => handleClickW(['Potenciómetro'])}>
                             <strong>Trimmers</strong> — Resistores variables
                             que permiten ajustar niveles (por ejemplo, volumen, contraste,
                             puntos de ajuste en circuitos).
