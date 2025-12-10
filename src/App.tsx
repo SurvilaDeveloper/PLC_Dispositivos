@@ -19,7 +19,8 @@ function App() {
 
   const [page, setPage] = useState('presentacion');
   const [menuHeight, setMenuHeight] = useState('0');
-  const [menuVisibility, setMenuVisibility] = useState('hidden')
+  const [menuVisibility, setMenuVisibility] = useState<'visible' | 'hidden'>('hidden');
+
 
   const toggleMenu = () => {
     if (menuHeight === '0') {
@@ -31,6 +32,11 @@ function App() {
     }
   }
 
+  const resetMenu = () => {
+    setMenuHeight('0');
+    setMenuVisibility('hidden')
+  }
+
   return (
     <>
 
@@ -39,28 +45,37 @@ function App() {
         <h1>Electricidad y Electrónica</h1>
 
         <nav className="navbar">
-          <button className="home-button" onClick={() => setPage('presentacion')}>🏠</button>
+          <button className="home-button" onClick={() => {setPage('presentacion'); resetMenu()}}>🏠</button>
           <button className="menu-button" onClick={() => toggleMenu()}>Menú</button>
         </nav>
 
-        <div className='nav-buttons' style={{ height: menuHeight, overflow: 'hidden', visibility: menuVisibility}}>
+        <div className='nav-buttons' style={{ height: menuHeight, overflow: 'hidden', visibility: menuVisibility }}>
           <div className='temaButtons'> PLC - Automatización Industrial
-            <button onClick={() => {setPage('componentes');toggleMenu()}} className='button-nav'>Componentes</button>
-            <button onClick={() => {setPage('ladder');toggleMenu()}} className='button-nav'>Comandos Ladder</button>
+            <div className='buttons-container'>
+              <button onClick={() => { setPage('componentes'); toggleMenu() }} className='button-nav'>Componentes</button>
+              <button onClick={() => { setPage('ladder'); toggleMenu() }} className='button-nav'>Comandos Ladder</button>
+            </div>
           </div>
           <div className='temaButtons'> Fórmulas, Calculadoras y Tablas
-            <button onClick={() => {setPage('formulas');toggleMenu()}} className='button-nav'>Fórmulas</button>
-            <button onClick={() => {setPage('tablas');toggleMenu()}} className='button-nav'>Tablas</button>
-
+            <div className='buttons-container'>
+              <button onClick={() => { setPage('formulas'); toggleMenu() }} className='button-nav'>Fórmulas</button>
+              <button onClick={() => { setPage('tablas'); toggleMenu() }} className='button-nav'>Tablas</button>
+            </div>
           </div>
           <div className='temaButtons'> Instalaciones Eléctricas Domésticas
-            <button onClick={() => {setPage('instalacionesDom');toggleMenu()}} className='button-nav'>Instalaciones Domésticas</button>
+            <div className='buttons-container'>
+              <button onClick={() => { setPage('instalacionesDom'); toggleMenu() }} className='button-nav'>Instalaciones Domésticas</button>
+            </div>
           </div>
           <div className='temaButtons'> Instalaciones Eléctricas Industriales
-            <button onClick={() => {setPage('instalacionesInd');toggleMenu()}} className='button-nav'>Instalaciones Industriales</button>
+            <div className='buttons-container'>
+              <button onClick={() => { setPage('instalacionesInd'); toggleMenu() }} className='button-nav'>Instalaciones Industriales</button>
+            </div>
           </div>
           <div className='temaButtons'> Electrónica
-            <button onClick={() => {setPage('componentesElectronicos');toggleMenu()}} className='button-nav'>Componentes Electrónicos</button>
+            <div className='buttons-container'>
+              <button onClick={() => { setPage('componentesElectronicos'); toggleMenu() }} className='button-nav'>Componentes Electrónicos</button>
+            </div>
           </div>
 
         </div>
@@ -178,55 +193,52 @@ function App() {
         {page === 'tablaCorrienteCable' && <TablaCorrienteCable />}
         {page === 'presentacion' && (
           <div>
-<section className="home-hero">
-          <div className='card'>
-          <div className='profile-data'>
-            <p>Survila Gabriel - Desarrollador Full Stack</p>
-            <p>email: surviladeveloper@gmail.com</p>
-            <p>cel-WhatsApp: 11-5845-1937</p>
-          </div>
-          <img
-            src="./gabi.png"
-            alt="Foto de Gabriel Survila"
-            className="profile-image"
-          />
+            <section className="home-hero">
+              <div className='card'>
+                <div className='profile-data'>
+                  <p>Survila Gabriel - Desarrollador Full Stack</p>
+                  <p>email: surviladeveloper@gmail.com</p>
+                  <p>cel-WhatsApp: 11-5845-1937</p>
+                </div>
+                <img
+                  src="./gabi.png"
+                  alt="Foto de Gabriel Survila"
+                  className="profile-image"
+                />
 
 
-        </div>
-  <h1>Apuntes de Electricidad y Automatización – Material didáctico y calculadoras</h1>
+              </div>
+              <h1>Apuntes de Electricidad y Automatización – Material didáctico y calculadoras</h1>
 
-  <p>
-    Este sitio reúne en un solo lugar:
-  </p>
+              <p>
+                Este sitio reúne en un solo lugar:
+              </p>
+              <p>
+                <strong>Apuntes sobre instalaciones: </strong>
+                normas básicas, dispositivos hogareños e industriales, selección orientativa de cables y protecciones.
+              </p>
+              <p>
+                <strong>Motores trifásicos: </strong>
+                potencia, factor de potencia, curvas par–velocidad, ensayos y parámetros equivalentes.
+              </p>
+              <p>
+                <strong>PLC y Ladder: </strong>
+                comandos típicos, temporizadores, contadores, ciclo de scan y ejemplos de lógica de mando.
+              </p>
+              <p>
+                <strong>Electrónica básica: </strong>
+                componentes pasivos, semiconductores, RLC, inductores, capacitores y circuitos de ejemplo.
+              </p>
+              <p>
+                <strong>Calculadoras interactivas: </strong>
+                herramientas para estimar corrientes, secciones de cable, potencias y otros parámetros eléctricos.
+              </p>
 
-  <ul>
-    <li>
-      <strong>Apuntes sobre instalaciones:</strong>
-      normas básicas, dispositivos hogareños e industriales, selección orientativa de cables y protecciones.
-    </li>
-    <li>
-      <strong>Motores trifásicos:</strong>
-      potencia, factor de potencia, curvas par–velocidad, ensayos y parámetros equivalentes.
-    </li>
-    <li>
-      <strong>PLC y Ladder:</strong>
-      comandos típicos, temporizadores, contadores, ciclo de scan y ejemplos de lógica de mando.
-    </li>
-    <li>
-      <strong>Electrónica básica:</strong>
-      componentes pasivos, semiconductores, RLC, inductores, capacitores y circuitos de ejemplo.
-    </li>
-    <li>
-      <strong>Calculadoras interactivas:</strong>
-      herramientas para estimar corrientes, secciones de cable, potencias y otros parámetros eléctricos.
-    </li>
-  </ul>
-
-  <p>
-    El material tiene fines educativos y de consulta rápida, y no sustituye
-    las reglamentaciones AEA/IRAM ni el asesoramiento de profesionales matriculados.
-  </p>
-</section>
+              <p>
+                El material tiene fines educativos y de consulta rápida, y no sustituye
+                las reglamentaciones AEA/IRAM ni el asesoramiento de profesionales matriculados.
+              </p>
+            </section>
 
           </div>
         )}

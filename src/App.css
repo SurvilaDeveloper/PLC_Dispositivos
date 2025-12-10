@@ -227,13 +227,29 @@ ul {
 
 .temaButtons {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: space-between;
   gap: 12px;
   margin: 12px 0;
   padding: 0.5rem;
   background-color: #121212;
 }
 
+.buttons-container button {
+  font-size:medium;
+  color: white;
+  justify-content: center;
+  gap: 2px;
+  margin: 8px;
+  padding: 0.5rem;
+  background-color: #000000;
+  border: 1px solid #213249;
+}
+
+.buttons-container button:hover {
+  background-color: #213249;
+  cursor: pointer;
+}
 .card {
   border: 1px solid #adadad;
   border-radius: 8px;
@@ -447,10 +463,10 @@ ul {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 8px 12px;
-  background-color: #121212;
-  border-bottom: 1px solid #1f2937;
-  margin-bottom: 12px;
+  padding: 1px 22px;
+  background-color: #000000;
+  border-bottom: 1px solid #213249;
+  margin-bottom: 8px;
 }
 
 .nav-buttons {
@@ -461,9 +477,31 @@ ul {
   gap: 1px;
   margin: 12px 0;
   padding: 0.5rem;
-  background-color: #121212;
+  background-color: #000000;
 }
 
+.home-button {
+  font-size: large;
+  color:white;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin: 12px 0;
+  padding: 0.5rem;
+  background-color: #121212;
+  width: 100px
+}
+.menu-button {
+  font-size: large;
+  color: white;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin: 12px 0;
+  padding: 0.5rem;
+  background-color: #121212;
+  width: 100px;
+}
 /* Contenedor principal del hero */
 .home-hero {
   max-width: 900px;
