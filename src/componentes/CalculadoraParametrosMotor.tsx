@@ -1,5 +1,4 @@
 import React, { useState, useMemo } from "react";
-import "./potenciaMotorTrifasico.css";
 
 type Resultados = {
   // Ensayo en vacío
@@ -120,7 +119,7 @@ const CalculadoraParametrosMotor: React.FC = () => {
   }, [VL0, I0, P0_kW, VLLR, ILR, PLR_kW, R1medida]);
 
   return (
-    <main className="pm-body">
+    <main className="page-wrapper">
       <h1>Calculadora de parámetros de motor de inducción trifásico</h1>
 
       <section className="formula-block">

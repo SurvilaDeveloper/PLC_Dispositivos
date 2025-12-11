@@ -1,5 +1,4 @@
 import React, { useState, useMemo } from "react";
-import "./potenciaMotorTrifasico.css";
 
 const CalculadoraTrifasica: React.FC = () => {
   // Estados de entrada
@@ -17,7 +16,7 @@ const CalculadoraTrifasica: React.FC = () => {
     const P_W = P_kW * 1000;                           // W
     const S_kVA = P_kW / cosPhi;                       // kVA
     const S_VA = S_kVA * 1000;                         // VA
-    const Q_kVAr = Math.sqrt(Math.max(S_kVA**2 - P_kW**2, 0)); // kVAr
+    const Q_kVAr = Math.sqrt(Math.max(S_kVA ** 2 - P_kW ** 2, 0)); // kVAr
 
     // I = P / (√3 · V_L · cos φ)
     const I_line = P_W / (Math.sqrt(3) * VL * cosPhi); // A
@@ -39,7 +38,7 @@ const CalculadoraTrifasica: React.FC = () => {
   };
 
   return (
-    <main className="pm-body">
+    <main className="calc">
       <h1>Calculadora trifásica – P, Q, S e I</h1>
 
       <section className="formula-block">
@@ -114,27 +113,28 @@ const CalculadoraTrifasica: React.FC = () => {
           </p>
         ) : (
           <>
-            <ul>
-              <li>
-                Potencia activa P ={" "}
-                <strong>{P_kW.toFixed(2)} kW</strong> (
-                {resultados.P_W.toFixed(0)} W)
-              </li>
-              <li>
-                Potencia aparente S ≈{" "}
-                <strong>{resultados.S_kVA.toFixed(2)} kVA</strong> (
-                {resultados.S_VA.toFixed(0)} VA)
-              </li>
-              <li>
-                Potencia reactiva Q ≈{" "}
-                <strong>{resultados.Q_kVAr.toFixed(2)} kVAr</strong>
-              </li>
-              <li>
-                Corriente de línea I<sub>L</sub> ≈{" "}
-                <strong>{resultados.I_line.toFixed(1)} A</strong>
-              </li>
-            </ul>
-
+            <div className="calc">
+              <ul>
+                <li>
+                  Potencia activa P ={" "}
+                  <strong>{P_kW.toFixed(2)} kW</strong> (
+                  {resultados.P_W.toFixed(0)} W)
+                </li>
+                <li>
+                  Potencia aparente S ≈{" "}
+                  <strong>{resultados.S_kVA.toFixed(2)} kVA</strong> (
+                  {resultados.S_VA.toFixed(0)} VA)
+                </li>
+                <li>
+                  Potencia reactiva Q ≈{" "}
+                  <strong>{resultados.Q_kVAr.toFixed(2)} kVAr</strong>
+                </li>
+                <li>
+                  Corriente de línea I<sub>L</sub> ≈{" "}
+                  <strong>{resultados.I_line.toFixed(1)} A</strong>
+                </li>
+              </ul>
+            </div>
             <p style={{ marginTop: "0.75rem", fontSize: "0.9rem" }}>
               Recordá las relaciones para un sistema trifásico equilibrado:
             </p>

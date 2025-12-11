@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import "./inductorCheatSheet.css";
 
 declare global {
   interface Window {
@@ -20,7 +19,7 @@ const InductorCheatSheet: React.FC = () => {
   }, []);
 
   return (
-    <main className="ind-body">
+    <main className="page-wrapper">
       <h1>Inductor ideal: corriente, tensión, impedancia y potencia</h1>
 
       <p>
@@ -221,7 +220,7 @@ const InductorCalculator: React.FC = () => {
 
 
 
-      <div className="ind-calc-grid">
+      <div className="calc-grid">
         <label>
           L (mH)
           <input
@@ -269,7 +268,7 @@ const InductorCalculator: React.FC = () => {
         </label>
       </div>
 
-      <div className="ind-calc-results">
+      <div className="calc-results">
         <h3>Resultados</h3>
         <ul>
           <li>

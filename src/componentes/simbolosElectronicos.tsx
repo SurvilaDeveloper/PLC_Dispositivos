@@ -1,5 +1,6 @@
 import "./SimbolosElectronicos.css"
 
+
 const SimbolosElectronicos = () => {
     return (
         <div>

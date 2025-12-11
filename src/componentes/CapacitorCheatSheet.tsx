@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import "./capacitorCheatSheet.css";
 
 declare global {
   interface Window {
@@ -20,7 +19,7 @@ const CapacitorCheatSheet: React.FC = () => {
   }, []);
 
   return (
-    <main className="cap-body">
+    <main className="page-wrapper">
       <h1>Capacitor ideal: corriente, tensión, impedancia y potencia</h1>
 
       <p>
@@ -223,12 +222,12 @@ const CapacitorCalculator: React.FC = () => {
   const Q_from_I = I > 0 && XC > 0 ? I * I * XC : 0;
 
   return (
-    <section className="cap-calc">
+    <section className="calc">
       <p>
         {"Ingresá capacitancia $C$, frecuencia $f$ y opcionalmente $V_{rms}$ y/o $I_{rms}$. Se asume capacitor ideal (sin pérdidas)."}
       </p>
 
-      <div className="cap-calc-grid">
+      <div className="calc-grid">
         <label>
           C (µF)
           <input
@@ -278,7 +277,7 @@ const CapacitorCalculator: React.FC = () => {
         </label>
       </div>
 
-      <div className="cap-calc-results">
+      <div className="calc-results">
         <h3>Resultados</h3>
         <ul>
           <li>
@@ -316,7 +315,7 @@ const CapacitorCalculator: React.FC = () => {
             <span>{Q_from_I ? Q_from_I.toFixed(2) : "—"}</span>
           </li>
         </ul>
-        <p className="cap-calc-note">
+        <p className="calc-note">
           El signo de Q en un capacitor ideal sería negativo (potencia reactiva
           capacitiva). Aquí se muestran los módulos para comparación rápida.
         </p>

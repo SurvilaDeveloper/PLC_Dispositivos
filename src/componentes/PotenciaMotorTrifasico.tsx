@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import "./potenciaMotorTrifasico.css";
 
 declare global {
   interface Window {
@@ -20,7 +19,7 @@ const PotenciaMotorTrifasico: React.FC = () => {
   }, []);
 
   return (
-    <main className="pm-body">
+    <main className="page-wrapper">
       <h1>Fórmulas de Potencia en Motores Trifásicos</h1>
 
       <p>

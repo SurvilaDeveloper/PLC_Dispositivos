@@ -25,7 +25,7 @@ a:active {
 
 .table-container {
   overflow-x: auto;
-  background-color: rgb(63, 52, 30);
+  background-color: rgb(36, 36, 36);
   color:rgb(255, 255, 255);
 }
 
@@ -35,7 +35,7 @@ a:active {
 }
 
 .dtable tr {
-  border-bottom: 1px solid #8b8b8b; /* línea bajo cada fila */
+  border-bottom: 1px solid #01086d; /* línea bajo cada fila */
 }
 
 .dtable th,

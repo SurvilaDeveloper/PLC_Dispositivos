@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import "./potenciaMotorTrifasico.css";
 import TrianguloPotenciasSVG from "./TrianguloPotenciaSVG";
 import CosenoPhiInteractive from "./CosenoPhiInteractive";
 import CalculadoraTrifasica from "./CalculadoraTrifasica";
@@ -23,7 +22,7 @@ const CosenoPhi: React.FC = () => {
   }, []);
 
   return (
-    <main className="pm-body">
+    <main className="page-wrapper">
       <h1>Factor de Potencia: cos&nbsp;φ</h1>
 
       <p>

@@ -1,5 +1,4 @@
 import { componentesAutomatizacion } from './catalogo'
-import './App.css'
 
 type SelectedProps = {
   tipoSeleccionado: string | null
@@ -8,7 +7,7 @@ type SelectedProps = {
   elementoSeleccionado: string | null
 }
 
-function Selected({
+function SelectedPLCComponente({
   tipoSeleccionado,
   categoriaSeleccionada,
   subcategoriaSeleccionada,
@@ -85,9 +84,9 @@ function Selected({
           <span>&nbsp;&nbsp;&nbsp;</span>
           <span className="item_descript">{componente[7]}</span>
           <br />
-          <div className="button-group">
-          <button onClick={() => handleClickG(componente)} className='button-nav'>Buscar en Google</button>
-          <button onClick={() => handleClickM(componente)} className='button-nav'>Buscar en Mercado Libre</button>
+          <div className="btn-group">
+          <button onClick={() => handleClickG(componente)} className='btn'>Buscar en Google</button>
+          <button onClick={() => handleClickM(componente)} className='btn'>Buscar en Mercado Libre</button>
           </div>
 
         </div>
@@ -96,4 +95,4 @@ function Selected({
   )
 }
 
-export default Selected
+export default SelectedPLCComponente

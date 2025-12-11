@@ -1,6 +1,5 @@
 // src/componentes/RlcSerieCheatSheet.tsx
 import React, { useEffect, useState } from "react";
-import "./rlcSerieCheatSheet.css";
 
 declare global {
   interface Window {
@@ -21,7 +20,7 @@ const RlcSerieCheatSheet: React.FC = () => {
   }, []);
 
   return (
-    <main className="rlc-body">
+    <main className="page-wrapper">
       <h1>R–L–C en serie: impedancia, fasores y potencias</h1>
 
       <p>
@@ -229,14 +228,14 @@ const RlcSerieCalculator: React.FC = () => {
   else if (X < -1e-9) tipoComportamiento = "Capacitivo";
 
   return (
-    <section className="rlc-calc">
+    <section className="calc">
       <p>
         Ingresá R, L, C, frecuencia y tensión RMS. La calculadora asume un
         circuito R–L–C en serie y calcula la impedancia total, la corriente y
         las potencias.
       </p>
 
-      <div className="rlc-calc-grid">
+      <div className="calc-grid">
         <label>
           R (Ω)
           <input
@@ -295,7 +294,7 @@ const RlcSerieCalculator: React.FC = () => {
         </label>
       </div>
 
-      <div className="rlc-calc-results">
+      <div className="calc-results">
         <h3>Resultados</h3>
         <ul>
           <li>
@@ -353,7 +352,7 @@ const RlcSerieCalculator: React.FC = () => {
             <span>{tipoComportamiento}</span>
           </li>
         </ul>
-        <p className="rlc-calc-note">
+        <p className="calc-note">
           Q &gt; 0 indica predominio inductivo, Q &lt; 0 indica predominio
           capacitivo. En resonancia ideal se cumple X<sub>L</sub> = X<sub>C</sub>{" "}
           y el circuito se comporta como puramente resistivo.

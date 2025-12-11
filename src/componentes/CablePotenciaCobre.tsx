@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import "./cablePotenciaCobre.css";
 
 declare global {
     interface Window {
@@ -20,10 +19,10 @@ const CablePotenciaCobre: React.FC = () => {
     }, []);
 
     return (
-        <main className="cable-body">
+        <main className="page-wrapper">
             <h1>Sección de cable de cobre en función de la potencia (visión simplificada)</h1>
 
-            <p className="cable-intro">
+            <p className="sheet-header">
                 Este módulo explica, de forma simplificada, cómo se relacionan la potencia
                 de una carga, la corriente que circula por un circuito y la sección
                 (área) de un cable de cobre.{" "}
@@ -174,7 +173,7 @@ const CablePotenciaCobre: React.FC = () => {
 
             {/* 4. Advertencia importante */}
             <h2>4. Advertencia importante</h2>
-            <section className="formula-block cable-warning">
+            <section className="formula-block-warning">
                 <div className="tag">Aviso</div>
                 <p>
                     Las fórmulas anteriores sirven para entender la{" "}

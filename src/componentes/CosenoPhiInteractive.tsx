@@ -1,5 +1,4 @@
 import React, { useState, useMemo } from "react";
-import "./potenciaMotorTrifasico.css";
 
 const CosenoPhiInteractive: React.FC = () => {
   const [cosPhi, setCosPhi] = useState(0.8);
@@ -20,7 +19,7 @@ const CosenoPhiInteractive: React.FC = () => {
   const baseY = 180;
 
   return (
-    <main className="pm-body">
+    <main className="plc">
       <h1>Demo interactiva – cos φ y triángulo de potencias</h1>
 
       <section className="formula-block">

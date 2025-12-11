@@ -1,6 +1,5 @@
 import { useState } from 'react'
-import './App.css'
-import Menu from './Menu'
+import PLCComponentesMenu from './PLCComponentsMenu'
 import LadderPlcCheatSheet from './componentes/LadderCheatSheet'
 import InstalacionesDomesticas from './pages/InstalacionesDomesticas'
 import InstalacionesIndustriales from './pages/InstalacionesIndustriales'
@@ -15,6 +14,12 @@ import CosenoPhi from './componentes/CosenoPhi'
 import ComponentesElectronicosCheatSheet from './componentes/ComponentesElectronicosCheatSheet'
 import TablaCorrienteCable from './componentes/TablaCorrienteCable'
 import SimbolosElectronicos from './componentes/simbolosElectronicos'
+import ResistenciaMateriales from './componentes/ResistenciaMateriales'
+import TransistorBjtCheatSheet from './componentes/TransistorBjtCheatSheet'
+import TransistorMosfetCheatSheet from './componentes/TransistorMosfetCheatSheet'
+import MosfetSourceFollowerCheatSheet from './componentes/MosfetSourceFollowerCheatSheet'
+import PmosCurrentMirrorCheatSheet from './componentes/PmosCurrentMirrorCheatSheet'
+import PmosActiveLoadDiffAmpCheatSheet from './componentes/PmosActiveLoadDiffAmpCheatSheet'
 
 function App() {
 
@@ -40,146 +45,212 @@ function App() {
 
   return (
     <>
-
-      <div>
+      <nav className="navbar">
+        <button className="btn" onClick={() => {
+          setPage('presentacion');
+          resetMenu();
+          window.scrollTo({
+            top: 0,
+            behavior: "smooth", // o "auto" si no querés animación
+          });
+        }}>🏠</button>
+        <button className="btn" onClick={() => {
+          toggleMenu();
+          window.scrollTo({
+            top: 0,
+            behavior: "smooth", // o "auto" si no querés animación
+          });
+        }}>Menú</button>
+      </nav>
+      <div className='page-panel'>
 
         <h1>Electricidad y Electrónica</h1>
-
-        <nav className="navbar">
-          <button className="home-button" onClick={() => {setPage('presentacion'); resetMenu()}}>🏠</button>
-          <button className="menu-button" onClick={() => toggleMenu()}>Menú</button>
-        </nav>
-
         <div className='nav-buttons' style={{ height: menuHeight, overflow: 'hidden', visibility: menuVisibility }}>
-          <div className='temaButtons'> PLC - Automatización Industrial
-            <div className='buttons-container'>
-              <button onClick={() => { setPage('componentes'); toggleMenu() }} className='button-nav'>Componentes</button>
-              <button onClick={() => { setPage('ladder'); toggleMenu() }} className='button-nav'>Comandos Ladder</button>
+          <div className='tema'> PLC - Automatización Industrial
+            <div className='btn-group'>
+              <button onClick={() => { setPage('componentes'); toggleMenu() }} className='btn'>Componentes</button>
+              <button onClick={() => { setPage('ladder'); toggleMenu() }} className='btn'>Comandos Ladder</button>
             </div>
           </div>
-          <div className='temaButtons'> Fórmulas, Calculadoras y Tablas
-            <div className='buttons-container'>
-              <button onClick={() => { setPage('formulas'); toggleMenu() }} className='button-nav'>Fórmulas</button>
-              <button onClick={() => { setPage('tablas'); toggleMenu() }} className='button-nav'>Tablas</button>
+          <div className='tema'> Fórmulas, Calculadoras y Tablas
+            <div className='btn-group'>
+              <button onClick={() => { setPage('formulas'); toggleMenu() }} className='btn'>Fórmulas</button>
+              <button onClick={() => { setPage('tablas'); toggleMenu() }} className='btn'>Tablas</button>
             </div>
           </div>
-          <div className='temaButtons'> Instalaciones Eléctricas Domésticas
-            <div className='buttons-container'>
-              <button onClick={() => { setPage('instalacionesDom'); toggleMenu() }} className='button-nav'>Instalaciones Domésticas</button>
+          <div className='tema'> Instalaciones Eléctricas Domésticas
+            <div className='btn-group'>
+              <button onClick={() => { setPage('instalacionesDom'); toggleMenu() }} className='btn'>Instalaciones Domésticas</button>
             </div>
           </div>
-          <div className='temaButtons'> Instalaciones Eléctricas Industriales
-            <div className='buttons-container'>
-              <button onClick={() => { setPage('instalacionesInd'); toggleMenu() }} className='button-nav'>Instalaciones Industriales</button>
+          <div className='tema'> Instalaciones Eléctricas Industriales
+            <div className='btn-group'>
+              <button onClick={() => { setPage('instalacionesInd'); toggleMenu() }} className='btn'>Instalaciones Industriales</button>
             </div>
           </div>
-          <div className='temaButtons'> Electrónica
-            <div className='buttons-container'>
-              <button onClick={() => { setPage('componentesElectronicos'); toggleMenu() }} className='button-nav'>Componentes Electrónicos</button>
+          <div className='tema'> Electrónica
+            <div className='btn-group'>
+              <button onClick={() => { setPage('componentesElectronicos'); toggleMenu() }} className='btn'>Componentes Electrónicos</button>
             </div>
           </div>
 
         </div>
 
         <hr />
-        {page === 'componentes' && <Menu />}
+        {page === 'componentes' && <PLCComponentesMenu />}
         {page === 'ladder' && <LadderPlcCheatSheet />}
+        {/* FORMULAS */}
         {page === 'formulas' && (
-          <ul className="formulas-list">
+          <ul className="tema-list">
             <li
-              className="formulas-list-item"
+              className="tema-list-li"
+              onClick={() => setPage("resistenciaMateriales")}
+            >
+              <span className="tema-title">Resistencia de materiales conductores</span>
+              <span className="tema-descripcion">
+                Fórmulas para calcular la resistencia eléctrica según material, longitud y sección.
+              </span>
+            </li>
+            <li
+              className="tema-list-li"
               onClick={() => setPage("potenciaMotorTrifasico")}
             >
-              <span className="formulas-item-title">Potencia de motores trifásicos</span>
-              <span className="formulas-item-desc">
+              <span className="tema-title">Potencia de motores trifásicos</span>
+              <span className="tema-descripcion">
                 Relación entre tensión, corriente, cos φ y potencia.
               </span>
             </li>
 
             <li
-              className="formulas-list-item"
+              className="tema-list-li"
               onClick={() => setPage("motorTrifasicoParVelocidad")}
             >
-              <span className="formulas-item-title">Motor trifásico: par y velocidad</span>
-              <span className="formulas-item-desc">
+              <span className="tema-title">Motor trifásico: par y velocidad</span>
+              <span className="tema-descripcion">
                 Vínculo entre velocidad sincrónica, resbalamiento y par.
               </span>
             </li>
 
             <li
-              className="formulas-list-item"
+              className="tema-list-li"
               onClick={() => setPage("cosenoPhi")}
             >
-              <span className="formulas-item-title">Factor de potencia: cos φ</span>
-              <span className="formulas-item-desc">
+              <span className="tema-title">Factor de potencia: cos φ</span>
+              <span className="tema-descripcion">
                 Activa, reactiva y aparente para distintos cos φ.
               </span>
             </li>
 
             <li
-              className="formulas-list-item"
+              className="tema-list-li"
               onClick={() => setPage("ensayosMotorTrifasico")}
             >
-              <span className="formulas-item-title">Ensayos de motor trifásico</span>
-              <span className="formulas-item-desc">
+              <span className="tema-title">Ensayos de motor trifásico</span>
+              <span className="tema-descripcion">
                 Ensayo en vacío y rotor bloqueado para obtener parámetros.
               </span>
             </li>
             <li
-              className="formulas-list-item"
+              className="tema-list-li"
               onClick={() => setPage("inductorCheatSheet")}
             >
-              <span className="formulas-item-title">Inductor ideal: fórmulas clave</span>
-              <span className="formulas-item-desc">
+              <span className="tema-title">Inductor ideal: fórmulas clave</span>
+              <span className="tema-descripcion">
                 Resumen de fórmulas esenciales para el análisis de inductores ideales.
               </span>
             </li>
             <li
-              className="formulas-list-item"
+              className="tema-list-li"
               onClick={() => setPage("capacitorCheatSheet")}
             >
-              <span className="formulas-item-title">Capacitor ideal: fórmulas clave</span>
-              <span className="formulas-item-desc">
+              <span className="tema-title">Capacitor ideal: fórmulas clave</span>
+              <span className="tema-descripcion">
                 Resumen de fórmulas esenciales para el análisis de capacitores ideales.
               </span>
             </li>
             <li
-              className="formulas-list-item"
+              className="tema-list-li"
               onClick={() => setPage("rlcSerieCheatSheet")}
             >
-              <span className="formulas-item-title">Circuito RLC serie: fórmulas clave</span>
-              <span className="formulas-item-desc">
+              <span className="tema-title">Circuito RLC serie: fórmulas clave</span>
+              <span className="tema-descripcion">
                 Resumen de fórmulas esenciales para el análisis de circuitos RLC serie.
               </span>
             </li>
             <li
-              className="formulas-list-item"
+              className="tema-list-li"
               onClick={() => setPage("cablePotenciaCobre")}
             >
-              <span className="formulas-item-title">Cable de potencia de cobre</span>
-              <span className="formulas-item-desc">
+              <span className="tema-title">Cable de potencia de cobre</span>
+              <span className="tema-descripcion">
                 Cálculo simplificado de sección de cable según potencia e intensidad.
               </span>
             </li>
+            <li
+              className="tema-list-li"
+              onClick={() => setPage("bjt")}
+            >
+              <span className="tema-title">Transistor BJT</span>
+              <span className="tema-descripcion">
+                Fórmulas del transistor BJT.
+              </span>
+            </li>
+            <li
+              className="tema-list-li"
+              onClick={() => setPage("mosfet")}
+            >
+              <span className="tema-title">Transistor MOSFET</span>
+              <span className="tema-descripcion">
+                Fórmulas del transistor MOSFET.
+              </span>
+            </li>
+                        <li
+              className="tema-list-li"
+              onClick={() => setPage("mosfet-follower")}
+            >
+              <span className="tema-title">Transistor MOSFET</span>
+              <span className="tema-descripcion">
+                MOSFET seguidor de fuente.
+              </span>
+            </li>
+                        <li
+              className="tema-list-li"
+              onClick={() => setPage("mosfet-mirror")}
+            >
+              <span className="tema-title">Transistor MOSFET</span>
+              <span className="tema-descripcion">
+                PMOS espejo de corriente / carga activa.
+              </span>
+            </li>
+                        <li
+              className="tema-list-li"
+              onClick={() => setPage("mosfet-active")}
+            >
+              <span className="tema-title">Transistor MOSFET</span>
+              <span className="tema-descripcion">
+                PMOS como carga activa (amplificador diferencial).
+              </span>
+            </li>
+
           </ul>
         )}
         {page === 'tablas' && (
           <ul className="formulas-list">
             <li
-              className="formulas-list-item"
+              className="tema-list-li"
               onClick={() => setPage("tablaCorrienteCable")}
             >
-              <span className="formulas-item-title">Tabla sección del cable</span>
-              <span className="formulas-item-desc">
+              <span className="tema-title">Tabla sección del cable</span>
+              <span className="tema-descripcion">
                 Tabla de corriente admisible según sección del cable de cobre.
               </span>
             </li>
             <li
-              className="formulas-list-item"
+              className="tema-list-li"
               onClick={() => setPage("simbolosElectronicos")}
             >
-              <span className="formulas-item-title">Símbolos electrónicos</span>
-              <span className="formulas-item-desc">
+              <span className="tema-title">Símbolos electrónicos</span>
+              <span className="tema-descripcion">
                 Tabla con símbolos normalizados de componentes electrónicos.
               </span>
             </li>
@@ -201,6 +272,12 @@ function App() {
         {page === 'componentesElectronicos' && <ComponentesElectronicosCheatSheet />}
         {page === 'tablaCorrienteCable' && <TablaCorrienteCable />}
         {page === 'simbolosElectronicos' && <SimbolosElectronicos />}
+        {page === 'resistenciaMateriales' && <ResistenciaMateriales />}
+        {page === 'bjt' && <TransistorBjtCheatSheet />}
+        {page === 'mosfet' && <TransistorMosfetCheatSheet/>}
+        {page === 'mosfet-follower' && <MosfetSourceFollowerCheatSheet/>}
+        {page === 'mosfet-mirror' && <PmosCurrentMirrorCheatSheet/>}
+        {page === 'mosfet-active' && <PmosActiveLoadDiffAmpCheatSheet/>}
         {page === 'presentacion' && (
           <div>
             <section className="home-hero">
@@ -252,7 +329,12 @@ function App() {
 
           </div>
         )}
+
       </div>
+      <footer className='main-footer'>
+        Sitio desarrollado por Gabriel E. Survila
+
+      </footer>
     </>
   )
 }

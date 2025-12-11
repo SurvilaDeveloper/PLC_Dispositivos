@@ -1,72 +1,75 @@
 // src/components/NormativaIndustrialAMBA.tsx
-import "./NormativaIndustrialAMBA.css";
 
 const NormativaIndustrialAMBA: React.FC = () => {
   return (
-    <div className="ind-regla-wrapper">
+    <div className="page-wrapper">
       {/* Encabezado */}
-      <header className="ind-regla-header">
-        <div className="ind-regla-pill">
+      <header className="sheet-header">
+        <div className="sheet-pill">
           Instalaciones eléctricas · Industria · AMBA
         </div>
-        <h1 className="ind-regla-title">
+        <h1 className="sheet-title">
           Apuntes de normativa para instalaciones industriales en AMBA
         </h1>
-        <p className="ind-regla-subtitle">
+        <p className="sheet-subtitle">
           Síntesis de los principales marcos técnicos y regulatorios que afectan
           a las instalaciones eléctricas industriales en el Área Metropolitana
           de Buenos Aires (AMBA). Contenido de carácter informativo, no sustituye
           normas, reglamentos ni proyectos de ingeniería.
         </p>
-        <a href="https://drive.google.com/file/d/1V-wxAOlz50sWMIj-qDGDa-Pho2U_1DJo/view?usp=sharing" target="_blank" rel="noopener noreferrer" className="linkNormativa">Ver Reglamentación AEA 90364</a>
+        <div className="columner">
+          <a href="https://drive.google.com/file/d/1V-wxAOlz50sWMIj-qDGDa-Pho2U_1DJo/view?usp=sharing" target="_blank" rel="noopener noreferrer" className="linkNormativa">Ver Reglamentación AEA 90364</a>
+          <a href="https://drive.google.com/file/d/1BbTvRREQ34rYeNsr3Ahf3tG6b2fYc0gD/view?usp=sharing" target="_blank" rel="noopener noreferrer" className="linkNormativa">Ver Listado de Reglamentaciones de AEA</a>
+          <a href="https://aea.org.ar/" target="_blank" rel="noopener noreferrer" className="linkNormativa">Sitio de Asociación Electrotécnica Argentina</a>
+        </div>
       </header>
 
       {/* Navegación rápida */}
-      <nav className="ind-regla-nav">
-        <a href="#aea" className="ind-regla-nav-item">
+      <nav className="nav-buttons">
+        <a href="#aea" className="btn">
           AEA 90364 (base técnica)
         </a>
-        <a href="#higiene" className="ind-regla-nav-item">
+        <a href="#higiene" className="btn">
           Higiene y seguridad laboral
         </a>
-        <a href="#enre" className="ind-regla-nav-item">
+        <a href="#enre" className="btn">
           ENRE y distribuidoras
         </a>
-        <a href="#local" className="ind-regla-nav-item">
+        <a href="#local" className="btn">
           Normativa local
         </a>
-        <a href="#otras" className="ind-regla-nav-item">
+        <a href="#otras" className="btn">
           Otras normas frecuentes
         </a>
-        <a href="#practica" className="ind-regla-nav-item">
+        <a href="#practica" className="btn">
           Síntesis práctica
         </a>
       </nav>
 
       {/* Contenido */}
-      <main className="ind-regla-content">
+      <main className="page-wrapper">
         {/* 1. AEA 90364 */}
-        <section id="aea" className="ind-regla-section">
-          <h2 className="ind-regla-section-title">
+        <section id="aea" className="sheet-section">
+          <h2 className="sheet-section-title">
             1. Reglamentación AEA 90364 como base técnica
           </h2>
-          <p className="ind-regla-text">
+          <p className="sheet-text">
             Para instalaciones eléctricas de baja tensión en inmuebles,
             incluyendo establecimientos industriales, la referencia técnica
             principal en Argentina es la{" "}
             <strong>Reglamentación AEA 90364 – Ejecución de instalaciones
-            eléctricas en inmuebles</strong>, elaborada por la Asociación
+              eléctricas en inmuebles</strong>, elaborada por la Asociación
             Electrotécnica Argentina (AEA) y basada en la serie IEC 60364,
             adaptada al contexto local.
           </p>
-          <p className="ind-regla-text">
+          <p className="sheet-text">
             La AEA 90364 establece criterios de seguridad eléctrica, selección
             de materiales y equipos, esquemas de puesta a tierra, dimensionamiento
             de conductores y protecciones, así como procedimientos de verificación
             inicial y periódica. Se aplica a viviendas, locales comerciales, de
             pública concurrencia y establecimientos industriales, entre otros.
           </p>
-          <p className="ind-regla-text-small">
+          <p className="sheet-text-small">
             Para una instalación industrial de baja tensión en AMBA se considera,
             como mínimo, el cumplimiento de las partes generales de AEA 90364
             (Partes 0 a 6) y las reglas particulares de la Parte 7 que resulten
@@ -75,11 +78,11 @@ const NormativaIndustrialAMBA: React.FC = () => {
         </section>
 
         {/* 2. Higiene y seguridad */}
-        <section id="higiene" className="ind-regla-section">
-          <h2 className="ind-regla-section-title">
+        <section id="higiene" className="sheet-section">
+          <h2 className="sheet-section-title">
             2. Higiene y seguridad en el trabajo
           </h2>
-          <p className="ind-regla-text">
+          <p className="sheet-text">
             Las instalaciones eléctricas en ámbitos industriales se encuentran
             también bajo el alcance de la{" "}
             <strong>Ley 19.587 de Higiene y Seguridad en el Trabajo</strong>
@@ -88,14 +91,14 @@ const NormativaIndustrialAMBA: React.FC = () => {
             y mantenidos de forma tal que eliminen o reduzcan los riesgos
             eléctricos para las personas trabajadoras.
           </p>
-          <p className="ind-regla-text">
+          <p className="sheet-text">
             En diversos documentos técnicos se reconoce a la{" "}
             <strong>Reglamentación AEA 90364</strong> como referencia para
             definir las condiciones de seguridad de las instalaciones eléctricas
             internas, integrando así la normativa de higiene y seguridad con el
             reglamento técnico específico del sector eléctrico.
           </p>
-          <p className="ind-regla-text-small">
+          <p className="sheet-text-small">
             En establecimientos industriales, la correcta aplicación simultánea
             de AEA 90364 y de la legislación de Higiene y Seguridad constituye
             un requisito básico para reducir riesgos de choque eléctrico,
@@ -104,23 +107,23 @@ const NormativaIndustrialAMBA: React.FC = () => {
         </section>
 
         {/* 3. ENRE y distribuidoras */}
-        <section id="enre" className="ind-regla-section">
-          <h2 className="ind-regla-section-title">
+        <section id="enre" className="sheet-section">
+          <h2 className="sheet-section-title">
             3. ENRE y reglamentos de las distribuidoras (Edenor, Edesur, Edelap)
           </h2>
-          <p className="ind-regla-text">
+          <p className="sheet-text">
             En el Área Metropolitana de Buenos Aires, las conexiones a la red
             pública de media y baja tensión están reguladas por el{" "}
             <strong>Ente Nacional Regulador de la Electricidad (ENRE)</strong>
             y por los reglamentos de las empresas distribuidoras (Edenor, Edesur,
             Edelap, entre otras según zona).
           </p>
-          <p className="ind-regla-text">
+          <p className="sheet-text">
             Estos reglamentos incluyen el{" "}
             <strong>Reglamento de Suministro</strong> y normas específicas para
             la conexión de nuevos suministros. En general:
           </p>
-          <ul className="ind-regla-list">
+          <ul className="sheet-list">
             <li>
               Exigen que las instalaciones internas de los usuarios cumplan
               <strong>AEA 90364</strong> o normas técnicas equivalentes reconocidas.
@@ -135,7 +138,7 @@ const NormativaIndustrialAMBA: React.FC = () => {
               el suministro eléctrico.
             </li>
           </ul>
-          <p className="ind-regla-text-small">
+          <p className="sheet-text-small">
             En instalaciones industriales de cierta potencia, la interacción
             técnica con la distribuidora suele incluir el estudio de cortocircuito,
             corrientes de arranque de grandes motores, factor de potencia,
@@ -144,11 +147,11 @@ const NormativaIndustrialAMBA: React.FC = () => {
         </section>
 
         {/* 4. Normativa local */}
-        <section id="local" className="ind-regla-section">
-          <h2 className="ind-regla-section-title">
+        <section id="local" className="sheet-section">
+          <h2 className="sheet-section-title">
             4. Normativa local: CABA y municipios del GBA
           </h2>
-          <p className="ind-regla-text">
+          <p className="sheet-text">
             Además de la reglamentación AEA y de los reglamentos del ENRE, cada
             jurisdicción dentro del AMBA (Ciudad Autónoma de Buenos Aires y
             municipios del Gran Buenos Aires) puede contar con{" "}
@@ -156,10 +159,10 @@ const NormativaIndustrialAMBA: React.FC = () => {
             propias que regulan las instalaciones eléctricas en edificios
             industriales, comerciales y de servicios.
           </p>
-          <p className="ind-regla-text">
+          <p className="sheet-text">
             En muchos casos, esas normas locales:
           </p>
-          <ul className="ind-regla-list">
+          <ul className="sheet-list">
             <li>
               Adoptan explícitamente la AEA 90364 como reglamentación técnica de
               referencia para instalaciones de baja tensión.
@@ -175,7 +178,7 @@ const NormativaIndustrialAMBA: React.FC = () => {
               incendios y planes de emergencia.
             </li>
           </ul>
-          <p className="ind-regla-text-small">
+          <p className="sheet-text-small">
             Por esta razón, cualquier proyecto de instalación industrial en AMBA
             debe considerar simultáneamente la normativa nacional, la reglamentación
             técnica AEA, los reglamentos del ENRE y las ordenanzas específicas del
@@ -184,15 +187,15 @@ const NormativaIndustrialAMBA: React.FC = () => {
         </section>
 
         {/* 5. Otras normas frecuentes */}
-        <section id="otras" className="ind-regla-section">
-          <h2 className="ind-regla-section-title">
+        <section id="otras" className="sheet-section">
+          <h2 className="sheet-section-title">
             5. Otras normas habituales en entornos industriales
           </h2>
-          <p className="ind-regla-text">
+          <p className="sheet-text">
             En función del tipo de industria y de los riesgos presentes, suelen
             aplicarse también otras normas específicas, entre ellas:
           </p>
-          <ul className="ind-regla-list">
+          <ul className="sheet-list">
             <li>
               <strong>Normas IRAM / IEC para seguridad de maquinaria</strong>{" "}
               (por ejemplo, IEC 60204-1 / IRAM-IEC 60204-1) que regulan los
@@ -205,7 +208,7 @@ const NormativaIndustrialAMBA: React.FC = () => {
             </li>
             <li>
               <strong>Documentos específicos sobre puesta a tierra y protección
-              contra descargas atmosféricas</strong>, incluyendo sistemas de
+                contra descargas atmosféricas</strong>, incluyendo sistemas de
               protección contra rayos y criterios de equipotencialidad.
             </li>
             <li>
@@ -217,15 +220,15 @@ const NormativaIndustrialAMBA: React.FC = () => {
         </section>
 
         {/* 6. Síntesis práctica */}
-        <section id="practica" className="ind-regla-section">
-          <h2 className="ind-regla-section-title">
+        <section id="practica" className="sheet-section">
+          <h2 className="sheet-section-title">
             6. Síntesis práctica para instalaciones industriales en AMBA
           </h2>
-          <p className="ind-regla-text">
+          <p className="sheet-text">
             En términos prácticos, una instalación eléctrica industrial en el
             AMBA se considera correctamente enmarcada cuando:
           </p>
-          <ul className="ind-regla-list">
+          <ul className="sheet-list">
             <li>
               Se encuentra diseñada y ejecutada de acuerdo con{" "}
               <strong>AEA 90364</strong> y las normas IRAM aplicables a
@@ -239,7 +242,7 @@ const NormativaIndustrialAMBA: React.FC = () => {
             <li>
               Respeta los{" "}
               <strong>reglamentos de suministro y conexión del ENRE y de la
-              distribuidora</strong> correspondiente (Edenor, Edesur, Edelap, etc.).
+                distribuidora</strong> correspondiente (Edenor, Edesur, Edelap, etc.).
             </li>
             <li>
               Observa las{" "}
@@ -253,7 +256,7 @@ const NormativaIndustrialAMBA: React.FC = () => {
               contra descargas atmosféricas.
             </li>
           </ul>
-          <p className="ind-regla-text-small">
+          <p className="sheet-text-small">
             Estos apuntes resumen el contexto normativo de forma general. Para
             cualquier proyecto concreto es imprescindible consultar los textos
             oficiales vigentes y la normativa específica aplicable, y contar con
@@ -261,10 +264,14 @@ const NormativaIndustrialAMBA: React.FC = () => {
             eléctricas industriales.
           </p>
         </section>
-        <a href="https://drive.google.com/file/d/1V-wxAOlz50sWMIj-qDGDa-Pho2U_1DJo/view?usp=sharing" target="_blank" rel="noopener noreferrer" className="linkNormativa">Ver Reglamentación AEA 90364</a>
+        <div className="columner">
+          <a href="https://drive.google.com/file/d/1V-wxAOlz50sWMIj-qDGDa-Pho2U_1DJo/view?usp=sharing" target="_blank" rel="noopener noreferrer" className="linkNormativa">Ver Reglamentación AEA 90364</a>
+          <a href="https://drive.google.com/file/d/1BbTvRREQ34rYeNsr3Ahf3tG6b2fYc0gD/view?usp=sharing" target="_blank" rel="noopener noreferrer" className="linkNormativa">Ver Listado de Reglamentaciones de AEA</a>
+          <a href="https://aea.org.ar/" target="_blank" rel="noopener noreferrer" className="linkNormativa">Sitio de Asociación Electrotécnica Argentina</a>
+        </div>
       </main>
 
-      <footer className="ind-regla-footer">
+      <footer className="sheet-footer">
         Apuntes de referencia general sobre normativa para instalaciones
         eléctricas industriales en el AMBA. No reemplazan las normas oficiales
         ni el asesoramiento técnico y legal especializado.

@@ -1,10 +1,9 @@
 // Menu.tsx
 import { useState } from 'react'
 import { componentesAutomatizacion, componentType } from './catalogo'
-import './App.css'
-import Selected from './Selected'
+import SelectedPLCComponente from './SelectedPLCComponente'
 
-function Menu() {
+function PLCComponentesMenu() {
   const [tipoSeleccionado, setTipoSeleccionado] = useState<string | null>(null)
   const [CategoríaSeleccionada, setCategoríaSeleccionada] = useState<string | null>(null)
   const [SubcategoríaSeleccionada, setSubcategoríaSeleccionada] = useState<string | null>(null)
@@ -19,24 +18,23 @@ function Menu() {
   }
 
   return (
-    <div className="menu-wrapper">
-      <div className="menu-panel">
-        <header className="menu-header">
-          <div className="menu-pill">Catálogo · Automatización</div>
-          <h1 className="menu-title">Componentes de automatización</h1>
-          <p className="menu-subtitle">
+    <div className="page-wrapper">
+        <header className="sheet-header">
+          <div className="sheet-pill">Catálogo · Automatización</div>
+          <h1 className="sheet-title">Componentes de automatización</h1>
+          <p className="sheet-subtitle">
             Explorá los componentes por tipo, categoría y subcategoría. Hacé clic en un elemento para ver más detalles.
           </p>
         </header>
 
-        <ul className="menu-type-list">
+        <ul className='tema-list'>
           {componentType.map((tipo) => (
-            <li className="item_title_2" key={tipo}>
-              <div className="item">
+            <li className="tema-title" key={tipo}>
+              <div className="tema">
                 {tipo}
               </div>
 
-              <ul className="menu-component-list">
+              <ul className="tema-list">
                 {componentesAutomatizacion
                   .filter((componente) => componente[0] === tipo)
                   .map((componente, idx) => {
@@ -48,14 +46,14 @@ function Menu() {
 
                     return (
                       <li
-                        className={`item_container ${isSelected ? 'item_container--selected' : ''}`}
+                        className={`item-container ${isSelected ? 'item-container--selected' : ''}`}
                         key={idx}
                         onClick={() =>
                           handleItemClick(componente[0], componente[1], componente[2], componente[3])
                         }
                       >
                         {!isSelected && (
-                          <div className="item_2">
+                          <div className="item-no-selected">
                             <span className="item_descript">{componente[1]}, </span>
                             <span className="item_descript">{componente[2]}, </span>
                             <span className="item_descript">{componente[3]}</span>
@@ -64,7 +62,7 @@ function Menu() {
 
                         {isSelected && (
                           <div className="detalle">
-                            <Selected
+                            <SelectedPLCComponente
                               tipoSeleccionado={tipoSeleccionado}
                               categoriaSeleccionada={CategoríaSeleccionada}
                               subcategoriaSeleccionada={SubcategoríaSeleccionada}
@@ -79,9 +77,8 @@ function Menu() {
             </li>
           ))}
         </ul>
-      </div>
     </div>
   )
 }
 
-export default Menu
+export default PLCComponentesMenu

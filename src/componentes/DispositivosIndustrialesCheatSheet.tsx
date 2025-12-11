@@ -1,16 +1,15 @@
 // src/components/DispositivosIndustrialesCheatSheet.tsx
-import "./DispositivosIndustrialesCheatSheet.css";
 
 const DispositivosIndustrialesCheatSheet: React.FC = () => {
   return (
-    <div className="ind-elec-cheatsheet">
+    <div className="page-wrapper">
       {/* Encabezado */}
-      <header className="ind-elec-header">
-        <div className="ind-elec-pill">Instalaciones eléctricas · Industria</div>
-        <h1 className="ind-elec-title">
+      <header className="sheet-header">
+        <div className="sheet-pill">Instalaciones eléctricas · Industria</div>
+        <h1 className="sheet-title">
           Apuntes de dispositivos eléctricos típicos en instalaciones industriales
         </h1>
-        <p className="ind-elec-subtitle">
+        <p className="sheet-subtitle">
           Resumen de los principales equipos que aparecen en tableros, líneas de producción
           y sistemas de fuerza y control en entornos industriales. Contenido de carácter
           didáctico, no sustituye normas ni proyectos de ingeniería.
@@ -18,28 +17,28 @@ const DispositivosIndustrialesCheatSheet: React.FC = () => {
       </header>
 
       {/* Navegación rápida */}
-      <nav className="ind-elec-nav">
-        <a href="#alimentacion" className="ind-elec-nav-item">Alimentación y subestaciones</a>
-        <a href="#proteccion" className="ind-elec-nav-item">Protección</a>
-        <a href="#maniobra" className="ind-elec-nav-item">Maniobra y seccionamiento</a>
-        <a href="#motores" className="ind-elec-nav-item">Motores y arranques</a>
-        <a href="#control" className="ind-elec-nav-item">Automatización y control</a>
-        <a href="#sensores" className="ind-elec-nav-item">Sensores y actuadores</a>
-        <a href="#iluminacion" className="ind-elec-nav-item">Iluminación industrial</a>
-        <a href="#calidad" className="ind-elec-nav-item">Calidad de energía</a>
-        <a href="#bajatension" className="ind-elec-nav-item">Baja tensión y datos</a>
-        <a href="#tierra" className="ind-elec-nav-item">Puesta a tierra</a>
-        <a href="#accesorios" className="ind-elec-nav-item">Tableros y accesorios</a>
+      <nav className="nav-buttons">
+        <a href="#alimentacion" className="btn">Alimentación y subestaciones</a>
+        <a href="#proteccion" className="btn">Protección</a>
+        <a href="#maniobra" className="btn">Maniobra y seccionamiento</a>
+        <a href="#motores" className="btn">Motores y arranques</a>
+        <a href="#control" className="btn">Automatización y control</a>
+        <a href="#sensores" className="btn">Sensores y actuadores</a>
+        <a href="#iluminacion" className="btn">Iluminación industrial</a>
+        <a href="#calidad" className="btn">Calidad de energía</a>
+        <a href="#bajatension" className="btn">Baja tensión y datos</a>
+        <a href="#tierra" className="btn">Puesta a tierra</a>
+        <a href="#accesorios" className="btn">Tableros y accesorios</a>
       </nav>
 
       {/* Contenido */}
-      <main className="ind-elec-content">
+      <main className="page-wrapper">
         {/* 1. Alimentación y subestaciones */}
-        <section id="alimentacion" className="ind-elec-section">
-          <h2 className="ind-elec-section-title">
+        <section id="alimentacion" className="elec-section">
+          <h2 className="elec-section-title">
             1. Alimentación, subestaciones y distribución principal
           </h2>
-          <ul className="ind-elec-list">
+          <ul className="elec-list">
             <li>
               <strong>Transformadores de potencia y distribución</strong> — Reducción de media tensión
               (por ejemplo 13,2 kV) a baja tensión (400/230 V u otros niveles) para uso interno.
@@ -65,11 +64,11 @@ const DispositivosIndustrialesCheatSheet: React.FC = () => {
         </section>
 
         {/* 2. Protección */}
-        <section id="proteccion" className="ind-elec-section">
-          <h2 className="ind-elec-section-title">
+        <section id="proteccion" className="elec-section">
+          <h2 className="elec-section-title">
             2. Dispositivos de protección
           </h2>
-          <ul className="ind-elec-list">
+          <ul className="elec-list">
             <li>
               <strong>Interruptores automáticos de caja moldeada (MCCB)</strong> — Protección contra
               sobrecargas y cortocircuitos en corrientes medias/altas, con ajustes regulables.
@@ -100,11 +99,11 @@ const DispositivosIndustrialesCheatSheet: React.FC = () => {
         </section>
 
         {/* 3. Maniobra y seccionamiento */}
-        <section id="maniobra" className="ind-elec-section">
-          <h2 className="ind-elec-section-title">
+        <section id="maniobra" className="elec-section">
+          <h2 className="elec-section-title">
             3. Dispositivos de maniobra y seccionamiento
           </h2>
-          <ul className="ind-elec-list">
+          <ul className="elec-list">
             <li>
               <strong>Seccionadores bajo carga</strong> — Permiten abrir y cerrar circuitos en carga
               de manera segura (en media y baja tensión).
@@ -129,11 +128,11 @@ const DispositivosIndustrialesCheatSheet: React.FC = () => {
         </section>
 
         {/* 4. Motores y arranques */}
-        <section id="motores" className="ind-elec-section">
-          <h2 className="ind-elec-section-title">
+        <section id="motores" className="elec-section">
+          <h2 className="elec-section-title">
             4. Motores, arranques y control de velocidad
           </h2>
-          <ul className="ind-elec-list">
+          <ul className="elec-list">
             <li>
               <strong>Motores trifásicos de inducción</strong> — Carga más común en la industria
               (bombas, ventiladores, cintas transportadoras, compresores).
@@ -162,11 +161,11 @@ const DispositivosIndustrialesCheatSheet: React.FC = () => {
         </section>
 
         {/* 5. Automatización y control */}
-        <section id="control" className="ind-elec-section">
-          <h2 className="ind-elec-section-title">
+        <section id="control" className="elec-section">
+          <h2 className="elec-section-title">
             5. Automatización, control y supervisión
           </h2>
-          <ul className="ind-elec-list">
+          <ul className="elec-list">
             <li>
               <strong>PLC (Controladores Lógicos Programables)</strong> — Núcleo de muchos sistemas
               de automatización industrial; ejecutan lógica de control secuencial y regulaciones.
@@ -191,11 +190,11 @@ const DispositivosIndustrialesCheatSheet: React.FC = () => {
         </section>
 
         {/* 6. Sensores y actuadores */}
-        <section id="sensores" className="ind-elec-section">
-          <h2 className="ind-elec-section-title">
+        <section id="sensores" className="elec-section">
+          <h2 className="elec-section-title">
             6. Sensores, actuadores y elementos de campo
           </h2>
-          <ul className="ind-elec-list">
+          <ul className="elec-list">
             <li>
               <strong>Sensores de proximidad inductivos, capacitivos y fotoeléctricos</strong> —
               Detección sin contacto de presencia, posición o paso de piezas.
@@ -228,11 +227,11 @@ const DispositivosIndustrialesCheatSheet: React.FC = () => {
         </section>
 
         {/* 7. Iluminación industrial */}
-        <section id="iluminacion" className="ind-elec-section">
-          <h2 className="ind-elec-section-title">
+        <section id="iluminacion" className="elec-section">
+          <h2 className="elec-section-title">
             7. Luminarias y sistemas de iluminación industrial
           </h2>
-          <ul className="ind-elec-list">
+          <ul className="elec-list">
             <li>
               <strong>Luminarias LED de nave / campanas industriales</strong> — Iluminan áreas
               de producción, depósitos y talleres.
@@ -253,11 +252,11 @@ const DispositivosIndustrialesCheatSheet: React.FC = () => {
         </section>
 
         {/* 8. Calidad de energía */}
-        <section id="calidad" className="ind-elec-section">
-          <h2 className="ind-elec-section-title">
+        <section id="calidad" className="elec-section">
+          <h2 className="elec-section-title">
             8. Calidad de energía y compensación
           </h2>
-          <ul className="ind-elec-list">
+          <ul className="elec-list">
             <li>
               <strong>Bancos de capacitores y reactores</strong> — Compensan energía reactiva y
               corrigen factor de potencia. Pueden ser fijos o automáticos.
@@ -282,11 +281,11 @@ const DispositivosIndustrialesCheatSheet: React.FC = () => {
         </section>
 
         {/* 9. Baja tensión, comunicaciones y redes */}
-        <section id="bajatension" className="ind-elec-section">
-          <h2 className="ind-elec-section-title">
+        <section id="bajatension" className="elec-section">
+          <h2 className="elec-section-title">
             9. Baja tensión auxiliar, comunicaciones y redes de datos
           </h2>
-          <ul className="ind-elec-list">
+          <ul className="elec-list">
             <li>
               <strong>Fuentes de alimentación DC</strong> — Por ejemplo 24 Vdc para PLC, relés,
               sensores y dispositivos de campo.
@@ -311,11 +310,11 @@ const DispositivosIndustrialesCheatSheet: React.FC = () => {
         </section>
 
         {/* 10. Puesta a tierra y protección contra descargas */}
-        <section id="tierra" className="ind-elec-section">
-          <h2 className="ind-elec-section-title">
+        <section id="tierra" className="elec-section">
+          <h2 className="elec-section-title">
             10. Puesta a tierra y protección contra descargas
           </h2>
-          <ul className="ind-elec-list">
+          <ul className="elec-list">
             <li>
               <strong>Red de puesta a tierra de protección (PE)</strong> — Conjunto de conductores,
               barras y jabalinas que garantizan la equipotencialidad y el desvío de corrientes de
@@ -337,11 +336,11 @@ const DispositivosIndustrialesCheatSheet: React.FC = () => {
         </section>
 
         {/* 11. Tableros, envolventes y accesorios */}
-        <section id="accesorios" className="ind-elec-section">
-          <h2 className="ind-elec-section-title">
+        <section id="accesorios" className="elec-section">
+          <h2 className="elec-section-title">
             11. Tableros, envolventes y accesorios de instalación
           </h2>
-          <ul className="ind-elec-list">
+          <ul className="elec-list">
             <li>
               <strong>Tableros metálicos o plásticos (IP, IK, EX, etc.)</strong> — Envolventes para
               equipos de maniobra, protección y control, con grados de protección adaptados al ambiente.
@@ -374,7 +373,7 @@ const DispositivosIndustrialesCheatSheet: React.FC = () => {
         </section>
       </main>
 
-      <footer className="ind-elec-footer">
+      <footer className="elec-footer">
         Apuntes generales de dispositivos eléctricos para instalaciones industriales.
         Para proyectos reales se deben seguir normas, reglamentos y criterios de ingeniería,
         con intervención de profesionales habilitados.

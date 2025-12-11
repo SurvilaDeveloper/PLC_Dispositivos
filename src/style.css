@@ -1,0 +1,621 @@
+/* ==============================
+   1. Reset & base global
+   ============================== */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    background: #000000;
+    color: #e5e7eb;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+}
+
+#root {
+    min-height: 100vh;
+}
+
+/* ==============================
+   2. Tipografía & elementos básicos
+   ============================== */
+
+h1,
+h2,
+h3,
+h4 {
+    margin: 0 0 0.5rem 0;
+    font-weight: 600;
+    color: #f9fafb;
+}
+
+p {
+    margin: 0 0 0.5rem 0;
+    font-size: 0.95rem;
+    line-height: 1.45;
+}
+
+ul {
+    margin: 0;
+    padding-left: 1.1rem;
+}
+
+li {
+    margin: 0.15rem 0;
+}
+
+/* Enlaces */
+a {
+    color: #38bdf8;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+img {
+background-color: white;
+}
+
+
+/* ==============================
+   3. Layout general de páginas
+   ============================== */
+
+/* Contenedor de página (fondo general) */
+.page-wrapper {
+    min-height: 100vh;
+    padding: 24px 16px;
+    background: #020617;
+    box-sizing: border-box;
+}
+
+/* Panel central con ancho fijo */
+.page-panel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 900px;
+    margin: auto;
+    padding: 60px;
+    border-radius: 16px;
+    border: 1px solid #1f2937;
+    background: rgba(15, 23, 42, 0.98);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+}
+
+/* Título principal de página */
+.page-title {
+    margin-bottom: 0.75rem;
+    font-size: 1.6rem;
+}
+
+/* Subtítulo opcional de página */
+.page-subtitle {
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    color: #cbd5f5;
+}
+
+.page-table-container{
+    border: 1px solid white;
+    padding: 6px;
+}
+/* ==============================
+   4. Botones genéricos
+   ============================== */
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+
+    padding: 8px 14px;
+    border-radius: 999px;
+    border: 1px solid #1f2937;
+    background: #020617;
+    color: #e5e7eb;
+    font-size: 0.9rem;
+    cursor: pointer;
+
+    transition:
+        background 0.15s ease,
+        border-color 0.15s ease,
+        color 0.15s ease,
+        transform 0.08s ease;
+}
+
+.btn:hover {
+    background: #030712;
+    border-color: #38bdf8;
+    color: #f9fafb;
+    transform: translateY(-1px);
+}
+
+.btn-primary {
+    background: #2563eb;
+    border-color: #2563eb;
+}
+
+.btn-primary:hover {
+    background: #1d4ed8;
+    border-color: #1d4ed8;
+}
+
+/* Grupo de botones (como tus temaButtons) */
+.btn-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 12px 0 18px;
+}
+
+.tema {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.tema-list {
+
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.tema-list-li {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 14px;
+    border-radius: 10px;
+    border: 1px solid #1f2937;
+    background: #020617;
+    color: #e5e7eb;
+    font-size: 1rem;
+    margin-bottom: 8px;
+    cursor: pointer;
+    transition:
+        background 0.15s ease,
+        border-color 0.15s ease,
+        color 0.15s ease,
+        transform 0.08s ease;
+}
+
+.tema-title {
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin-bottom: 4px;
+}
+
+.tema-descripcion {
+    font-size: 0.9rem;
+    color: #cbd5f5;
+}
+
+.item{
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.item-container {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #828383;
+    border-radius: 8px;
+    padding:6px;
+}
+.item-container--selected {
+    border-color: #38bdf8;
+    background-color: #08112e;
+}
+
+.item_descript{
+    font-size: 1rem;
+    font-weight: 500;
+}
+.item-no-selected{
+    margin:2px;
+}
+.item-no-selected:hover{
+    background-color: #0f2664;
+}
+
+.item_title{
+    font-size: 1.1rem;
+}
+
+.selected{
+    padding:8px;
+}
+/* ==============================
+   5. “Cheat sheet / Apuntes” genéricos
+   ============================== */
+
+.plc{
+    font-size: 16px;
+}
+
+.plc-section{
+    border: 1px solid white;
+    padding: 10px;
+    margin:8px;
+    border-radius:8px;
+}
+
+
+/* Para todos tus apuntes: Ladder, dispositivos, reglamentación, etc. */
+.sheet {
+    /* ya están dentro de .page-panel, por si querés algo extra */
+}
+
+/* Cabecera de sección/apunte */
+.sheet-header {
+    margin-bottom: 14px;
+}
+
+.sheet-pill {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 999px;
+    border: 1px solid #1f2937;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #a5b4fc;
+    background: rgba(15, 23, 42, 0.95);
+}
+
+.sheet-title {
+    margin: 10px 0 4px 0;
+    font-size: 1.4rem;
+}
+
+.sheet-subtitle {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #cbd5f5;
+}
+
+.sheet-section {
+    margin-top: 16px;
+}
+
+.sheet-section-title{
+    font-size: 1.2rem;
+}
+
+.sheet-text{
+    font-size:1rem;
+}
+.sheet-list{
+    font-size:1rem;
+}
+
+.sheet-text-small{
+    font-size:0.9rem;
+}
+
+.sheet-footer{
+    background-color: #000000;
+    padding: 10px;
+}
+/* ==============================
+   6. Bloques de fórmula y texto técnico
+   ============================== */
+
+.formula-block {
+    margin: 10px 0 14px 0;
+    padding: 10px 12px;
+    border-radius: 12px;
+    border: 1px solid #1f2937;
+    background: #020617;
+}
+
+.formula-tag {
+    display: inline-block;
+    margin-bottom: 6px;
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border: 1px solid #1f2937;
+    color: #a5b4fc;
+}
+
+/* Listas dentro de bloques técnicos */
+.formula-block ul {
+    padding-left: 1rem;
+    margin-top: 4px;
+}
+
+.formula-block-warning{
+    color:rgb(249, 252, 213);
+    border: 1px solid rgb(238, 255, 0);
+    padding: 10px;
+    border-radius:10px;
+}
+
+/* ==============================
+   7. Calculadoras técnicas (inductor, capacitor, cable, etc.)
+   ============================== */
+
+.calc {
+    margin-top: 8px;
+    padding: 12px 14px;
+    border-radius: 14px;
+    border: 1px solid #1f2937;
+    background: #020617;
+}
+
+.calc-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 10px;
+    margin: 10px 0 12px 0;
+}
+
+.calc-grid label {
+    display: flex;
+    flex-direction: column;
+    font-size: 0.85rem;
+    gap: 4px;
+}
+
+.calc-grid input {
+    padding: 4px 6px;
+    border-radius: 6px;
+    border: 1px solid #374151;
+    background: #020617;
+    color: #e5e7eb;
+}
+
+.calc-grid input:focus {
+    outline: none;
+    border-color: #38bdf8;
+}
+
+/* Resultados */
+.calc-results h3 {
+    margin: 4px 0 6px 0;
+    font-size: 1rem;
+}
+
+.calc-results ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.calc-results li {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 4px 0;
+    border-bottom: 1px solid #111827;
+    font-size: 0.9rem;
+}
+
+.calc-note{
+    font-size: 15px;
+    color:#cad7fc
+}
+/* ==============================
+   8. Cosas de navegación (navbar simple)
+   ============================== */
+
+.navbar {
+    position:fixed;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 6px 18px;
+    background-color: #000000;
+    border-bottom: 1px solid #1f2937;
+    width: 100%;
+}
+
+.navbar-title {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.navbar-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.nav-buttons {
+    margin-top: 8px;
+    transition: height 0.3s ease, visibility 0.3s ease;
+}
+
+/* ==============================
+   Presentacion- Home Page
+   ============================== */
+.home-hero {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 12px 0 20px 0;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #cbd5f5;
+    text-align: center;
+}
+
+.card{
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+    margin: 12px 0;
+    justify-content: center;
+    padding: 16px;
+    border-radius: 12px;
+    border: 1px solid #1f2937;
+    background: #020617;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    transition:
+        background 0.15s ease,
+        border-color 0.15s ease,
+        color 0.15s ease,
+        transform 0.08s ease;
+    cursor: pointer;
+    width: 320px;
+}
+.profile-image {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 12px;
+    border: 2px solid #2563eb;
+}  
+
+/* ==============================
+   9. Responsive
+   ============================== */
+
+@media (max-width: 600px) {
+    .page-panel {
+        padding: 60px 0 0 0;
+    }
+
+    .page-title {
+        font-size: 1.3rem;
+    }
+}
+
+/* src/components/DispositivosHogarCheatSheet.css */
+
+.elec-cheatsheet {
+  min-height: 100vh;
+  padding: 24px 16px;
+  box-sizing: border-box;
+  background: #020617;
+  color: #e5e7eb;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.elec-header {
+  max-width: 900px;
+  margin: 0 auto 16px auto;
+}
+
+.elec-pill {
+  display: inline-block;
+  padding: 2px 10px;
+  margin-bottom: 6px;
+  border-radius: 999px;
+  border: 1px solid #1f2937;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #a5b4fc;
+}
+
+.elec-title {
+  font-size: 1.6rem;
+  margin: 0 0 6px 0;
+}
+
+.elec-subtitle {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #9ca3af;
+}
+
+.elec-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 16px auto;
+  max-width: 900px;
+}
+
+.elec-nav-item {
+  font-size: 0.8rem;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid #1f2937;
+  text-decoration: none;
+  color: #e5e7eb;
+}
+
+.elec-nav-item:hover {
+  background: #111827;
+}
+
+.elec-content {
+  max-width: 900px;
+  margin: 0 auto 32px auto;
+}
+
+.elec-section {
+  margin-bottom: 18px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid #1f2937;
+  background: #020617;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.4);
+}
+
+.elec-section-title {
+  margin: 0 0 8px 0;
+  font-size: 1.05rem;
+}
+
+.elec-list {
+  list-style: disc;
+  padding-left: 20px;
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.elec-list li + li {
+  margin-top: 4px;
+}
+
+.elec-text-small {
+  font-size: 0.8rem;
+  color: #9ca3af;
+}
+
+.elec-footer {
+  max-width: 900px;
+  margin: 0 auto;
+  padding-top: 8px;
+  border-top: 1px solid #1f2937;
+  font-size: 0.8rem;
+  color: #9ca3af;
+}
+
+.link-item {
+  cursor: pointer;
+  
+}
+.link-item:hover{
+    background-color: #0f2664;
+}
+
+.columner{
+    display:flex;
+    flex-direction: column;
+}
+
+.main-footer{
+    background-color: #000000;
+    width: 100vw;
+    padding:10px;
+    font-size: 14px;
+}

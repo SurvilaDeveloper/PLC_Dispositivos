@@ -1,6 +1,5 @@
 // src/components/TablaCorrienteCable.tsx
 import React, { useState } from "react";
-import "./TablaCorrienteCable.css";
 
 type TablaRow = {
   amps: string;
@@ -169,13 +168,13 @@ const TablaCorrienteCable: React.FC = () => {
   };
 
   return (
-    <div className="cable-wrapper">
-      <header className="cable-header">
-        <div className="cable-pill">Cables de cobre · Baja tensión</div>
-        <h1 className="cable-title">
+    <div className="page-wrapper">
+      <header className="sheet-header">
+        <div className="sheet-pill">Cables de cobre · Baja tensión</div>
+        <h1 className="sheet-title">
           Corriente, sección de cable de cobre y longitud
         </h1>
-        <p className="cable-subtitle">
+        <p className="sheet-subtitle">
           Tablas orientativas para cables de cobre en 230 V monofásico y 400 V
           trifásico, más una calculadora simplificada que sugiere sección de
           cable en función de voltaje, corriente y longitud. No reemplaza las
@@ -183,11 +182,11 @@ const TablaCorrienteCable: React.FC = () => {
         </p>
       </header>
 
-      <main className="cable-content">
+      <main className="page-wrapper">
         {/* Suposiciones */}
-        <section className="cable-section">
-          <h2 className="cable-section-title">Suposiciones simplificadas</h2>
-          <ul className="cable-list">
+        <section className="sheet-section">
+          <h2 className="sheet-title">Suposiciones simplificadas</h2>
+          <ul className="formula-block">
             <li>Conductores de cobre.</li>
             <li>
               Instalación estándar en cañería / bandeja, sin considerar todos
@@ -206,13 +205,13 @@ const TablaCorrienteCable: React.FC = () => {
         </section>
 
         {/* Tabla 230 V monofásico */}
-        <section className="cable-section">
-          <h2 className="cable-section-title">
+        <section className="sheet-section">
+          <h2 className="sheet-title">
             Tabla 1 – 230 V monofásico (orientativa)
           </h2>
 
-          <div className="cable-table-container">
-            <table className="cable-table">
+          <div className="page-table-container">
+            <table>
               <thead>
                 <tr>
                   <th>Corriente</th>
@@ -236,13 +235,13 @@ const TablaCorrienteCable: React.FC = () => {
         </section>
 
         {/* Tabla 400 V trifásico */}
-        <section className="cable-section">
-          <h2 className="cable-section-title">
+        <section className="sheet-section">
+          <h2 className="sheet-title">
             Tabla 2 – 400 V trifásico (orientativa)
           </h2>
 
-          <div className="cable-table-container">
-            <table className="cable-table">
+          <div className="page-table-container">
+            <table>
               <thead>
                 <tr>
                   <th>Corriente</th>
@@ -266,17 +265,17 @@ const TablaCorrienteCable: React.FC = () => {
         </section>
 
         {/* Calculadora de sección */}
-        <section className="cable-section">
-          <h2 className="cable-section-title">
+        <section className="sheet-section">
+          <h2 className="sheet-title">
             Calculadora orientativa de sección de cable
           </h2>
-          <p className="cable-note">
+          <p className="calc-note">
             Modelo simplificado: usa densidad de corriente máxima aproximada (6
             A/mm²) y límite de caída de tensión del 3 %. El resultado es una
             **sugerencia orientativa**, no un valor normativo.
           </p>
 
-          <div className="cable-calc-grid">
+          <div className="calc-grid">
             <label>
               Tipo de sistema
               <select
@@ -324,15 +323,15 @@ const TablaCorrienteCable: React.FC = () => {
             </label>
           </div>
 
-          <button className="cable-calc-button" onClick={calcularSeccion}>
+          <button className="btn" onClick={calcularSeccion}>
             Calcular sección orientativa
           </button>
 
-          {resultado && <p className="cable-result">{resultado}</p>}
+          {resultado && <p className="calc-results">{resultado}</p>}
         </section>
       </main>
 
-      <footer className="cable-footer">
+      <footer className="page-footer">
         Apunte de referencia rápida. Para proyectos reales deben utilizarse las
         tablas y métodos de la reglamentación AEA/IRAM y contar con la
         intervención de profesionales habilitados.

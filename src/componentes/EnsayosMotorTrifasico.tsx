@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import "./potenciaMotorTrifasico.css";
 import CalculadoraParametrosMotor from "./CalculadoraParametrosMotor";
 
 declare global {
@@ -21,8 +20,8 @@ const EnsayosMotorTrifasico: React.FC = () => {
   }, []);
 
   return (
-    <main className="pm-body">
-      <h1>Chuleta de ensayos de motor de inducción trifásico</h1>
+    <main className="page-wrapper">
+      <h1>Apuntes sobre ensayos de motor de inducción trifásico</h1>
 
       <p>
         {

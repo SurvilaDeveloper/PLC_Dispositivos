@@ -1,5 +1,4 @@
 // src/components/DispositivosHogarCheatSheet.tsx
-import "./DispositivosHogarCheatSheet.css";
 
 const DispositivosHogarCheatSheet: React.FC = () => {
 
@@ -12,14 +11,14 @@ const DispositivosHogarCheatSheet: React.FC = () => {
         window.open(url, '_blank', 'noopener,noreferrer')
     }
     return (
-        <div className="home-elec-cheatsheet">
+        <div className="page-wrapper">
             {/* Encabezado */}
-            <header className="home-elec-header">
-                <div className="home-elec-pill">Instalación eléctrica hogareña</div>
-                <h1 className="home-elec-title">
+            <header className="sheet-header">
+                <div className="sheet-pill">Instalación eléctrica hogareña</div>
+                <h1 className="sheet-title">
                     Apuntes de dispositivos eléctricos típicos en una vivienda
                 </h1>
-                <p className="home-elec-subtitle">
+                <p className="sheet-subtitle">
                     Resumen de los principales elementos que aparecen en una instalación
                     eléctrica domiciliaria: protección, mando, tomas, iluminación,
                     seguridad y comunicaciones. Solo con fines didácticos, no reemplaza
@@ -28,47 +27,47 @@ const DispositivosHogarCheatSheet: React.FC = () => {
             </header>
 
             {/* Navegación rápida */}
-            <nav className="home-elec-nav">
-                <a href="#alimentacion" className="home-elec-nav-item">
+            <nav className="nav-buttons">
+                <a href="#alimentacion" className="btn">
                     Alimentación y tablero
                 </a>
-                <a href="#proteccion" className="home-elec-nav-item">
+                <a href="#proteccion" className="btn">
                     Dispositivos de protección
                 </a>
-                <a href="#circuitos" className="home-elec-nav-item">
+                <a href="#circuitos" className="btn">
                     Cables y canalizaciones
                 </a>
-                <a href="#mando" className="home-elec-nav-item">
+                <a href="#mando" className="btn">
                     Mando e interruptores
                 </a>
-                <a href="#tomas" className="home-elec-nav-item">
+                <a href="#tomas" className="btn">
                     Tomas y salidas
                 </a>
-                <a href="#iluminacion" className="home-elec-nav-item">
+                <a href="#iluminacion" className="btn">
                     Luminarias
                 </a>
-                <a href="#seguridad" className="home-elec-nav-item">
+                <a href="#seguridad" className="btn">
                     Seguridad y señalización
                 </a>
-                <a href="#bajatension" className="home-elec-nav-item">
+                <a href="#bajatension" className="btn">
                     Baja tensión / datos
                 </a>
-                <a href="#puesta-tierra" className="home-elec-nav-item">
+                <a href="#puesta-tierra" className="btn">
                     Puesta a tierra
                 </a>
-                <a href="#accesorios" className="home-elec-nav-item">
+                <a href="#accesorios" className="btn">
                     Cajas y accesorios
                 </a>
             </nav>
 
             {/* Contenido */}
-            <main className="home-elec-content">
+            <main className="page-wrapper">
                 {/* 1. Alimentación y tablero */}
-                <section id="alimentacion" className="home-elec-section">
-                    <h2 className="home-elec-section-title">
+                <section id="alimentacion" className="elec-section">
+                    <h2 className="elec-section-title">
                         1. Alimentación y tablero principal
                     </h2>
-                    <ul className="home-elec-list">
+                    <ul className="elec-list">
                         <li className="link-item" onClick={() => handleClickG(['Medidor', 'de', 'energía', '(contador)'])}>
                             <strong>Medidor de energía (contador)</strong> — Equipo de la
                             distribuidora que mide el consumo (kWh). No es del usuario, pero
@@ -92,11 +91,11 @@ const DispositivosHogarCheatSheet: React.FC = () => {
                 </section>
 
                 {/* 2. Protección */}
-                <section id="proteccion" className="home-elec-section">
-                    <h2 className="home-elec-section-title">
+                <section id="proteccion" className="elec-section">
+                    <h2 className="elec-section-title">
                         2. Dispositivos de protección
                     </h2>
-                    <ul className="home-elec-list">
+                    <ul className="elec-list">
                         <li className="link-item" onClick={() => handleClickG(['Interruptor', 'termomagnético', '(MCB)', 'hogar'])}>
                             <strong>Interruptores termomagnéticos (MCB)</strong> — Protegen
                             contra sobrecargas y cortocircuitos. Hay de distintas
@@ -126,11 +125,11 @@ const DispositivosHogarCheatSheet: React.FC = () => {
                 </section>
 
                 {/* 3. Cables y canalizaciones */}
-                <section id="circuitos" className="home-elec-section">
-                    <h2 className="home-elec-section-title">
+                <section id="circuitos" className="elec-section">
+                    <h2 className="elec-section-title">
                         3. Conductores y canalizaciones
                     </h2>
-                    <ul className="home-elec-list">
+                    <ul className="elec-list">
                         <li className="link-item" onClick={() => handleClickG(['Cables','Conductores', 'eléctricos', 'hogar', 'unipolarres'])}>
                             <strong>Cables unipolares aislados (cobre)</strong> — Fase,
                             neutro y tierra, de distintas secciones (ej.: 1.5, 2.5, 4 mm²)
@@ -153,11 +152,11 @@ const DispositivosHogarCheatSheet: React.FC = () => {
                 </section>
 
                 {/* 4. Mando e interruptores */}
-                <section id="mando" className="home-elec-section">
-                    <h2 className="home-elec-section-title">
+                <section id="mando" className="elec-section">
+                    <h2 className="elec-section-title">
                         4. Dispositivos de mando e interruptores
                     </h2>
-                    <ul className="home-elec-list">
+                    <ul className="elec-list">
                         <li className="link-item" onClick={() => handleClickG(['Interruptor', 'eléctrico', 'hogar'])}>
                             <strong>Interruptores simples</strong> — Conmutan una fase para
                             encender/apagar una luminaria desde un punto.
@@ -196,11 +195,11 @@ const DispositivosHogarCheatSheet: React.FC = () => {
                 </section>
 
                 {/* 5. Tomas y salidas */}
-                <section id="tomas" className="home-elec-section">
-                    <h2 className="home-elec-section-title">
+                <section id="tomas" className="elec-section">
+                    <h2 className="elec-section-title">
                         5. Tomas de corriente y salidas específicas
                     </h2>
-                    <ul className="home-elec-list">
+                    <ul className="elec-list">
                         <li className="link-item" onClick={() => handleClickG(['Tomacorrientes', 'eléctricos', 'hogar'])}>
                             <strong>Tomacorrientes estándar</strong> — Tomas para usos
                             generales (enchufes de 2 y 3 polos, con tierra, según norma del
@@ -225,11 +224,11 @@ const DispositivosHogarCheatSheet: React.FC = () => {
                 </section>
 
                 {/* 6. Luminarias */}
-                <section id="iluminacion" className="home-elec-section">
-                    <h2 className="home-elec-section-title">
+                <section id="iluminacion" className="elec-section">
+                    <h2 className="elec-section-title">
                         6. Luminarias y artefactos de iluminación
                     </h2>
-                    <ul className="home-elec-list">
+                    <ul className="elec-list">
                         <li className="link-item" onClick={() => handleClickG(['Portalámparas', 'de', 'techo', 'hogar'])}>
                             <strong>Portalámparas y plafones de techo</strong> — Luminarias
                             generales de ambientes.
@@ -255,11 +254,11 @@ const DispositivosHogarCheatSheet: React.FC = () => {
                 </section>
 
                 {/* 7. Seguridad y señalización */}
-                <section id="seguridad" className="home-elec-section">
-                    <h2 className="home-elec-section-title">
+                <section id="seguridad" className="elec-section">
+                    <h2 className="elec-section-title">
                         7. Dispositivos de seguridad y señalización
                     </h2>
-                    <ul className="home-elec-list">
+                    <ul className="elec-list">
                         <li className="link-item" onClick={() => handleClickG(['Detectores', 'de', 'humo', 'hogar'])}>
                             <strong>Detectores de humo</strong> — Avisan presencia de humo en
                             ambientes clave (pasillos, dormitorios).
@@ -288,15 +287,15 @@ const DispositivosHogarCheatSheet: React.FC = () => {
                 </section>
 
                 {/* 8. Baja tensión / datos */}
-                <section id="bajatension" className="home-elec-section">
-                    <h2 className="home-elec-section-title">
+                <section id="bajatension" className="elec-section">
+                    <h2 className="elec-section-title">
                         8. Circuitos de baja tensión, datos y comunicaciones
                     </h2>
-                    <p className="home-elec-text-small">
+                    <p className="elec-text-small">
                         No son parte de la instalación de fuerza, pero conviven en la
                         vivienda y muchas veces comparten canalizaciones separadas:
                     </p>
-                    <ul className="home-elec-list">
+                    <ul className="elec-list">
                         <li className="link-item" onClick={() => handleClickG(['Tomas', 'de', 'red', 'de', 'datos', 'RJ45'])}>
                             <strong>Tomas de red de datos (RJ45)</strong> — Para LAN, internet
                             en distintos ambientes.
@@ -321,11 +320,11 @@ const DispositivosHogarCheatSheet: React.FC = () => {
                 </section>
 
                 {/* 9. Puesta a tierra */}
-                <section id="puesta-tierra" className="home-elec-section">
-                    <h2 className="home-elec-section-title">
+                <section id="puesta-tierra" className="elec-section">
+                    <h2 className="elec-section-title">
                         9. Puesta a tierra y elementos asociados
                     </h2>
-                    <ul className="home-elec-list">
+                    <ul className="elec-list">
                         <li className="link-item" onClick={() => handleClickG(['Jabalina', 'electrodo', 'de', 'tierra', 'hogar'])}>
                             <strong>Jabalina / electrodo de tierra</strong> — Elemento enterrado
                             que permite disipar corrientes de defecto al terreno.
@@ -342,11 +341,11 @@ const DispositivosHogarCheatSheet: React.FC = () => {
                 </section>
 
                 {/* 10. Cajas y accesorios */}
-                <section id="accesorios" className="home-elec-section">
-                    <h2 className="home-elec-section-title">
+                <section id="accesorios" className="elec-section">
+                    <h2 className="elec-section-title">
                         10. Cajas, módulos y otros accesorios
                     </h2>
-                    <ul className="home-elec-list">
+                    <ul className="elec-list">
                         <li className="link-item" onClick={() => handleClickG(['Cajas', 'de', 'embutir', 'electricidad', 'hogar'])}>
                             <strong>Cajas de embutir para mecanismos</strong> — Donde se
                             alojan interruptores, tomas, teclas, etc.
@@ -371,7 +370,7 @@ const DispositivosHogarCheatSheet: React.FC = () => {
                 </section>
             </main>
 
-            <footer className="home-elec-footer">
+            <footer className="elec-footer">
                 Apuntes generales pensados con fines educativos. Para una instalación real
                 es obligatorio seguir la normativa local y contar con un profesional habilitado.
             </footer>

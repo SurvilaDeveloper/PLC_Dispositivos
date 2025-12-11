@@ -1,5 +1,4 @@
 // src/components/ComponentesElectronicosCheatSheet.tsx
-import "./ComponentesElectronicosCheatSheet.css";
 
 const ComponentesElectronicosCheatSheet: React.FC = () => {
 
@@ -9,14 +8,14 @@ const ComponentesElectronicosCheatSheet: React.FC = () => {
     }
 
     return (
-        <div className="ce-wrapper">
+        <div className="page-wrapper">
             {/* Encabezado */}
-            <header className="ce-header">
-                <div className="ce-pill">Electrónica básica</div>
-                <h1 className="ce-title">
+            <header className="sheet-header">
+                <div className="sheet-pill">Electrónica básica</div>
+                <h1 className="sheet-title">
                     Apuntes de componentes electrónicos: clasificación y usos típicos
                 </h1>
-                <p className="ce-subtitle">
+                <p className="sheet-subtitle">
                     Resumen de los principales tipos de componentes electrónicos utilizados
                     en circuitos analógicos y digitales: pasivos, semiconductores,
                     integrados, optoelectrónicos, electromecánicos y más. Contenido
@@ -25,28 +24,28 @@ const ComponentesElectronicosCheatSheet: React.FC = () => {
             </header>
 
             {/* Navegación rápida */}
-            <nav className="ce-nav">
-                <a href="#pasivos" className="ce-nav-item">Pasivos</a>
-                <a href="#semiconductores" className="ce-nav-item">Semiconductores discretos</a>
-                <a href="#integrados" className="ce-nav-item">Circuitos integrados</a>
-                <a href="#opto" className="ce-nav-item">Optoelectrónicos</a>
-                <a href="#electromecanicos" className="ce-nav-item">Electromecánicos</a>
-                <a href="#energia" className="ce-nav-item">Fuentes de energía</a>
-                <a href="#rf" className="ce-nav-item">RF y filtrado</a>
-                <a href="#proteccion" className="ce-nav-item">Protección</a>
-                <a href="#otros" className="ce-nav-item">Otros dispositivos</a>
+            <nav className="nav-buttons">
+                <a href="#pasivos" className="btn">Pasivos</a>
+                <a href="#semiconductores" className="btn">Semiconductores discretos</a>
+                <a href="#integrados" className="btn">Circuitos integrados</a>
+                <a href="#opto" className="btn">Optoelectrónicos</a>
+                <a href="#electromecanicos" className="btn">Electromecánicos</a>
+                <a href="#energia" className="btn">Fuentes de energía</a>
+                <a href="#rf" className="btn">RF y filtrado</a>
+                <a href="#proteccion" className="btn">Protección</a>
+                <a href="#otros" className="btn">Otros dispositivos</a>
             </nav>
 
             {/* Contenido */}
-            <main className="ce-content">
+            <main className="page-wrapper">
                 {/* 1. Componentes pasivos */}
-                <section id="pasivos" className="ce-section">
-                    <h2 className="ce-section-title">1. Componentes pasivos</h2>
-                    <p className="ce-text">
+                <section id="pasivos" className="sheet-section">
+                    <h2 className="sheet-section-title">1. Componentes pasivos</h2>
+                    <p className="sheet-text">
                         Los componentes pasivos no generan energía; se limitan a consumirla,
                         almacenarla o disiparla. Son la base de la mayoría de los circuitos.
                     </p>
-                    <ul className="ce-list">
+                    <ul className="sheet-list">
                         <li className="link-item" onClick={() => handleClickW(['Resistor'])}>
                             <strong>Resistores</strong> — Limitan la corriente y definen caídas
                             de tensión según la ley de Ohm. Se usan en divisores de tensión,
@@ -81,14 +80,14 @@ const ComponentesElectronicosCheatSheet: React.FC = () => {
                 </section>
 
                 {/* 2. Semiconductores discretos */}
-                <section id="semiconductores" className="ce-section">
-                    <h2 className="ce-section-title">2. Semiconductores discretos</h2>
-                    <p className="ce-text">
+                <section id="semiconductores" className="sheet-section">
+                    <h2 className="sheet-section-title">2. Semiconductores discretos</h2>
+                    <p className="sheet-text">
                         Son dispositivos basados en materiales semiconductores (como el
                         silicio) que permiten controlar el flujo de corriente de manera
                         no lineal. Son la base de la electrónica moderna.
                     </p>
-                    <ul className="ce-list">
+                    <ul className="sheet-list">
                         <li className="link-item" onClick={() => handleClickW(['Diodo'])}>
                             <strong>Diodos rectificadores</strong> — Conducen corriente en un
                             solo sentido. Usados para rectificación AC/DC, protección contra
@@ -145,14 +144,14 @@ const ComponentesElectronicosCheatSheet: React.FC = () => {
                 </section>
 
                 {/* 3. Circuitos integrados */}
-                <section id="integrados" className="ce-section">
-                    <h2 className="ce-section-title">3. Circuitos integrados (IC)</h2>
-                    <p className="ce-text">
+                <section id="integrados" className="sheet-section">
+                    <h2 className="sheet-section-title">3. Circuitos integrados (IC)</h2>
+                    <p className="sheet-text">
                         Un circuito integrado contiene en un mismo encapsulado muchos
                         componentes electrónicos miniaturizados. Hay gran variedad según su
                         función.
                     </p>
-                    <ul className="ce-list">
+                    <ul className="sheet-list">
                         <li className="link-item" onClick={() => handleClickW(['Amplificador operacional'])}>
                             <strong>Amplificadores operacionales (op-amps)</strong> — Bloques
                             analógicos básicos para amplificación, filtros activos, sumadores,
@@ -212,14 +211,14 @@ const ComponentesElectronicosCheatSheet: React.FC = () => {
                 </section>
 
                 {/* 4. Optoelectrónicos */}
-                <section id="opto" className="ce-section">
-                    <h2 className="ce-section-title">4. Componentes optoelectrónicos</h2>
-                    <p className="ce-text">
+                <section id="opto" className="sheet-section">
+                    <h2 className="sheet-section-title">4. Componentes optoelectrónicos</h2>
+                    <p className="sheet-text">
                         Son dispositivos que transforman energía eléctrica en luz o luz en
                         señales eléctricas, y se usan tanto en indicación como en comunicación
                         y sensado.
                     </p>
-                    <ul className="ce-list">
+                    <ul className="sheet-list">
                         <li className="link-item" onClick={() => handleClickW(['Diodo emisor de luz'])}>
                             <strong>LED (diodos emisores de luz)</strong> — Indicadores,
                             iluminación, backlights, comunicación óptica.
@@ -258,13 +257,13 @@ const ComponentesElectronicosCheatSheet: React.FC = () => {
                 </section>
 
                 {/* 5. Electromecánicos */}
-                <section id="electromecanicos" className="ce-section">
-                    <h2 className="ce-section-title">5. Componentes electromecánicos</h2>
-                    <p className="ce-text">
+                <section id="electromecanicos" className="sheet-section">
+                    <h2 className="sheet-section-title">5. Componentes electromecánicos</h2>
+                    <p className="sheet-text">
                         Combinan partes eléctricas y mecánicas. Suelen intervenir en la
                         interfaz entre el circuito y el usuario o la potencia.
                     </p>
-                    <ul className="ce-list">
+                    <ul className="sheet-list">
                         <li className="link-item" onClick={() => handleClickW(['Relé'])}>
                             <strong>Relés electromecánicos</strong> — Interruptores controlados
                             eléctricamente que permiten conmutar cargas usando una bobina de
@@ -298,9 +297,9 @@ const ComponentesElectronicosCheatSheet: React.FC = () => {
                 </section>
 
                 {/* 6. Fuentes de energía */}
-                <section id="energia" className="ce-section">
-                    <h2 className="ce-section-title">6. Fuentes de energía y almacenamiento</h2>
-                    <ul className="ce-list">
+                <section id="energia" className="sheet-section">
+                    <h2 className="sheet-section-title">6. Fuentes de energía y almacenamiento</h2>
+                    <ul className="sheet-list">
                         <li className="link-item" onClick={() => handleClickW(['Batería (electricidad)'])}>
                             <strong>Baterías y pilas</strong> — Fuentes químicas de energía
                             (primarias y recargables) que alimentan circuitos portátiles.
@@ -323,11 +322,11 @@ const ComponentesElectronicosCheatSheet: React.FC = () => {
                 </section>
 
                 {/* 7. RF y filtrado */}
-                <section id="rf" className="ce-section">
-                    <h2 className="ce-section-title">
+                <section id="rf" className="sheet-section">
+                    <h2 className="sheet-section-title">
                         7. Dispositivos para RF, filtrado y sintonía
                     </h2>
-                    <ul className="ce-list">
+                    <ul className="sheet-list">
                         <li className="link-item" onClick={() => handleClickW(['Filtro electrónico'])}>
                             <strong>Filtros LC, filtros cerámicos, filtros SAW</strong> —
                             Selección de bandas de frecuencia en radios, TV, comunicaciones.
@@ -349,9 +348,9 @@ const ComponentesElectronicosCheatSheet: React.FC = () => {
                 </section>
 
                 {/* 8. Protección */}
-                <section id="proteccion" className="ce-section">
-                    <h2 className="ce-section-title">8. Componentes de protección</h2>
-                    <ul className="ce-list">
+                <section id="proteccion" className="sheet-section">
+                    <h2 className="sheet-section-title">8. Componentes de protección</h2>
+                    <ul className="sheet-list">
                         <li className="link-item" onClick={() => handleClickW(['Fusible'])}>
                             <strong>Fusibles</strong> — Protegen contra
                             sobrecorrientes.
@@ -380,13 +379,13 @@ const ComponentesElectronicosCheatSheet: React.FC = () => {
                 </section>
 
                 {/* 9. Otros dispositivos */}
-                <section id="otros" className="ce-section">
-                    <h2 className="ce-section-title">9. Otros dispositivos y familias</h2>
-                    <p className="ce-text">
+                <section id="otros" className="sheet-section">
+                    <h2 className="sheet-section-title">9. Otros dispositivos y familias</h2>
+                    <p className="sheet-text">
                         El universo de componentes electrónicos es muy amplio. Algunos
                         grupos adicionales que aparecen en proyectos reales son:
                     </p>
-                    <ul className="ce-list">
+                    <ul className="sheet-list">
                         <li className="link-item">
                             <strong>Sensores de posición y movimiento</strong> — Acelerómetros,
                             giróscopos, sensores Hall, sensores magnéticos, etc.
@@ -405,7 +404,7 @@ const ComponentesElectronicosCheatSheet: React.FC = () => {
                             conectores) en un formato cómodo (Arduino, ESP32, etc.).
                         </li>
                     </ul>
-                    <p className="ce-text-small">
+                    <p className="sheet-text-small">
                         Estos apuntes resumen las familias más comunes. Cada grupo incluye
                         muchas variantes y modelos específicos con distintas características
                         eléctricas y encapsulados.
@@ -413,7 +412,7 @@ const ComponentesElectronicosCheatSheet: React.FC = () => {
                 </section>
             </main>
 
-            <footer className="ce-footer">
+            <footer className="sheet-footer">
                 Apuntes generales de componentes electrónicos, pensados como referencia
                 rápida para estudio y diseño básico de circuitos.
             </footer>
