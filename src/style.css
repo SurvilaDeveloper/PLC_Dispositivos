@@ -26,7 +26,13 @@ body {
    2. Tipografía & elementos básicos
    ============================== */
 
-h1,
+h1 {
+    font-size: 1.2rem;
+    margin: 0 0 0.5rem 0;
+    font-weight: 600;
+    color: #f9fafb;
+}
+
 h2,
 h3,
 h4 {
@@ -61,7 +67,7 @@ a:hover {
 }
 
 img {
-background-color: white;
+    background-color: white;
 }
 
 
@@ -104,10 +110,11 @@ background-color: white;
     color: #cbd5f5;
 }
 
-.page-table-container{
+.page-table-container {
     border: 1px solid white;
     padding: 6px;
 }
+
 /* ==============================
    4. Botones genéricos
    ============================== */
@@ -200,7 +207,7 @@ background-color: white;
     color: #cbd5f5;
 }
 
-.item{
+.item {
     font-size: 1rem;
     font-weight: 500;
 }
@@ -210,44 +217,48 @@ background-color: white;
     flex-direction: column;
     border: 1px solid #828383;
     border-radius: 8px;
-    padding:6px;
+    padding: 6px;
 }
+
 .item-container--selected {
     border-color: #38bdf8;
     background-color: #08112e;
 }
 
-.item_descript{
+.item_descript {
     font-size: 1rem;
     font-weight: 500;
 }
-.item-no-selected{
-    margin:2px;
+
+.item-no-selected {
+    margin: 2px;
 }
-.item-no-selected:hover{
+
+.item-no-selected:hover {
     background-color: #0f2664;
 }
 
-.item_title{
+.item_title {
     font-size: 1.1rem;
 }
 
-.selected{
-    padding:8px;
+.selected {
+    padding: 8px;
 }
+
 /* ==============================
    5. “Cheat sheet / Apuntes” genéricos
    ============================== */
 
-.plc{
+.plc {
     font-size: 16px;
 }
 
-.plc-section{
+.plc-section {
     border: 1px solid white;
     padding: 10px;
-    margin:8px;
-    border-radius:8px;
+    margin: 8px;
+    border-radius: 8px;
 }
 
 
@@ -288,25 +299,27 @@ background-color: white;
     margin-top: 16px;
 }
 
-.sheet-section-title{
+.sheet-section-title {
     font-size: 1.2rem;
 }
 
-.sheet-text{
-    font-size:1rem;
-}
-.sheet-list{
-    font-size:1rem;
+.sheet-text {
+    font-size: 1rem;
 }
 
-.sheet-text-small{
-    font-size:0.9rem;
+.sheet-list {
+    font-size: 1rem;
 }
 
-.sheet-footer{
+.sheet-text-small {
+    font-size: 0.9rem;
+}
+
+.sheet-footer {
     background-color: #000000;
     padding: 10px;
 }
+
 /* ==============================
    6. Bloques de fórmula y texto técnico
    ============================== */
@@ -337,11 +350,11 @@ background-color: white;
     margin-top: 4px;
 }
 
-.formula-block-warning{
-    color:rgb(249, 252, 213);
+.formula-block-warning {
+    color: rgb(249, 252, 213);
     border: 1px solid rgb(238, 255, 0);
     padding: 10px;
-    border-radius:10px;
+    border-radius: 10px;
 }
 
 /* ==============================
@@ -404,16 +417,17 @@ background-color: white;
     font-size: 0.9rem;
 }
 
-.calc-note{
+.calc-note {
     font-size: 15px;
-    color:#cad7fc
+    color: #cad7fc
 }
+
 /* ==============================
    8. Cosas de navegación (navbar simple)
    ============================== */
 
 .navbar {
-    position:fixed;
+    position: fixed;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -453,8 +467,8 @@ background-color: white;
     text-align: center;
 }
 
-.card{
-    display:flex;
+.card {
+    display: flex;
     flex-direction: row;
     align-items: center;
     gap: 12px;
@@ -473,6 +487,7 @@ background-color: white;
     cursor: pointer;
     width: 320px;
 }
+
 .profile-image {
     width: 80px;
     height: 80px;
@@ -480,7 +495,7 @@ background-color: white;
     object-fit: cover;
     margin-bottom: 12px;
     border: 2px solid #2563eb;
-}  
+}
 
 /* ==============================
    9. Responsive
@@ -499,123 +514,800 @@ background-color: white;
 /* src/components/DispositivosHogarCheatSheet.css */
 
 .elec-cheatsheet {
-  min-height: 100vh;
-  padding: 24px 16px;
-  box-sizing: border-box;
-  background: #020617;
-  color: #e5e7eb;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    min-height: 100vh;
+    padding: 24px 16px;
+    box-sizing: border-box;
+    background: #020617;
+    color: #e5e7eb;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
 .elec-header {
-  max-width: 900px;
-  margin: 0 auto 16px auto;
+    max-width: 900px;
+    margin: 0 auto 16px auto;
 }
 
 .elec-pill {
-  display: inline-block;
-  padding: 2px 10px;
-  margin-bottom: 6px;
-  border-radius: 999px;
-  border: 1px solid #1f2937;
-  font-size: 0.75rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: #a5b4fc;
+    display: inline-block;
+    padding: 2px 10px;
+    margin-bottom: 6px;
+    border-radius: 999px;
+    border: 1px solid #1f2937;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #a5b4fc;
 }
 
 .elec-title {
-  font-size: 1.6rem;
-  margin: 0 0 6px 0;
+    font-size: 1.6rem;
+    margin: 0 0 6px 0;
 }
 
 .elec-subtitle {
-  margin: 0;
-  font-size: 0.9rem;
-  color: #9ca3af;
+    margin: 0;
+    font-size: 0.9rem;
+    color: #9ca3af;
 }
 
 .elec-nav {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin: 16px auto;
-  max-width: 900px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 16px auto;
+    max-width: 900px;
 }
 
 .elec-nav-item {
-  font-size: 0.8rem;
-  padding: 4px 10px;
-  border-radius: 999px;
-  border: 1px solid #1f2937;
-  text-decoration: none;
-  color: #e5e7eb;
+    font-size: 0.8rem;
+    padding: 4px 10px;
+    border-radius: 999px;
+    border: 1px solid #1f2937;
+    text-decoration: none;
+    color: #e5e7eb;
 }
 
 .elec-nav-item:hover {
-  background: #111827;
+    background: #111827;
 }
 
 .elec-content {
-  max-width: 900px;
-  margin: 0 auto 32px auto;
+    max-width: 900px;
+    margin: 0 auto 32px auto;
 }
 
 .elec-section {
-  margin-bottom: 18px;
-  padding: 12px 14px;
-  border-radius: 14px;
-  border: 1px solid #1f2937;
-  background: #020617;
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.4);
+    margin-bottom: 18px;
+    padding: 12px 14px;
+    border-radius: 14px;
+    border: 1px solid #1f2937;
+    background: #020617;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.4);
 }
 
 .elec-section-title {
-  margin: 0 0 8px 0;
-  font-size: 1.05rem;
+    margin: 0 0 8px 0;
+    font-size: 1.05rem;
 }
 
 .elec-list {
-  list-style: disc;
-  padding-left: 20px;
-  margin: 0;
-  font-size: 0.9rem;
+    list-style: disc;
+    padding-left: 20px;
+    margin: 0;
+    font-size: 0.9rem;
 }
 
-.elec-list li + li {
-  margin-top: 4px;
+.elec-list li+li {
+    margin-top: 4px;
 }
 
 .elec-text-small {
-  font-size: 0.8rem;
-  color: #9ca3af;
+    font-size: 0.8rem;
+    color: #9ca3af;
 }
 
 .elec-footer {
-  max-width: 900px;
-  margin: 0 auto;
-  padding-top: 8px;
-  border-top: 1px solid #1f2937;
-  font-size: 0.8rem;
-  color: #9ca3af;
+    max-width: 900px;
+    margin: 0 auto;
+    padding-top: 8px;
+    border-top: 1px solid #1f2937;
+    font-size: 0.8rem;
+    color: #9ca3af;
 }
 
 .link-item {
-  cursor: pointer;
-  
+    cursor: pointer;
+
 }
-.link-item:hover{
+
+.link-item:hover {
     background-color: #0f2664;
 }
 
-.columner{
-    display:flex;
+.columner {
+    display: flex;
     flex-direction: column;
 }
 
-.main-footer{
+.main-footer {
     background-color: #000000;
     width: 100vw;
-    padding:10px;
+    padding: 10px;
     font-size: 14px;
+}
+
+
+/* ====== Arquitecturas: selector de tipo ====== */
+
+.arch-type-selector {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 0.75rem 0 0.25rem;
+}
+
+.arch-type-chip {
+    border-radius: 9999px;
+    border: 1px solid #4b5563;
+    padding: 0.35rem 0.75rem;
+    background: #111827;
+    color: #e5e7eb;
+    font-size: 0.85rem;
+    line-height: 1.3;
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    transition: background 0.15s ease, border-color 0.15s ease,
+        transform 0.05s ease;
+}
+
+.arch-type-chip:hover {
+    background: #1f2937;
+    border-color: #6b7280;
+    transform: translateY(-1px);
+}
+
+.arch-type-chip--active {
+    background: #2563eb;
+    border-color: #60a5fa;
+    color: #f9fafb;
+}
+
+.arch-type-chip-label {
+    white-space: nowrap;
+}
+
+.arch-type-description {
+    margin-top: 0.35rem;
+    color: #9ca3af;
+}
+
+/* ====== Arquitecturas: grid y tarjetas ====== */
+
+.arch-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1rem;
+}
+
+@media (min-width: 900px) {
+    .arch-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+.arch-card {
+    border-radius: 0.75rem;
+    border: 1px solid #374151;
+    background: radial-gradient(circle at top left, #111827, #020617);
+    padding: 0.9rem 1rem;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+}
+
+.arch-card-header {
+    border-bottom: 1px solid #1f2937;
+    padding-bottom: 0.4rem;
+    margin-bottom: 0.15rem;
+}
+
+.arch-card-title {
+    font-size: 1.05rem;
+    margin: 0;
+}
+
+.arch-card-subtitle {
+    margin: 0.15rem 0 0;
+    font-size: 0.8rem;
+    color: #9ca3af;
+}
+
+.arch-card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+}
+
+/* ====== Diagrama simple (cajas y flecha) ====== */
+
+.arch-diagram {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.4rem 0.55rem;
+    border-radius: 9999px;
+    background: #020617;
+    border: 1px dashed #374151;
+    font-size: 0.78rem;
+}
+
+.arch-diagram-box {
+    padding: 0.3rem 0.6rem;
+    border-radius: 9999px;
+    border: 1px solid #4b5563;
+    background: #111827;
+}
+
+.arch-diagram-box--primary {
+    border-color: #60a5fa;
+    background: linear-gradient(135deg, #1d4ed8, #0f172a);
+}
+
+.arch-diagram-box--secondary {
+    border-color: #f97316;
+    background: linear-gradient(135deg, #ea580c, #0f172a);
+}
+
+.arch-diagram-label {
+    white-space: nowrap;
+    color: #e5e7eb;
+}
+
+.arch-diagram-arrow {
+    font-size: 0.9rem;
+    color: #9ca3af;
+}
+
+/* ====== Bloques dentro de la tarjeta ====== */
+
+.arch-block {
+    border-radius: 0.75rem;
+    border: 1px solid #1f2937;
+    background: #020617;
+    padding: 0.55rem 0.65rem;
+}
+
+.arch-block-tag {
+    display: inline-block;
+    padding: 0.1rem 0.45rem;
+    border-radius: 9999px;
+    background: #111827;
+    border: 1px solid #374151;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #9ca3af;
+    margin-bottom: 0.3rem;
+}
+
+.arch-block-list {
+    list-style: disc;
+    margin: 0.15rem 0 0.1rem 1.1rem;
+    padding: 0;
+    font-size: 0.78rem;
+    color: #e5e7eb;
+}
+
+.arch-block-list li+li {
+    margin-top: 0.12rem;
+}
+
+/* ====== Chips de micros / placas ====== */
+
+.arch-tag-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+    margin-top: 0.15rem;
+}
+
+.arch-chip {
+    border-radius: 9999px;
+    border: 1px solid #4b5563;
+    padding: 0.18rem 0.55rem;
+    font-size: 0.75rem;
+    background: #020617;
+    color: #e5e7eb;
+    white-space: nowrap;
+}
+
+.arch-chip--board {
+    border-color: #22c55e;
+    color: #bbf7d0;
+}
+
+/* ====== Notas dentro de tarjeta ====== */
+
+.arch-notes {
+    margin-top: 0.3rem;
+    color: #9ca3af;
+}
+
+/* ====== Resumen de micros y placas ====== */
+
+.arch-summary-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1rem;
+    margin-top: 0.75rem;
+}
+
+@media (min-width: 800px) {
+    .arch-summary-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+.arch-summary-column {
+    border-radius: 0.75rem;
+    border: 1px solid #1f2937;
+    background: #020617;
+    padding: 0.6rem 0.75rem;
+}
+
+.arch-summary-title {
+    margin: 0 0 0.3rem;
+    font-size: 0.9rem;
+}
+
+.arch-summary-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-size: 0.8rem;
+}
+
+.arch-summary-item+.arch-summary-item {
+    margin-top: 0.14rem;
+}
+
+.arch-tip-block {
+    margin-top: 0.75rem;
+    border-radius: 0.75rem;
+    border: 1px dashed #4b5563;
+    padding: 0.55rem 0.7rem;
+    background: rgba(37, 99, 235, 0.08);
+}
+
+/* ============================
+   MatrizEleccionPlataforma
+   ============================ */
+
+/* Selector de tipo de proyecto (chips) */
+
+.matrix-type-selector {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 0.75rem 0 0.5rem;
+}
+
+.matrix-type-chip {
+    border-radius: 9999px;
+    border: 1px solid #4b5563;
+    padding: 0.35rem 0.75rem;
+    background: #111827;
+    color: #e5e7eb;
+    font-size: 0.85rem;
+    line-height: 1.3;
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    transition: background 0.15s ease, border-color 0.15s ease,
+        transform 0.05s ease, box-shadow 0.15s ease;
+}
+
+.matrix-type-chip:hover {
+    background: #1f2937;
+    border-color: #9ca3af;
+    box-shadow: 0 0 0 1px rgba(148, 163, 184, 0.4);
+    transform: translateY(-1px);
+}
+
+.matrix-type-chip--active {
+    background: #2563eb;
+    border-color: #60a5fa;
+    color: #f9fafb;
+    box-shadow: 0 0 0 1px rgba(96, 165, 250, 0.6);
+}
+
+.matrix-type-chip-label {
+    white-space: nowrap;
+}
+
+.matrix-type-description {
+    margin-top: 0.5rem;
+}
+
+/* ============================
+   Tabla de compatibilidad
+   ============================ */
+
+.matrix-table-wrapper {
+    margin-top: 0.75rem;
+    border-radius: 0.75rem;
+    border: 1px solid #1f2937;
+    background: #020617;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* pequeña pista visual de que se puede scrollear horizontalmente */
+.matrix-table-wrapper::after {
+    content: "↔ desplazá para ver más";
+    display: block;
+    font-size: 0.7rem;
+    color: #6b7280;
+    padding: 0.25rem 0.5rem 0.4rem;
+}
+
+.matrix-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.8rem;
+    min-width: 650px;
+    /* para que en escritorio se vea toda la matriz prolija */
+}
+
+.matrix-table-th,
+.matrix-table-td {
+    padding: 0.35rem 0.4rem;
+    border-bottom: 1px solid #111827;
+}
+
+.matrix-table-th {
+    text-align: center;
+    font-weight: 500;
+    color: #e5e7eb;
+    background: #020617;
+    white-space: nowrap;
+}
+
+.matrix-table-th--platform {
+    text-align: left;
+    min-width: 11rem;
+}
+
+.matrix-table-th--active {
+    background: rgba(59, 130, 246, 0.18);
+    color: #bfdbfe;
+}
+
+.matrix-table-row:nth-child(even) {
+    background: rgba(15, 23, 42, 0.6);
+}
+
+.matrix-table-row:nth-child(odd) {
+    background: rgba(15, 23, 42, 0.3);
+}
+
+.matrix-table-td {
+    text-align: center;
+    color: #e5e7eb;
+}
+
+.matrix-table-td--platform {
+    text-align: left;
+}
+
+.matrix-table-td--active {
+    font-weight: 600;
+    background: rgba(59, 130, 246, 0.15);
+}
+
+.matrix-platform-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.matrix-platform-name {
+    font-weight: 600;
+    color: #f9fafb;
+}
+
+.matrix-platform-family {
+    font-size: 0.74rem;
+    color: #9ca3af;
+}
+
+/* ============================
+   Grid de recomendaciones
+   ============================ */
+
+.matrix-reco-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.9rem;
+    margin-top: 0.75rem;
+}
+
+@media (min-width: 900px) {
+    .matrix-reco-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+.matrix-reco-card {
+    border-radius: 0.9rem;
+    border: 1px solid #374151;
+    background: radial-gradient(circle at top left, #111827, #020617);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+    transition: transform 0.12s ease, box-shadow 0.12s ease,
+        border-color 0.12s ease;
+}
+
+.matrix-reco-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 16px 30px rgba(0, 0, 0, 0.45);
+}
+
+/* Colores según nivel */
+
+.matrix-reco-card--ideal {
+    border-color: rgba(16, 185, 129, 0.85);
+}
+
+.matrix-reco-card--buena {
+    border-color: rgba(59, 130, 246, 0.85);
+}
+
+.matrix-reco-card--posible {
+    border-color: rgba(156, 163, 175, 0.9);
+}
+
+.matrix-reco-title {
+    font-size: 1.05rem;
+    margin-bottom: 0.25rem;
+}
+
+/* Bloque TIP al final */
+
+.matrix-tip-block {
+    margin-top: 1.25rem;
+    border-radius: 0.85rem;
+    border: 1px dashed #4b5563;
+    background: rgba(37, 99, 235, 0.08);
+}
+
+/* ============================
+   Ajustes específicos para móvil
+   ============================ */
+
+@media (max-width: 640px) {
+
+    /* Chips: que no queden apretados en una sola fila */
+    .matrix-type-selector {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .matrix-type-chip {
+        width: 100%;
+        justify-content: center;
+        text-align: center;
+    }
+
+    /* En móvil la tabla sólo muestra:
+     - Columna "Plataforma"
+     - Columna activa (tipo seleccionado)
+  */
+    .matrix-table-wrapper {
+        overflow-x: visible;
+    }
+
+    .matrix-table-wrapper::after {
+        content: "";
+        display: none;
+    }
+
+    .matrix-table {
+        min-width: 0;
+        width: 100%;
+    }
+
+    .matrix-table-th,
+    .matrix-table-td {
+        padding: 0.4rem 0.3rem;
+        font-size: 0.72rem;
+    }
+
+    .matrix-table-th {
+        white-space: normal;
+    }
+
+    .matrix-table-th--platform {
+        min-width: 0;
+    }
+
+    /* 🔴 Ocultar todas las columnas que NO sean:
+       - la columna de plataforma
+       - la columna activa (la que tiene --active)
+  */
+    .matrix-table-th:not(.matrix-table-th--platform):not(.matrix-table-th--active),
+    .matrix-table-td:not(.matrix-table-td--platform):not(.matrix-table-td--active) {
+        display: none;
+    }
+
+    .matrix-platform-name {
+        font-size: 0.8rem;
+    }
+
+    .matrix-platform-family {
+        font-size: 0.7rem;
+    }
+
+    /* Cards: ya estaban a una columna, reforzamos */
+    .matrix-reco-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+/* ============================
+   Página de instrucciones C para Arduino
+   ============================ */
+
+.arduino-page {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 1.5rem 1rem 2rem;
+    background: #020617;
+    /* fondo oscuro tipo panel */
+    border-radius: 1rem;
+    border: 1px solid #1f2937;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45);
+    color: #e5e7eb;
+}
+
+/* En móviles: que el panel aproveche todo el ancho y sea más liviano */
+@media (max-width: 640px) {
+    .arduino-page {
+        max-width: 100%;
+        margin: 0;
+        border-radius: 0;
+        border-left: none;
+        border-right: none;
+        padding: 1rem 0.75rem 1.5rem;
+        box-shadow: none;
+    }
+}
+
+/* Cabecera */
+
+.arduino-header {
+    margin-bottom: 1.25rem;
+}
+
+.arduino-pill {
+    display: inline-block;
+    padding: 0.15rem 0.6rem;
+    border-radius: 9999px;
+    background: #111827;
+    border: 1px solid #374151;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #9ca3af;
+}
+
+.arduino-title {
+    margin: 0.6rem 0 0.4rem;
+    font-size: 1.4rem;
+    line-height: 1.2;
+}
+
+.arduino-subtitle {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #9ca3af;
+}
+
+/* Secciones */
+
+.arduino-section {
+    margin-top: 1.3rem;
+}
+
+.arduino-section-title {
+    margin: 0 0 0.45rem;
+    font-size: 1.1rem;
+}
+
+.arduino-text {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin: 0.25rem 0;
+}
+
+/* Listas */
+
+.arduino-list {
+    margin: 0.3rem 0 0.2rem 1.2rem;
+    padding: 0;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.arduino-list li+li {
+    margin-top: 0.2rem;
+}
+
+/* Bloques tipo "card" con código o explicación */
+
+.arduino-block {
+    margin-top: 0.7rem;
+}
+
+.arduino-block-tag {
+    display: inline-block;
+    padding: 0.1rem 0.5rem;
+    border-radius: 9999px;
+    background: #111827;
+    border: 1px solid #374151;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #9ca3af;
+    margin-bottom: 0.25rem;
+}
+
+/* Bloques de código */
+
+.arduino-code-block {
+    max-width: 100%;
+    margin: 0.25rem 0 0.3rem;
+    padding: 0.75rem 0.8rem;
+    border-radius: 0.75rem;
+    background: #020617;
+    border: 1px solid #111827;
+    overflow-x: auto;
+    /* clave para que en móvil no se haga ancho */
+    font-size: 0.8rem;
+}
+
+/* Quitar scroll vertical feo si no hace falta */
+.arduino-code-block::-webkit-scrollbar {
+    height: 6px;
+}
+
+.arduino-code-block::-webkit-scrollbar-track {
+    background: #020617;
+}
+
+.arduino-code-block::-webkit-scrollbar-thumb {
+    background: #4b5563;
+    border-radius: 9999px;
+}
+
+.arduino-code-block code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+        "Liberation Mono", "Courier New", monospace;
+    white-space: pre;
+    /* mantener formato original */
+}
+
+/* Footer */
+
+.arduino-footer {
+    margin-top: 1.5rem;
+    padding-top: 0.8rem;
+    border-top: 1px solid #1f2937;
+}
+
+.arduino-footer-text {
+    margin: 0;
+    font-size: 0.8rem;
+    color: #9ca3af;
 }

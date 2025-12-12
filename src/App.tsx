@@ -20,6 +20,12 @@ import TransistorMosfetCheatSheet from './componentes/TransistorMosfetCheatSheet
 import MosfetSourceFollowerCheatSheet from './componentes/MosfetSourceFollowerCheatSheet'
 import PmosCurrentMirrorCheatSheet from './componentes/PmosCurrentMirrorCheatSheet'
 import PmosActiveLoadDiffAmpCheatSheet from './componentes/PmosActiveLoadDiffAmpCheatSheet'
+import MicrocontroladoresCheatSheet from './componentes/MicrocontroladoresCheatSheet'
+import PlacasDesarrolloCheatSheet from './componentes/PlacasDesarrolloCheatSheet'
+import PlacasHibridasAvanzadas from './componentes/PlacasHibridasAvanzadas'
+import MatrizEleccionPlataforma from './componentes/MatrizEleccionPlataforma'
+import MatrizArquitecturaPlataformas from './componentes/MatrizArquitecturaPlataformas'
+import ArduinoCInstrucciones from './componentes/ArduinoCInstrucciones'
 
 function App() {
 
@@ -53,7 +59,7 @@ function App() {
             top: 0,
             behavior: "smooth", // o "auto" si no querés animación
           });
-        }}>🏠</button>
+        }}>&#x1F3E1;</button>
         <button className="btn" onClick={() => {
           toggleMenu();
           window.scrollTo({
@@ -70,6 +76,17 @@ function App() {
             <div className='btn-group'>
               <button onClick={() => { setPage('componentes'); toggleMenu() }} className='btn'>Componentes</button>
               <button onClick={() => { setPage('ladder'); toggleMenu() }} className='btn'>Comandos Ladder</button>
+            </div>
+          </div>
+          <div className='tema'> Robótica
+            <div className='btn-group'>
+              <button onClick={() => { setPage('micro_controladores'); toggleMenu() }} className='btn'>Micro-controladores</button>
+              <button onClick={() => { setPage('placa_desarrollo'); toggleMenu() }} className='btn'>Placas de Desarrollo</button>
+              <button onClick={() => { setPage('placa_desarrollo_ha'); toggleMenu() }} className='btn'>Placas de Desarrollo Híbridas / Avanzadas</button>
+              <button onClick={() => { setPage('elec_plataforma'); toggleMenu() }} className='btn'>Elección de Plataforma</button>
+              <button onClick={() => { setPage('elec_arquitectura'); toggleMenu() }} className='btn'>Elección de Arquitectura</button>
+              <button onClick={() => { setPage('arduino_lenguaje'); toggleMenu() }} className='btn'>Lenguaje de Programación para Arduino</button>
+
             </div>
           </div>
           <div className='tema'> Fórmulas, Calculadoras y Tablas
@@ -95,8 +112,6 @@ function App() {
           </div>
 
         </div>
-
-        <hr />
         {page === 'componentes' && <PLCComponentesMenu />}
         {page === 'ladder' && <LadderPlcCheatSheet />}
         {/* FORMULAS */}
@@ -204,7 +219,7 @@ function App() {
                 Fórmulas del transistor MOSFET.
               </span>
             </li>
-                        <li
+            <li
               className="tema-list-li"
               onClick={() => setPage("mosfet-follower")}
             >
@@ -213,7 +228,7 @@ function App() {
                 MOSFET seguidor de fuente.
               </span>
             </li>
-                        <li
+            <li
               className="tema-list-li"
               onClick={() => setPage("mosfet-mirror")}
             >
@@ -222,7 +237,7 @@ function App() {
                 PMOS espejo de corriente / carga activa.
               </span>
             </li>
-                        <li
+            <li
               className="tema-list-li"
               onClick={() => setPage("mosfet-active")}
             >
@@ -274,10 +289,16 @@ function App() {
         {page === 'simbolosElectronicos' && <SimbolosElectronicos />}
         {page === 'resistenciaMateriales' && <ResistenciaMateriales />}
         {page === 'bjt' && <TransistorBjtCheatSheet />}
-        {page === 'mosfet' && <TransistorMosfetCheatSheet/>}
-        {page === 'mosfet-follower' && <MosfetSourceFollowerCheatSheet/>}
-        {page === 'mosfet-mirror' && <PmosCurrentMirrorCheatSheet/>}
-        {page === 'mosfet-active' && <PmosActiveLoadDiffAmpCheatSheet/>}
+        {page === 'mosfet' && <TransistorMosfetCheatSheet />}
+        {page === 'mosfet-follower' && <MosfetSourceFollowerCheatSheet />}
+        {page === 'mosfet-mirror' && <PmosCurrentMirrorCheatSheet />}
+        {page === 'mosfet-active' && <PmosActiveLoadDiffAmpCheatSheet />}
+        {page === 'micro_controladores' && <MicrocontroladoresCheatSheet />}
+        {page === 'placa_desarrollo' && <PlacasDesarrolloCheatSheet/>}
+        {page === 'placa_desarrollo_ha' && <PlacasHibridasAvanzadas/>}
+        {page === 'elec_plataforma' && <MatrizEleccionPlataforma/>}
+        {page === 'elec_arquitectura' && <MatrizArquitecturaPlataformas/>}
+        {page === 'arduino_lenguaje' && <ArduinoCInstrucciones/>}
         {page === 'presentacion' && (
           <div>
             <section className="home-hero">
@@ -335,6 +356,8 @@ function App() {
         Sitio desarrollado por Gabriel E. Survila
 
       </footer>
+      
+      
     </>
   )
 }
