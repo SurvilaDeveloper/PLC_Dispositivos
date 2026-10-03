@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, type MouseEvent } from 'react'
 import PLCComponentesMenu from './PLCComponentsMenu'
 import LadderPlcCheatSheet from './componentes/LadderCheatSheet'
 import InstalacionesDomesticas from './pages/InstalacionesDomesticas'
@@ -28,272 +28,300 @@ import MatrizArquitecturaPlataformas from './componentes/MatrizArquitecturaPlata
 import ArduinoCInstrucciones from './componentes/ArduinoCInstrucciones'
 import { ROUTES, routeTitle, useAppNavigation, type AppRoute } from './navigation'
 
+type RouteItem = {
+  route: AppRoute
+  label: string
+}
+
+type MenuGroup = {
+  title: string
+  items: readonly RouteItem[]
+}
+
+type TopicItem = {
+  route: AppRoute
+  title: string
+  description: string
+}
+
+const MENU_GROUPS: readonly MenuGroup[] = [
+  {
+    title: 'PLC · Automatización Industrial',
+    items: [
+      { route: ROUTES.plcComponents, label: 'Componentes' },
+      { route: ROUTES.plcLadder, label: 'Comandos Ladder' },
+    ],
+  },
+  {
+    title: 'Sistemas embebidos',
+    items: [
+      { route: ROUTES.microcontrollers, label: 'Microcontroladores' },
+      { route: ROUTES.developmentBoards, label: 'Placas de desarrollo' },
+      { route: ROUTES.advancedBoards, label: 'Placas híbridas / avanzadas' },
+      { route: ROUTES.platformSelection, label: 'Elección de plataforma' },
+      { route: ROUTES.architectureSelection, label: 'Elección de arquitectura' },
+      { route: ROUTES.arduinoLanguage, label: 'Programación para Arduino' },
+    ],
+  },
+  {
+    title: 'Fórmulas, calculadoras y tablas',
+    items: [
+      { route: ROUTES.formulas, label: 'Fórmulas y calculadoras' },
+      { route: ROUTES.tables, label: 'Tablas y símbolos' },
+    ],
+  },
+  {
+    title: 'Instalaciones eléctricas',
+    items: [
+      { route: ROUTES.domesticInstallations, label: 'Instalaciones domésticas' },
+      { route: ROUTES.industrialInstallations, label: 'Instalaciones industriales' },
+    ],
+  },
+  {
+    title: 'Electrónica',
+    items: [
+      { route: ROUTES.electronicComponents, label: 'Componentes electrónicos' },
+    ],
+  },
+]
+
+const FORMULA_LINKS: readonly TopicItem[] = [
+  {
+    route: ROUTES.resistanceMaterials,
+    title: 'Resistencia de materiales conductores',
+    description: 'Fórmulas para calcular la resistencia eléctrica según material, longitud y sección.',
+  },
+  {
+    route: ROUTES.threePhasePower,
+    title: 'Potencia de motores trifásicos',
+    description: 'Relación entre tensión, corriente, cos φ y potencia.',
+  },
+  {
+    route: ROUTES.threePhaseTorqueSpeed,
+    title: 'Motor trifásico: par y velocidad',
+    description: 'Vínculo entre velocidad sincrónica, resbalamiento y par.',
+  },
+  {
+    route: ROUTES.powerFactor,
+    title: 'Factor de potencia: cos φ',
+    description: 'Potencia activa, reactiva y aparente para distintos valores de cos φ.',
+  },
+  {
+    route: ROUTES.threePhaseTests,
+    title: 'Ensayos de motor trifásico',
+    description: 'Ensayo en vacío y rotor bloqueado para obtener parámetros.',
+  },
+  {
+    route: ROUTES.inductor,
+    title: 'Inductor ideal: fórmulas clave',
+    description: 'Resumen de fórmulas esenciales para el análisis de inductores ideales.',
+  },
+  {
+    route: ROUTES.capacitor,
+    title: 'Capacitor ideal: fórmulas clave',
+    description: 'Resumen de fórmulas esenciales para el análisis de capacitores ideales.',
+  },
+  {
+    route: ROUTES.rlcSeries,
+    title: 'Circuito RLC serie: fórmulas clave',
+    description: 'Resumen de fórmulas esenciales para el análisis de circuitos RLC serie.',
+  },
+  {
+    route: ROUTES.copperCable,
+    title: 'Cable de potencia de cobre',
+    description: 'Cálculo simplificado de sección de cable según potencia e intensidad.',
+  },
+  {
+    route: ROUTES.bjt,
+    title: 'Transistor BJT',
+    description: 'Fórmulas y relaciones principales del transistor BJT.',
+  },
+  {
+    route: ROUTES.mosfet,
+    title: 'Transistor MOSFET',
+    description: 'Fórmulas y relaciones principales del transistor MOSFET.',
+  },
+  {
+    route: ROUTES.mosfetFollower,
+    title: 'MOSFET seguidor de fuente',
+    description: 'Análisis del transistor MOSFET en configuración seguidor de fuente.',
+  },
+  {
+    route: ROUTES.pmosMirror,
+    title: 'PMOS: espejo de corriente',
+    description: 'PMOS como espejo de corriente y carga activa.',
+  },
+  {
+    route: ROUTES.pmosActiveLoad,
+    title: 'PMOS: carga activa',
+    description: 'PMOS como carga activa en un amplificador diferencial.',
+  },
+]
+
+const TABLE_LINKS: readonly TopicItem[] = [
+  {
+    route: ROUTES.cableCurrentTable,
+    title: 'Tabla de sección del cable',
+    description: 'Corriente admisible orientativa según sección del conductor de cobre.',
+  },
+  {
+    route: ROUTES.electronicSymbols,
+    title: 'Símbolos electrónicos',
+    description: 'Tabla visual de símbolos de componentes electrónicos.',
+  },
+]
+
 function App() {
   const { path, navigate, href, isKnownRoute } = useAppNavigation()
-  const [menuHeight, setMenuHeight] = useState('0')
-  const [menuVisibility, setMenuVisibility] = useState<'visible' | 'hidden'>('hidden')
+  const [menuOpen, setMenuOpen] = useState(false)
 
-  const toggleMenu = () => {
-    if (menuHeight === '0') {
-      setMenuHeight('auto')
-      setMenuVisibility('visible')
-    } else {
-      setMenuHeight('0')
-      setMenuVisibility('hidden')
+  const handleRouteClick = (
+    event: MouseEvent<HTMLAnchorElement>,
+    route: AppRoute,
+  ) => {
+    if (
+      event.button !== 0 ||
+      event.metaKey ||
+      event.ctrlKey ||
+      event.shiftKey ||
+      event.altKey
+    ) {
+      return
     }
-  }
 
-  const resetMenu = () => {
-    setMenuHeight('0')
-    setMenuVisibility('hidden')
-  }
-
-  const goTo = (route: AppRoute) => {
+    event.preventDefault()
     navigate(route)
-    resetMenu()
+    setMenuOpen(false)
   }
 
   useEffect(() => {
-    resetMenu()
+    setMenuOpen(false)
     window.scrollTo({ top: 0, behavior: 'auto' })
     document.title = `${routeTitle(path)} | Electricidad, Electrónica y Automatización`
   }, [path])
 
+  useEffect(() => {
+    if (!menuOpen) {
+      return
+    }
+
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setMenuOpen(false)
+      }
+    }
+
+    document.addEventListener('keydown', closeOnEscape)
+    return () => document.removeEventListener('keydown', closeOnEscape)
+  }, [menuOpen])
+
+  const renderTopicList = (items: readonly TopicItem[]) => (
+    <ul className="topic-list">
+      {items.map((item) => (
+        <li key={item.route}>
+          <a
+            className="topic-link"
+            href={href(item.route)}
+            onClick={(event) => handleRouteClick(event, item.route)}
+          >
+            <span>
+              <span className="tema-title">{item.title}</span>
+              <span className="tema-descripcion">{item.description}</span>
+            </span>
+            <span className="topic-link-arrow" aria-hidden="true">→</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  )
+
   return (
     <>
-      <nav className="navbar" aria-label="Navegación principal">
-        <a
-          className="btn"
-          href={href(ROUTES.home)}
-          aria-label="Ir al inicio"
-          onClick={(event) => {
-            if (
-              event.button !== 0 ||
-              event.metaKey ||
-              event.ctrlKey ||
-              event.shiftKey ||
-              event.altKey
-            ) {
-              return
-            }
+      <a className="skip-link" href="#main-content">
+        Saltar al contenido
+      </a>
 
-            event.preventDefault()
-            goTo(ROUTES.home)
-          }}
-        >
-          &#x1F3E1;
-        </a>
+      <header className="site-header">
+        <nav className="navbar" aria-label="Navegación principal">
+          <div className="navbar-inner">
+            <a
+              className="site-brand"
+              href={href(ROUTES.home)}
+              aria-current={path === ROUTES.home ? 'page' : undefined}
+              onClick={(event) => handleRouteClick(event, ROUTES.home)}
+            >
+              <span className="site-brand-icon" aria-hidden="true">⚡</span>
+              <span className="site-brand-text">
+                <span className="site-brand-name">Electricidad · Electrónica · Automatización</span>
+                <span className="site-brand-short">EEA Toolkit</span>
+              </span>
+            </a>
 
-        <button
-          type="button"
-          className="btn"
-          aria-expanded={menuHeight !== '0'}
-          aria-controls="main-menu"
-          onClick={toggleMenu}
-        >
-          Menú
-        </button>
-      </nav>
-
-      <div className="page-panel">
-        <h1>Electricidad, Electrónica y Automatización</h1>
-
-        <div
-          id="main-menu"
-          className="nav-buttons"
-          style={{ height: menuHeight, overflow: 'hidden', visibility: menuVisibility }}
-        >
-          <div className="tema">
-            PLC - Automatización Industrial
-            <div className="btn-group">
-              <button onClick={() => goTo(ROUTES.plcComponents)} className="btn">
-                Componentes
-              </button>
-              <button onClick={() => goTo(ROUTES.plcLadder)} className="btn">
-                Comandos Ladder
-              </button>
-            </div>
+            <button
+              type="button"
+              className="btn menu-toggle"
+              aria-expanded={menuOpen}
+              aria-controls="main-menu"
+              onClick={() => setMenuOpen((open) => !open)}
+            >
+              <span aria-hidden="true">{menuOpen ? '✕' : '☰'}</span>
+              {menuOpen ? 'Cerrar' : 'Menú'}
+            </button>
           </div>
+        </nav>
 
-          <div className="tema">
-            Robótica
-            <div className="btn-group">
-              <button onClick={() => goTo(ROUTES.microcontrollers)} className="btn">
-                Micro-controladores
-              </button>
-              <button onClick={() => goTo(ROUTES.developmentBoards)} className="btn">
-                Placas de Desarrollo
-              </button>
-              <button onClick={() => goTo(ROUTES.advancedBoards)} className="btn">
-                Placas de Desarrollo Híbridas / Avanzadas
-              </button>
-              <button onClick={() => goTo(ROUTES.platformSelection)} className="btn">
-                Elección de Plataforma
-              </button>
-              <button onClick={() => goTo(ROUTES.architectureSelection)} className="btn">
-                Elección de Arquitectura
-              </button>
-              <button onClick={() => goTo(ROUTES.arduinoLanguage)} className="btn">
-                Lenguaje de Programación para Arduino
-              </button>
-            </div>
-          </div>
-
-          <div className="tema">
-            Fórmulas, Calculadoras y Tablas
-            <div className="btn-group">
-              <button onClick={() => goTo(ROUTES.formulas)} className="btn">
-                Fórmulas
-              </button>
-              <button onClick={() => goTo(ROUTES.tables)} className="btn">
-                Tablas
-              </button>
-            </div>
-          </div>
-
-          <div className="tema">
-            Instalaciones Eléctricas Domésticas
-            <div className="btn-group">
-              <button onClick={() => goTo(ROUTES.domesticInstallations)} className="btn">
-                Instalaciones Domésticas
-              </button>
-            </div>
-          </div>
-
-          <div className="tema">
-            Instalaciones Eléctricas Industriales
-            <div className="btn-group">
-              <button onClick={() => goTo(ROUTES.industrialInstallations)} className="btn">
-                Instalaciones Industriales
-              </button>
-            </div>
-          </div>
-
-          <div className="tema">
-            Electrónica
-            <div className="btn-group">
-              <button onClick={() => goTo(ROUTES.electronicComponents)} className="btn">
-                Componentes Electrónicos
-              </button>
-            </div>
+        <div id="main-menu" className="nav-menu" hidden={!menuOpen}>
+          <div className="nav-menu-grid">
+            {MENU_GROUPS.map((group) => (
+              <section className="nav-menu-section" key={group.title}>
+                <h2 className="nav-menu-title">{group.title}</h2>
+                <div className="nav-menu-links">
+                  {group.items.map((item) => (
+                    <a
+                      key={item.route}
+                      className="nav-menu-link"
+                      href={href(item.route)}
+                      aria-current={path === item.route ? 'page' : undefined}
+                      onClick={(event) => handleRouteClick(event, item.route)}
+                    >
+                      {item.label}
+                    </a>
+                  ))}
+                </div>
+              </section>
+            ))}
           </div>
         </div>
+      </header>
 
+      <main id="main-content" className="page-panel" tabIndex={-1}>
         {path === ROUTES.plcComponents && <PLCComponentesMenu />}
         {path === ROUTES.plcLadder && <LadderPlcCheatSheet />}
 
         {path === ROUTES.formulas && (
-          <ul className="tema-list">
-            <li className="tema-list-li" onClick={() => goTo(ROUTES.resistanceMaterials)}>
-              <span className="tema-title">Resistencia de materiales conductores</span>
-              <span className="tema-descripcion">
-                Fórmulas para calcular la resistencia eléctrica según material, longitud y sección.
-              </span>
-            </li>
-
-            <li className="tema-list-li" onClick={() => goTo(ROUTES.threePhasePower)}>
-              <span className="tema-title">Potencia de motores trifásicos</span>
-              <span className="tema-descripcion">
-                Relación entre tensión, corriente, cos φ y potencia.
-              </span>
-            </li>
-
-            <li className="tema-list-li" onClick={() => goTo(ROUTES.threePhaseTorqueSpeed)}>
-              <span className="tema-title">Motor trifásico: par y velocidad</span>
-              <span className="tema-descripcion">
-                Vínculo entre velocidad sincrónica, resbalamiento y par.
-              </span>
-            </li>
-
-            <li className="tema-list-li" onClick={() => goTo(ROUTES.powerFactor)}>
-              <span className="tema-title">Factor de potencia: cos φ</span>
-              <span className="tema-descripcion">
-                Activa, reactiva y aparente para distintos cos φ.
-              </span>
-            </li>
-
-            <li className="tema-list-li" onClick={() => goTo(ROUTES.threePhaseTests)}>
-              <span className="tema-title">Ensayos de motor trifásico</span>
-              <span className="tema-descripcion">
-                Ensayo en vacío y rotor bloqueado para obtener parámetros.
-              </span>
-            </li>
-
-            <li className="tema-list-li" onClick={() => goTo(ROUTES.inductor)}>
-              <span className="tema-title">Inductor ideal: fórmulas clave</span>
-              <span className="tema-descripcion">
-                Resumen de fórmulas esenciales para el análisis de inductores ideales.
-              </span>
-            </li>
-
-            <li className="tema-list-li" onClick={() => goTo(ROUTES.capacitor)}>
-              <span className="tema-title">Capacitor ideal: fórmulas clave</span>
-              <span className="tema-descripcion">
-                Resumen de fórmulas esenciales para el análisis de capacitores ideales.
-              </span>
-            </li>
-
-            <li className="tema-list-li" onClick={() => goTo(ROUTES.rlcSeries)}>
-              <span className="tema-title">Circuito RLC serie: fórmulas clave</span>
-              <span className="tema-descripcion">
-                Resumen de fórmulas esenciales para el análisis de circuitos RLC serie.
-              </span>
-            </li>
-
-            <li className="tema-list-li" onClick={() => goTo(ROUTES.copperCable)}>
-              <span className="tema-title">Cable de potencia de cobre</span>
-              <span className="tema-descripcion">
-                Cálculo simplificado de sección de cable según potencia e intensidad.
-              </span>
-            </li>
-
-            <li className="tema-list-li" onClick={() => goTo(ROUTES.bjt)}>
-              <span className="tema-title">Transistor BJT</span>
-              <span className="tema-descripcion">Fórmulas del transistor BJT.</span>
-            </li>
-
-            <li className="tema-list-li" onClick={() => goTo(ROUTES.mosfet)}>
-              <span className="tema-title">Transistor MOSFET</span>
-              <span className="tema-descripcion">Fórmulas del transistor MOSFET.</span>
-            </li>
-
-            <li className="tema-list-li" onClick={() => goTo(ROUTES.mosfetFollower)}>
-              <span className="tema-title">Transistor MOSFET</span>
-              <span className="tema-descripcion">MOSFET seguidor de fuente.</span>
-            </li>
-
-            <li className="tema-list-li" onClick={() => goTo(ROUTES.pmosMirror)}>
-              <span className="tema-title">Transistor MOSFET</span>
-              <span className="tema-descripcion">
-                PMOS espejo de corriente / carga activa.
-              </span>
-            </li>
-
-            <li className="tema-list-li" onClick={() => goTo(ROUTES.pmosActiveLoad)}>
-              <span className="tema-title">Transistor MOSFET</span>
-              <span className="tema-descripcion">
-                PMOS como carga activa (amplificador diferencial).
-              </span>
-            </li>
-          </ul>
+          <section className="route-index">
+            <header className="route-index-header">
+              <div className="sheet-pill">Herramientas</div>
+              <h1 className="route-index-title">Fórmulas y calculadoras</h1>
+              <p className="route-index-description">
+                Accesos directos a fórmulas, calculadoras y resúmenes técnicos.
+              </p>
+            </header>
+            {renderTopicList(FORMULA_LINKS)}
+          </section>
         )}
 
         {path === ROUTES.tables && (
-          <ul className="formulas-list">
-            <li className="tema-list-li" onClick={() => goTo(ROUTES.cableCurrentTable)}>
-              <span className="tema-title">Tabla sección del cable</span>
-              <span className="tema-descripcion">
-                Tabla de corriente admisible según sección del cable de cobre.
-              </span>
-            </li>
-
-            <li className="tema-list-li" onClick={() => goTo(ROUTES.electronicSymbols)}>
-              <span className="tema-title">Símbolos electrónicos</span>
-              <span className="tema-descripcion">
-                Tabla con símbolos normalizados de componentes electrónicos.
-              </span>
-            </li>
-          </ul>
+          <section className="route-index">
+            <header className="route-index-header">
+              <div className="sheet-pill">Consulta rápida</div>
+              <h1 className="route-index-title">Tablas y símbolos</h1>
+              <p className="route-index-description">
+                Referencias visuales y tablas de consulta del toolkit.
+              </p>
+            </header>
+            {renderTopicList(TABLE_LINKS)}
+          </section>
         )}
 
         {path === ROUTES.threePhasePower && <PotenciaMotorTrifasico />}
@@ -323,70 +351,111 @@ function App() {
         {path === ROUTES.arduinoLanguage && <ArduinoCInstrucciones />}
 
         {path === ROUTES.home && (
-          <div>
-            <section className="home-hero">
-              <div className="card">
-                <div className="profile-data">
-                  <p>Gabriel E. Survila - Desarrollador Full Stack</p>
-                  <p>email: surviladeveloper@gmail.com</p>
-                  <p>cel-WhatsApp: 11-5845-1937</p>
-                </div>
-                <img
-                  src={`${import.meta.env.BASE_URL}gabi.png`}
-                  alt="Foto de Gabriel Survila"
-                  className="profile-image"
-                />
+          <section className="home-hero">
+            <div className="card profile-card">
+              <div className="profile-data">
+                <p className="profile-name">Gabriel E. Survila</p>
+                <p>Desarrollador Full Stack</p>
+                <p>
+                  <a href="mailto:surviladeveloper@gmail.com">
+                    surviladeveloper@gmail.com
+                  </a>
+                </p>
+                <p>
+                  <a href="tel:+541158451937">+54 11 5845-1937</a>
+                </p>
               </div>
 
-              <h1>Toolkit técnico interactivo de Electricidad, Electrónica y Automatización</h1>
+              <img
+                src={`${import.meta.env.BASE_URL}gabi.png`}
+                alt="Gabriel Survila"
+                className="profile-image"
+              />
+            </div>
 
-              <p>
+            <div className="hero-copy">
+              <div className="sheet-pill">Toolkit técnico interactivo</div>
+              <h1>Electricidad, Electrónica y Automatización</h1>
+
+              <p className="hero-lead">
                 Proyecto web de consulta y aprendizaje que reúne apuntes técnicos,
                 herramientas interactivas y calculadoras en un mismo entorno.
               </p>
-              <p>
-                <strong>Apuntes sobre instalaciones: </strong>
-                conceptos, dispositivos hogareños e industriales, selección orientativa de cables y protecciones.
-              </p>
-              <p>
-                <strong>Motores trifásicos: </strong>
-                potencia, factor de potencia, curvas par–velocidad, ensayos y parámetros equivalentes.
-              </p>
-              <p>
-                <strong>PLC y Ladder: </strong>
-                comandos típicos, temporizadores, contadores, ciclo de scan y ejemplos de lógica de mando.
-              </p>
-              <p>
-                <strong>Electrónica: </strong>
-                componentes pasivos, semiconductores, RLC, inductores, capacitores y circuitos de ejemplo.
-              </p>
-              <p>
-                <strong>Sistemas embebidos: </strong>
-                microcontroladores, placas de desarrollo, Arduino y criterios de elección de plataforma y arquitectura.
-              </p>
-              <p>
-                <strong>Calculadoras interactivas: </strong>
-                herramientas para estimar corrientes, secciones de cable, potencias y otros parámetros eléctricos.
-              </p>
 
-              <p>
-                El material tiene fines educativos y de consulta rápida, y no sustituye
-                reglamentaciones vigentes, documentación oficial ni el asesoramiento de profesionales habilitados.
+              <div className="home-feature-grid">
+                <article className="home-feature">
+                  <h2>Instalaciones</h2>
+                  <p>
+                    Conceptos, dispositivos hogareños e industriales y selección orientativa
+                    de cables y protecciones.
+                  </p>
+                </article>
+
+                <article className="home-feature">
+                  <h2>Motores trifásicos</h2>
+                  <p>
+                    Potencia, factor de potencia, curvas par–velocidad, ensayos y parámetros
+                    equivalentes.
+                  </p>
+                </article>
+
+                <article className="home-feature">
+                  <h2>PLC y Ladder</h2>
+                  <p>
+                    Comandos típicos, temporizadores, contadores, ciclo de scan y ejemplos
+                    de lógica de mando.
+                  </p>
+                </article>
+
+                <article className="home-feature">
+                  <h2>Electrónica</h2>
+                  <p>
+                    Componentes pasivos, semiconductores, RLC, inductores, capacitores y
+                    circuitos de ejemplo.
+                  </p>
+                </article>
+
+                <article className="home-feature">
+                  <h2>Sistemas embebidos</h2>
+                  <p>
+                    Microcontroladores, placas de desarrollo, Arduino y criterios de elección
+                    de plataforma y arquitectura.
+                  </p>
+                </article>
+
+                <article className="home-feature">
+                  <h2>Calculadoras</h2>
+                  <p>
+                    Herramientas para estimar corrientes, secciones de cable, potencias y
+                    otros parámetros eléctricos.
+                  </p>
+                </article>
+              </div>
+
+              <p className="home-disclaimer">
+                El material tiene fines educativos y de consulta rápida. No sustituye
+                reglamentaciones vigentes, documentación oficial ni el asesoramiento de
+                profesionales habilitados.
               </p>
-            </section>
-          </div>
+            </div>
+          </section>
         )}
 
         {!isKnownRoute && (
-          <section className="home-hero">
-            <h2>Página no encontrada</h2>
+          <section className="not-found">
+            <div className="sheet-pill">404</div>
+            <h1>Página no encontrada</h1>
             <p>La dirección ingresada no corresponde a una sección disponible del toolkit.</p>
-            <button type="button" className="btn" onClick={() => goTo(ROUTES.home)}>
+            <a
+              className="btn btn-primary"
+              href={href(ROUTES.home)}
+              onClick={(event) => handleRouteClick(event, ROUTES.home)}
+            >
               Volver al inicio
-            </button>
+            </a>
           </section>
         )}
-      </div>
+      </main>
 
       <footer className="main-footer">
         Sitio desarrollado por Gabriel E. Survila

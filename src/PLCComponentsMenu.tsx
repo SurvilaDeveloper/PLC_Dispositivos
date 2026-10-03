@@ -11,7 +11,7 @@ function PLCComponentesMenu() {
     useState<AutomationComponent | null>(null)
 
   const handleItemClick = (component: AutomationComponent) => {
-    setSelectedComponent(component)
+    setSelectedComponent((current) => current === component ? null : component)
   }
 
   return (
@@ -20,37 +20,49 @@ function PLCComponentesMenu() {
         <div className="sheet-pill">Catálogo · Automatización</div>
         <h1 className="sheet-title">Componentes de automatización</h1>
         <p className="sheet-subtitle">
-          Explorá los componentes por tipo, categoría y subcategoría. Hacé clic en un elemento para ver más detalles.
+          Explorá los componentes por tipo, categoría y subcategoría. Activá un elemento para ver sus detalles.
         </p>
       </header>
 
-      <ul className="tema-list">
+      <ul className="tema-list catalog-groups">
         {componentTypes.map((type) => (
-          <li className="tema-title" key={type}>
-            <div className="tema">{type}</div>
+          <li className="catalog-group" key={type}>
+            <h2 className="tema">{type}</h2>
 
-            <ul className="tema-list">
+            <ul className="tema-list catalog-list">
               {automationComponents
                 .filter((component) => component.type === type)
                 .map((component) => {
                   const isSelected = selectedComponent === component
+                  const componentId = `${component.type}|${component.category}|${component.subcategory}|${component.name}`
+                  const detailsId = `component-details-${encodeURIComponent(componentId).replaceAll('%', '')}`
 
                   return (
                     <li
                       className={`item-container ${isSelected ? 'item-container--selected' : ''}`}
-                      key={`${component.type}|${component.category}|${component.subcategory}|${component.name}`}
-                      onClick={() => handleItemClick(component)}
+                      key={componentId}
                     >
-                      {!isSelected && (
-                        <div className="item-no-selected">
-                          <span className="item_descript">{component.category}, </span>
-                          <span className="item_descript">{component.subcategory}, </span>
+                      <button
+                        type="button"
+                        className="catalog-item-trigger"
+                        aria-expanded={isSelected}
+                        aria-controls={detailsId}
+                        onClick={() => handleItemClick(component)}
+                      >
+                        <span className="catalog-item-copy">
+                          <span className="item_descript">{component.category}</span>
+                          <span className="catalog-item-separator" aria-hidden="true">·</span>
+                          <span className="item_descript">{component.subcategory}</span>
+                          <span className="catalog-item-separator" aria-hidden="true">·</span>
                           <span className="item_descript">{component.name}</span>
-                        </div>
-                      )}
+                        </span>
+                        <span className="catalog-item-chevron" aria-hidden="true">
+                          {isSelected ? '−' : '+'}
+                        </span>
+                      </button>
 
                       {isSelected && (
-                        <div className="detalle">
+                        <div className="detalle" id={detailsId}>
                           <SelectedPLCComponente component={component} />
                         </div>
                       )}
