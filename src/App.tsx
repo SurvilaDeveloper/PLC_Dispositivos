@@ -51,27 +51,46 @@ function App() {
 
   return (
     <>
-      <nav className="navbar">
-        <button className="btn" onClick={() => {
-          setPage('presentacion');
-          resetMenu();
-          window.scrollTo({
-            top: 0,
-            behavior: "smooth", // o "auto" si no querés animación
-          });
-        }}>&#x1F3E1;</button>
-        <button className="btn" onClick={() => {
-          toggleMenu();
-          window.scrollTo({
-            top: 0,
-            behavior: "smooth", // o "auto" si no querés animación
-          });
-        }}>Menú</button>
+      <nav className="navbar" aria-label="Navegación principal">
+        <button
+          type="button"
+          className="btn"
+          aria-label="Ir al inicio"
+          onClick={() => {
+            setPage('presentacion');
+            resetMenu();
+            window.scrollTo({
+              top: 0,
+              behavior: "smooth",
+            });
+          }}
+        >
+          &#x1F3E1;
+        </button>
+        <button
+          type="button"
+          className="btn"
+          aria-expanded={menuHeight !== '0'}
+          aria-controls="main-menu"
+          onClick={() => {
+            toggleMenu();
+            window.scrollTo({
+              top: 0,
+              behavior: "smooth",
+            });
+          }}
+        >
+          Menú
+        </button>
       </nav>
       <div className='page-panel'>
 
-        <h1>Electricidad y Electrónica</h1>
-        <div className='nav-buttons' style={{ height: menuHeight, overflow: 'hidden', visibility: menuVisibility }}>
+        <h1>Electricidad, Electrónica y Automatización</h1>
+        <div
+          id="main-menu"
+          className='nav-buttons'
+          style={{ height: menuHeight, overflow: 'hidden', visibility: menuVisibility }}
+        >
           <div className='tema'> PLC - Automatización Industrial
             <div className='btn-group'>
               <button onClick={() => { setPage('componentes'); toggleMenu() }} className='btn'>Componentes</button>
@@ -272,6 +291,7 @@ function App() {
 
 
 
+
           </ul>
         )}
         {page === 'potenciaMotorTrifasico' && <PotenciaMotorTrifasico />}
@@ -304,26 +324,27 @@ function App() {
             <section className="home-hero">
               <div className='card'>
                 <div className='profile-data'>
-                  <p>Survila Gabriel - Desarrollador Full Stack</p>
+                  <p>Gabriel E. Survila - Desarrollador Full Stack</p>
                   <p>email: surviladeveloper@gmail.com</p>
                   <p>cel-WhatsApp: 11-5845-1937</p>
                 </div>
                 <img
-                  src="./gabi.png"
+                  src={`${import.meta.env.BASE_URL}gabi.png`}
                   alt="Foto de Gabriel Survila"
                   className="profile-image"
                 />
 
 
               </div>
-              <h1>Apuntes de Electricidad y Automatización – Material didáctico y calculadoras</h1>
+              <h1>Toolkit técnico interactivo de Electricidad, Electrónica y Automatización</h1>
 
               <p>
-                Este sitio reúne en un solo lugar:
+                Proyecto web de consulta y aprendizaje que reúne apuntes técnicos,
+                herramientas interactivas y calculadoras en un mismo entorno.
               </p>
               <p>
                 <strong>Apuntes sobre instalaciones: </strong>
-                normas básicas, dispositivos hogareños e industriales, selección orientativa de cables y protecciones.
+                conceptos, dispositivos hogareños e industriales, selección orientativa de cables y protecciones.
               </p>
               <p>
                 <strong>Motores trifásicos: </strong>
@@ -334,8 +355,12 @@ function App() {
                 comandos típicos, temporizadores, contadores, ciclo de scan y ejemplos de lógica de mando.
               </p>
               <p>
-                <strong>Electrónica básica: </strong>
+                <strong>Electrónica: </strong>
                 componentes pasivos, semiconductores, RLC, inductores, capacitores y circuitos de ejemplo.
+              </p>
+              <p>
+                <strong>Sistemas embebidos: </strong>
+                microcontroladores, placas de desarrollo, Arduino y criterios de elección de plataforma y arquitectura.
               </p>
               <p>
                 <strong>Calculadoras interactivas: </strong>
@@ -344,7 +369,7 @@ function App() {
 
               <p>
                 El material tiene fines educativos y de consulta rápida, y no sustituye
-                las reglamentaciones AEA/IRAM ni el asesoramiento de profesionales matriculados.
+                reglamentaciones vigentes, documentación oficial ni el asesoramiento de profesionales habilitados.
               </p>
             </section>
 
@@ -356,11 +381,10 @@ function App() {
         Sitio desarrollado por Gabriel E. Survila
 
       </footer>
-      
-      
+
+
     </>
   )
 }
 
 export default App
-
