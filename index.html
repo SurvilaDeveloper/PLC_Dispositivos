@@ -3,7 +3,32 @@
 
 <head>
   <meta charset="UTF-8" />
-  <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+
+  <script>
+    (() => {
+      const redirect = new URLSearchParams(window.location.search).get('redirect');
+      const basePath = '%BASE_URL%';
+
+      if (!redirect) {
+        return;
+      }
+
+      const target = new URL(redirect, window.location.origin);
+
+      if (
+        target.origin === window.location.origin &&
+        target.pathname.startsWith(basePath)
+      ) {
+        window.history.replaceState(
+          null,
+          '',
+          `${target.pathname}${target.search}${target.hash}`,
+        );
+      }
+    })();
+  </script>
+
+  <link rel="icon" type="image/svg+xml" href="%BASE_URL%favicon.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <meta

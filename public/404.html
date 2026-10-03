@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="robots" content="noindex" />
+  <title>Redirigiendo…</title>
+</head>
+<body>
+  <script>
+    (() => {
+      const basePath = '/PLC_Dispositivos/';
+      const target = `${window.location.pathname}${window.location.search}${window.location.hash}`;
+
+      if (!window.location.pathname.startsWith(basePath)) {
+        window.location.replace(basePath);
+        return;
+      }
+
+      window.location.replace(
+        `${basePath}?redirect=${encodeURIComponent(target)}`,
+      );
+    })();
+  </script>
+</body>
+</html>
