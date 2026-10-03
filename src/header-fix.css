@@ -1,0 +1,7 @@
+/* Patch 04A · Anclaje explícito del header fijo */
+.navbar {
+    top: 0;
+    left: 0;
+    right: 0;
+    margin: 0;
+}
