@@ -198,10 +198,16 @@ function App() {
   }
 
   useEffect(() => {
-    setMenuOpen(false)
     window.scrollTo({ top: 0, behavior: 'auto' })
     document.title = `${routeTitle(path)} | Electricidad, Electrónica y Automatización`
   }, [path])
+
+  useEffect(() => {
+    const closeMenuOnPopState = () => setMenuOpen(false)
+
+    window.addEventListener('popstate', closeMenuOnPopState)
+    return () => window.removeEventListener('popstate', closeMenuOnPopState)
+  }, [])
 
   useEffect(() => {
     if (!menuOpen) {
