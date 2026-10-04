@@ -372,14 +372,16 @@ function App() {
             <div className="card profile-card">
               <div className="profile-data">
                 <p className="profile-name">Gabriel E. Survila</p>
-                <p>Desarrollador Full Stack</p>
+                <p>Técnico electricista</p>
                 <p>
-                  <a href="mailto:surviladeveloper@gmail.com">
-                    surviladeveloper@gmail.com
+                  <a href="mailto:gabrielsurvila@yahoo.com.ar">
+                    gabrielsurvila@yahoo.com.ar
                   </a>
                 </p>
                 <p>
-                  <a href="tel:+541158451937">+54 11 5845-1937</a>
+                  <a href="mailto:gabrielsurvila@gmail.com">
+                    gabrielsurvila@gmail.com
+                  </a>
                 </p>
               </div>
 
