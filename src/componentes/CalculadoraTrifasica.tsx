@@ -1,41 +1,22 @@
-import React, { useState, useMemo } from "react";
+import React, { useMemo, useState } from "react";
+import { calculateBalancedThreePhasePower } from "../electricalCalculations";
 
 const CalculadoraTrifasica: React.FC = () => {
-  // Estados de entrada
-  const [VL, setVL] = useState<number>(400);    // tensión de línea (V)
-  const [P_kW, setP_kW] = useState<number>(10); // potencia activa (kW)
+  const [VL, setVL] = useState<number>(400);
+  const [P_kW, setP_kW] = useState<number>(10);
   const [cosPhi, setCosPhi] = useState<number>(0.8);
 
-  // Cálculos derivados
-  const resultados = useMemo(() => {
-    // Validaciones básicas
-    if (VL <= 0 || P_kW < 0 || cosPhi <= 0 || cosPhi > 1) {
-      return null;
-    }
+  const resultado = useMemo(
+    () => calculateBalancedThreePhasePower(VL, P_kW, cosPhi),
+    [VL, P_kW, cosPhi],
+  );
 
-    const P_W = P_kW * 1000;                           // W
-    const S_kVA = P_kW / cosPhi;                       // kVA
-    const S_VA = S_kVA * 1000;                         // VA
-    const Q_kVAr = Math.sqrt(Math.max(S_kVA ** 2 - P_kW ** 2, 0)); // kVAr
-
-    // I = P / (√3 · V_L · cos φ)
-    const I_line = P_W / (Math.sqrt(3) * VL * cosPhi); // A
-
-    return {
-      P_W,
-      S_kVA,
-      S_VA,
-      Q_kVAr,
-      I_line,
+  const handleNumber =
+    (setter: (value: number) => void) =>
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      const value = Number.parseFloat(event.target.value);
+      setter(Number.isNaN(value) ? 0 : value);
     };
-  }, [VL, P_kW, cosPhi]);
-
-  const handleNumber = (
-    setter: (v: number) => void
-  ) => (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = parseFloat(e.target.value);
-    setter(Number.isNaN(value) ? 0 : value);
-  };
 
   return (
     <main className="calc">
@@ -45,8 +26,8 @@ const CalculadoraTrifasica: React.FC = () => {
         <div className="tag">Datos de entrada</div>
 
         <p style={{ marginBottom: "0.75rem" }}>
-          Ingresá la tensión de la red trifásica, la potencia activa y el coseno
-          de phi. La calculadora asume un sistema trifásico equilibrado.
+          Ingresá la tensión de línea, la potencia activa total y el factor de
+          potencia. La calculadora asume un sistema trifásico equilibrado.
         </p>
 
         <div
@@ -57,59 +38,79 @@ const CalculadoraTrifasica: React.FC = () => {
           }}
         >
           <div>
-            <label style={{ display: "block", marginBottom: "0.25rem", height: "1.5rem" }}>
+            <label
+              htmlFor="three-phase-voltage"
+              style={{ display: "block", marginBottom: "0.25rem", height: "1.5rem" }}
+            >
               Tensión de línea V<sub>L</sub> [V]
             </label>
             <input
+              id="three-phase-voltage"
               type="number"
               value={VL}
               onChange={handleNumber(setVL)}
               min={1}
               step={10}
+              inputMode="decimal"
               style={{ width: "98%", padding: "0.25rem" }}
             />
           </div>
 
           <div>
-            <label style={{ display: "block", marginBottom: "0.25rem", height: "1.5rem" }}>
-              Potencia activa P [kW]
+            <label
+              htmlFor="three-phase-active-power"
+              style={{ display: "block", marginBottom: "0.25rem", height: "1.5rem" }}
+            >
+              Potencia activa total P [kW]
             </label>
             <input
+              id="three-phase-active-power"
               type="number"
               value={P_kW}
               onChange={handleNumber(setP_kW)}
               min={0}
               step={0.1}
+              inputMode="decimal"
               style={{ width: "98%", padding: "0.25rem" }}
             />
           </div>
 
           <div>
-            <label style={{ display: "block", marginBottom: "0.25rem", height: "1.5rem" }}>
-              cos φ
+            <label
+              htmlFor="three-phase-power-factor"
+              style={{ display: "block", marginBottom: "0.25rem", height: "1.5rem" }}
+            >
+              Factor de potencia cos φ
             </label>
             <input
+              id="three-phase-power-factor"
               type="number"
               value={cosPhi}
               onChange={handleNumber(setCosPhi)}
-              min={0.1}
+              min={0.01}
               max={1}
               step={0.01}
+              inputMode="decimal"
+              aria-describedby="three-phase-power-factor-help"
               style={{ width: "98%", padding: "0.25rem" }}
             />
-            <small style={{ opacity: 0.8 }}>
-              (entre 0 y 1, típico 0.8–0.9)
+            <small id="three-phase-power-factor-help" style={{ opacity: 0.8 }}>
+              Valor mayor que 0 y menor o igual que 1.
             </small>
           </div>
         </div>
       </section>
 
-      <section className="formula-block">
+      <section
+        className="formula-block"
+        aria-live="polite"
+        aria-atomic="true"
+      >
         <div className="tag">Resultados</div>
 
-        {resultados === null ? (
-          <p style={{ color: "#f97373" }}>
-            Verificá que V<sub>L</sub> &gt; 0, P ≥ 0 y 0 &lt; cos φ ≤ 1.
+        {!resultado.ok ? (
+          <p role="alert" style={{ color: "#f97373" }}>
+            {resultado.error}
           </p>
         ) : (
           <>
@@ -118,31 +119,31 @@ const CalculadoraTrifasica: React.FC = () => {
                 <li>
                   Potencia activa P ={" "}
                   <strong>{P_kW.toFixed(2)} kW</strong> (
-                  {resultados.P_W.toFixed(0)} W)
+                  {resultado.value.activePowerW.toFixed(0)} W)
                 </li>
                 <li>
                   Potencia aparente S ≈{" "}
-                  <strong>{resultados.S_kVA.toFixed(2)} kVA</strong> (
-                  {resultados.S_VA.toFixed(0)} VA)
+                  <strong>{resultado.value.apparentPowerKVA.toFixed(2)} kVA</strong> (
+                  {resultado.value.apparentPowerVA.toFixed(0)} VA)
                 </li>
                 <li>
                   Potencia reactiva Q ≈{" "}
-                  <strong>{resultados.Q_kVAr.toFixed(2)} kVAr</strong>
+                  <strong>{resultado.value.reactivePowerKVAr.toFixed(2)} kVAr</strong>
                 </li>
                 <li>
                   Corriente de línea I<sub>L</sub> ≈{" "}
-                  <strong>{resultados.I_line.toFixed(1)} A</strong>
+                  <strong>{resultado.value.lineCurrentA.toFixed(1)} A</strong>
                 </li>
               </ul>
             </div>
+
             <p style={{ marginTop: "0.75rem", fontSize: "0.9rem" }}>
-              Recordá las relaciones para un sistema trifásico equilibrado:
+              Relaciones usadas para un sistema trifásico equilibrado:
             </p>
             <ul style={{ fontSize: "0.9rem" }}>
               <li>P = √3 · V<sub>L</sub> · I<sub>L</sub> · cos φ</li>
               <li>S = √3 · V<sub>L</sub> · I<sub>L</sub></li>
-              <li>Q = √3 · V<sub>L</sub> · I<sub>L</sub> · sen φ</li>
-              <li>S² = P² + Q²</li>
+              <li>Q = √(S² − P²)</li>
             </ul>
           </>
         )}
