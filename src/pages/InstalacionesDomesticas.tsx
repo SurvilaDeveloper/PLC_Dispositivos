@@ -2,9 +2,10 @@ import { useState } from "react";
 
 import DispositivosHogarCheatSheet from "../componentes/DispositivosHogarCheatSheet";
 import ReglamentacionCABA from "../componentes/ReglamentacionCABA";
+import CercoElectrico from "../componentes/CercoElectrico";
 import "../installation-navigation.css";
 
-type DomesticSection = "dispositivos" | "reglamentacion";
+type DomesticSection = "dispositivos" | "reglamentacion" | "cerco";
 
 const InstalacionesDomesticas: React.FC = () => {
   const [selectedSection, setSelectedSection] =
@@ -56,12 +57,28 @@ const InstalacionesDomesticas: React.FC = () => {
             </span>
             <span>Normativa AMBA</span>
           </button>
+
+          <button
+            type="button"
+            className={`installation-tab${
+              selectedSection === "cerco" ? " installation-tab--active" : ""
+            }`}
+            aria-pressed={selectedSection === "cerco"}
+            onClick={() => setSelectedSection("cerco")}
+          >
+            <span className="installation-tab-icon" aria-hidden="true">
+              ⛨
+            </span>
+            <span>Cerco eléctrico</span>
+          </button>
         </div>
       </header>
 
       {selectedSection === "dispositivos" && <DispositivosHogarCheatSheet />}
 
       {selectedSection === "reglamentacion" && <ReglamentacionCABA />}
+
+      {selectedSection === "cerco" && <CercoElectrico />}
     </div>
   );
 };
