@@ -10,10 +10,17 @@ const SYMBOL_REFERENCE_LINKS: Record<string, string> = {
 }
 
 function enhanceLegacyComponentLinks() {
-  const items = Array.from(document.querySelectorAll<HTMLElement>('.link-item'))
-    .filter((item) => item.tagName !== 'A' && item.tagName !== 'BUTTON')
+  const enhancedItems = new Map<HTMLElement, () => void>()
 
-  const cleanups = items.map((item) => {
+  const enhanceItem = (item: HTMLElement) => {
+    if (
+      item.tagName === 'A' ||
+      item.tagName === 'BUTTON' ||
+      enhancedItems.has(item)
+    ) {
+      return
+    }
+
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key !== 'Enter' && event.key !== ' ') {
         return
@@ -27,14 +34,45 @@ function enhanceLegacyComponentLinks() {
     item.tabIndex = 0
     item.addEventListener('keydown', handleKeyDown)
 
-    return () => {
+    enhancedItems.set(item, () => {
       item.removeEventListener('keydown', handleKeyDown)
       item.removeAttribute('role')
       item.removeAttribute('tabindex')
+    })
+  }
+
+  const scan = (root: ParentNode) => {
+    if (root instanceof HTMLElement && root.matches('.link-item')) {
+      enhanceItem(root)
     }
+
+    root
+      .querySelectorAll<HTMLElement>('.link-item')
+      .forEach((item) => enhanceItem(item))
+  }
+
+  scan(document)
+
+  const observer = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+      mutation.addedNodes.forEach((node) => {
+        if (node instanceof HTMLElement) {
+          scan(node)
+        }
+      })
+    })
   })
 
-  return () => cleanups.forEach((cleanup) => cleanup())
+  observer.observe(document.body, {
+    childList: true,
+    subtree: true,
+  })
+
+  return () => {
+    observer.disconnect()
+    enhancedItems.forEach((cleanup) => cleanup())
+    enhancedItems.clear()
+  }
 }
 
 function enhanceLegacySymbolTable() {
@@ -75,7 +113,10 @@ function enhanceLegacySymbolTable() {
 
 export function useLegacyAccessibility(path: string) {
   useEffect(() => {
-    if (path === ROUTES.electronicComponents) {
+    if (
+      path === ROUTES.electronicComponents ||
+      path === ROUTES.domesticInstallations
+    ) {
       return enhanceLegacyComponentLinks()
     }
 
