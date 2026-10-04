@@ -250,6 +250,14 @@ const MatrizEleccionPlataforma: React.FC = () => {
     });
   }, [tipoSeleccionado]);
 
+  const proyectoSeleccionado = proyectosOrdenados.find(
+    (proyecto) => proyecto.id === tipoSeleccionado,
+  );
+
+  const cantidadRecomendaciones = plataformasOrdenadas.filter(
+    (plataforma) => plataforma.compatibilidad[tipoSeleccionado] !== "no",
+  ).length;
+
   return (
     <div className="page-wrapper">
       <div className="page-panel sheet">
@@ -270,17 +278,23 @@ const MatrizEleccionPlataforma: React.FC = () => {
         <section className="sheet-section">
           <h2 className="sheet-section-title">1. Elegí el tipo de proyecto</h2>
           <p className="sheet-text">
-            Hacé clic en la categoría que más se parezca a tu idea. La tabla y la
+            Seleccioná la categoría que más se parezca a tu idea. La tabla y la
             lista de recomendaciones se actualizarán automáticamente.
           </p>
 
-          <div className="matrix-type-selector">
+          <div
+            className="matrix-type-selector"
+            role="group"
+            aria-label="Tipo de proyecto"
+          >
             {proyectosOrdenados.map((proyecto) => {
               const activo = proyecto.id === tipoSeleccionado;
               return (
                 <button
                   key={proyecto.id}
                   type="button"
+                  aria-pressed={activo}
+                  aria-controls="platform-matrix-results"
                   onClick={() => setTipoSeleccionado(proyecto.id)}
                   className={
                     "matrix-type-chip" +
@@ -295,139 +309,161 @@ const MatrizEleccionPlataforma: React.FC = () => {
             })}
           </div>
 
-          <div className="matrix-type-description formula-block">
+          <div
+            className="matrix-type-description formula-block"
+            role="status"
+            aria-live="polite"
+            aria-atomic="true"
+          >
             <span className="formula-tag">Descripción del tipo seleccionado</span>
             <p className="sheet-text-small">
-              {
-                proyectosOrdenados.find((p) => p.id === tipoSeleccionado)
-                  ?.descripcionCorta
-              }
+              {proyectoSeleccionado?.descripcionCorta}
             </p>
           </div>
+
+          <p className="sr-only" role="status" aria-live="polite" aria-atomic="true">
+            Tipo seleccionado: {proyectoSeleccionado?.etiqueta}.{" "}
+            {cantidadRecomendaciones} plataformas recomendadas.
+          </p>
         </section>
 
-        {/* Matriz de compatibilidad */}
-        <section className="sheet-section">
-          <h2 className="sheet-section-title">2. Matriz de compatibilidad</h2>
-          <p className="sheet-text-small">
-            Símbolos: <strong>✔</strong> ideal, <strong>◎</strong> buena opción,{" "}
-            <strong>△</strong> posible pero no óptima, <strong>–</strong> no recomendada.
-          </p>
+        <div id="platform-matrix-results">
+          {/* Matriz de compatibilidad */}
+          <section className="sheet-section">
+            <h2 className="sheet-section-title">2. Matriz de compatibilidad</h2>
+            <p className="sheet-text-small">
+              Símbolos: <strong>✔</strong> ideal, <strong>◎</strong> buena opción,{" "}
+              <strong>△</strong> posible pero no óptima, <strong>–</strong> no recomendada.
+            </p>
 
-          <div className="matrix-table-wrapper">
-            <table className="matrix-table">
-              <thead>
-                <tr>
-                  <th className="matrix-table-th matrix-table-th--platform">
-                    Plataforma
-                  </th>
-                  {proyectosOrdenados.map((proyecto) => {
-                    const activo = proyecto.id === tipoSeleccionado;
-                    return (
-                      <th
-                        key={proyecto.id}
-                        className={
-                          "matrix-table-th" +
-                          (activo ? " matrix-table-th--active" : "")
-                        }
-                      >
-                        {proyecto.etiqueta}
-                      </th>
-                    );
-                  })}
-                </tr>
-              </thead>
-              <tbody>
-                {PLATAFORMAS.map((plataforma) => (
-                  <tr key={plataforma.id} className="matrix-table-row">
-                    <td className="matrix-table-td matrix-table-td--platform">
-                      <div className="matrix-platform-info">
-                        <span className="matrix-platform-name">
-                          {plataforma.nombre}
-                        </span>
-                        <span className="matrix-platform-family">
-                          {plataforma.familia}
-                        </span>
-                      </div>
-                    </td>
+            <div className="matrix-table-wrapper">
+              <table className="matrix-table">
+                <caption className="sr-only">
+                  Compatibilidad de cada plataforma con los distintos tipos de proyecto.
+                </caption>
+                <thead>
+                  <tr>
+                    <th
+                      scope="col"
+                      className="matrix-table-th matrix-table-th--platform"
+                    >
+                      Plataforma
+                    </th>
                     {proyectosOrdenados.map((proyecto) => {
-                      const nivel =
-                        plataforma.compatibilidad[proyecto.id] || "no";
-                      const symbol = simboloCompatibilidad[nivel];
                       const activo = proyecto.id === tipoSeleccionado;
                       return (
-                        <td
+                        <th
                           key={proyecto.id}
+                          scope="col"
                           className={
-                            "matrix-table-td" +
-                            (activo ? " matrix-table-td--active" : "")
+                            "matrix-table-th" +
+                            (activo ? " matrix-table-th--active" : "")
                           }
                         >
-                          {symbol}
-                        </td>
+                          {proyecto.etiqueta}
+                        </th>
                       );
                     })}
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </section>
+                </thead>
+                <tbody>
+                  {PLATAFORMAS.map((plataforma) => (
+                    <tr key={plataforma.id} className="matrix-table-row">
+                      <th
+                        scope="row"
+                        className="matrix-table-td matrix-table-td--platform"
+                      >
+                        <div className="matrix-platform-info">
+                          <span className="matrix-platform-name">
+                            {plataforma.nombre}
+                          </span>
+                          <span className="matrix-platform-family">
+                            {plataforma.familia}
+                          </span>
+                        </div>
+                      </th>
+                      {proyectosOrdenados.map((proyecto) => {
+                        const nivel =
+                          plataforma.compatibilidad[proyecto.id] || "no";
+                        const symbol = simboloCompatibilidad[nivel];
+                        const activo = proyecto.id === tipoSeleccionado;
+                        return (
+                          <td
+                            key={proyecto.id}
+                            title={textoCompatibilidad[nivel]}
+                            aria-label={`${plataforma.nombre}, ${proyecto.etiqueta}: ${textoCompatibilidad[nivel]}`}
+                            className={
+                              "matrix-table-td" +
+                              (activo ? " matrix-table-td--active" : "")
+                            }
+                          >
+                            <span aria-hidden="true">{symbol}</span>
+                            <span className="sr-only">{textoCompatibilidad[nivel]}</span>
+                          </td>
+                        );
+                      })}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </section>
 
-        {/* Recomendaciones según tipo seleccionado */}
-        <section className="sheet-section">
-          <h2 className="sheet-section-title">
-            3. Placas recomendadas para este tipo de proyecto
-          </h2>
-          <p className="sheet-text">
-            Ordenadas desde las más recomendadas a las menos adecuadas para la
-            categoría seleccionada.
-          </p>
-
-          <div className="matrix-reco-grid">
-            {plataformasOrdenadas.map((plataforma) => {
-              const nivel =
-                plataforma.compatibilidad[tipoSeleccionado] || "no";
-              if (nivel === "no") return null;
-
-              const nivelClase =
-                nivel === "ideal"
-                  ? "matrix-reco-card--ideal"
-                  : nivel === "buena"
-                  ? "matrix-reco-card--buena"
-                  : "matrix-reco-card--posible";
-
-              return (
-                <article
-                  key={plataforma.id}
-                  className={`sheet-card matrix-reco-card ${nivelClase}`}
-                >
-                  <h3 className="matrix-reco-title">
-                    {plataforma.nombre}
-                  </h3>
-                  <p className="sheet-text-small">
-                    <strong>Familia:</strong> {plataforma.familia}
-                  </p>
-                  <p className="sheet-text-small">
-                    <strong>Compatibilidad:</strong>{" "}
-                    {textoCompatibilidad[nivel]}
-                  </p>
-                  <p className="sheet-text-small">{plataforma.notas}</p>
-                </article>
-              );
-            })}
-          </div>
-
-          <div className="formula-block matrix-tip-block">
-            <span className="formula-tag">Tip</span>
-            <p className="sheet-text-small">
-              La matriz no impide combinar varias plataformas. Por ejemplo: una
-              Raspberry Pi para la HMI o dashboard, uno o varios ESP32 para
-              nodos IoT y un STM32/Arduino Mega para hacer de “PLC casero”
-              robusto.
+          {/* Recomendaciones según tipo seleccionado */}
+          <section className="sheet-section">
+            <h2 className="sheet-section-title">
+              3. Placas recomendadas para este tipo de proyecto
+            </h2>
+            <p className="sheet-text">
+              Ordenadas desde las más recomendadas a las menos adecuadas para la
+              categoría seleccionada.
             </p>
-          </div>
-        </section>
+
+            <div className="matrix-reco-grid">
+              {plataformasOrdenadas.map((plataforma) => {
+                const nivel =
+                  plataforma.compatibilidad[tipoSeleccionado] || "no";
+                if (nivel === "no") return null;
+
+                const nivelClase =
+                  nivel === "ideal"
+                    ? "matrix-reco-card--ideal"
+                    : nivel === "buena"
+                    ? "matrix-reco-card--buena"
+                    : "matrix-reco-card--posible";
+
+                return (
+                  <article
+                    key={plataforma.id}
+                    className={`sheet-card matrix-reco-card ${nivelClase}`}
+                  >
+                    <h3 className="matrix-reco-title">
+                      {plataforma.nombre}
+                    </h3>
+                    <p className="sheet-text-small">
+                      <strong>Familia:</strong> {plataforma.familia}
+                    </p>
+                    <p className="sheet-text-small">
+                      <strong>Compatibilidad:</strong>{" "}
+                      {textoCompatibilidad[nivel]}
+                    </p>
+                    <p className="sheet-text-small">{plataforma.notas}</p>
+                  </article>
+                );
+              })}
+            </div>
+
+            <div className="formula-block matrix-tip-block">
+              <span className="formula-tag">Tip</span>
+              <p className="sheet-text-small">
+                La matriz no impide combinar varias plataformas. Por ejemplo: una
+                Raspberry Pi para la HMI o dashboard, uno o varios ESP32 para
+                nodos IoT y un STM32/Arduino Mega para hacer de “PLC casero”
+                robusto.
+              </p>
+            </div>
+          </section>
+        </div>
 
         <footer className="sheet-footer">
           <p className="sheet-text-small">
@@ -442,4 +478,3 @@ const MatrizEleccionPlataforma: React.FC = () => {
 };
 
 export default MatrizEleccionPlataforma;
-

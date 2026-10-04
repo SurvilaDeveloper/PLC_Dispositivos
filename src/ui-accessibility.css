@@ -565,3 +565,31 @@ textarea {
     max-width: 100%;
     height: auto;
 }
+
+/* ===== Patch 04C · matrices accesibles ===== */
+.sr-only {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+}
+
+.matrix-type-chip:focus-visible,
+.arch-type-chip:focus-visible {
+    outline: 3px solid #38bdf8;
+    outline-offset: 3px;
+}
+
+.matrix-type-chip[aria-pressed="true"],
+.arch-type-chip[aria-pressed="true"] {
+    box-shadow: 0 0 0 1px rgba(96, 165, 250, 0.75);
+}
+
+.matrix-table th.matrix-table-td--platform {
+    font-weight: inherit;
+}

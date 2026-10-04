@@ -286,13 +286,19 @@ const MatrizArquitecturaPlataformas: React.FC = () => {
             arquitectura global.
           </p>
 
-          <div className="arch-type-selector">
+          <div
+            className="arch-type-selector"
+            role="group"
+            aria-label="Tipo de proyecto"
+          >
             {TIPOS_PROYECTO.map((tipo) => {
               const isActive = tipo.id === tipoSeleccionado;
               return (
                 <button
                   key={tipo.id}
                   type="button"
+                  aria-pressed={isActive}
+                  aria-controls="architecture-results"
                   onClick={() => setTipoSeleccionado(tipo.id)}
                   className={
                     "arch-type-chip" + (isActive ? " arch-type-chip--active" : "")
@@ -305,148 +311,160 @@ const MatrizArquitecturaPlataformas: React.FC = () => {
           </div>
 
           {proyectoActual && (
-            <p className="sheet-text-small arch-type-description">
+            <p
+              className="sheet-text-small arch-type-description"
+              role="status"
+              aria-live="polite"
+              aria-atomic="true"
+            >
               {proyectoActual.descripcionCorta}
             </p>
           )}
+
+          <p className="sr-only" role="status" aria-live="polite" aria-atomic="true">
+            Tipo seleccionado: {proyectoActual?.etiqueta}.{" "}
+            {arquitecturasFiltradas.length} arquitecturas recomendadas.
+          </p>
         </section>
 
-        {/* Arquitecturas recomendadas */}
-        <section className="sheet-section">
-          <h2 className="sheet-section-title">
-            2. Arquitecturas recomendadas para este tipo de proyecto
-          </h2>
-          <p className="sheet-text">
-            Cada tarjeta describe un patrón de arquitectura, qué rol cumple cada
-            parte, qué micros y placas encajan bien, y en qué casos tiene más
-            sentido usarla.
-          </p>
+        <div id="architecture-results">
+          {/* Arquitecturas recomendadas */}
+          <section className="sheet-section">
+            <h2 className="sheet-section-title">
+              2. Arquitecturas recomendadas para este tipo de proyecto
+            </h2>
+            <p className="sheet-text">
+              Cada tarjeta describe un patrón de arquitectura, qué rol cumple cada
+              parte, qué micros y placas encajan bien, y en qué casos tiene más
+              sentido usarla.
+            </p>
 
-          <div className="arch-grid">
-            {arquitecturasFiltradas.map((arch) => (
-              <article key={arch.id} className="arch-card">
-                <header className="arch-card-header">
-                  <h3 className="arch-card-title">{arch.nombre}</h3>
-                  <p className="arch-card-subtitle">{arch.resumen}</p>
-                </header>
+            <div className="arch-grid">
+              {arquitecturasFiltradas.map((arch) => (
+                <article key={arch.id} className="arch-card">
+                  <header className="arch-card-header">
+                    <h3 className="arch-card-title">{arch.nombre}</h3>
+                    <p className="arch-card-subtitle">{arch.resumen}</p>
+                  </header>
 
-                <div className="arch-card-body">
-                  {/* Diagrama textual simple */}
-                  <div className="arch-diagram">
-                    <div className="arch-diagram-box arch-diagram-box--primary">
-                      <span className="arch-diagram-label">
-                        {arch.rolUno}
-                      </span>
+                  <div className="arch-card-body">
+                    {/* Diagrama textual simple */}
+                    <div className="arch-diagram">
+                      <div className="arch-diagram-box arch-diagram-box--primary">
+                        <span className="arch-diagram-label">
+                          {arch.rolUno}
+                        </span>
+                      </div>
+                      {arch.rolDos && (
+                        <>
+                          <span className="arch-diagram-arrow" aria-hidden="true">⇄</span>
+                          <div className="arch-diagram-box arch-diagram-box--secondary">
+                            <span className="arch-diagram-label">
+                              {arch.rolDos}
+                            </span>
+                          </div>
+                        </>
+                      )}
                     </div>
-                    {arch.rolDos && (
-                      <>
-                        <span className="arch-diagram-arrow">⇄</span>
-                        <div className="arch-diagram-box arch-diagram-box--secondary">
-                          <span className="arch-diagram-label">
-                            {arch.rolDos}
+
+                    {/* Estrategia */}
+                    <div className="arch-block">
+                      <div className="arch-block-tag">Estrategia</div>
+                      <ul className="arch-block-list">
+                        {arch.estrategia.map((item, idx) => (
+                          <li key={idx}>{item}</li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    {/* Micros sugeridos */}
+                    <div className="arch-block">
+                      <div className="arch-block-tag">Familias de microcontroladores sugeridas</div>
+                      <div className="arch-tag-row">
+                        {arch.microcontroladores.map((m) => (
+                          <span key={m} className="arch-chip">
+                            {m}
                           </span>
-                        </div>
-                      </>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Placas sugeridas */}
+                    <div className="arch-block">
+                      <div className="arch-block-tag">Placas de desarrollo típicas</div>
+                      <div className="arch-tag-row">
+                        {arch.placas.map((p) => (
+                          <span key={p} className="arch-chip arch-chip--board">
+                            {p}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Casos de uso */}
+                    <div className="arch-block">
+                      <div className="arch-block-tag">Casos de uso</div>
+                      <ul className="arch-block-list">
+                        {arch.casosDeUso.map((item, idx) => (
+                          <li key={idx}>{item}</li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    {arch.notas && (
+                      <p className="sheet-text-small arch-notes">
+                        {arch.notas}
+                      </p>
                     )}
                   </div>
-
-                  {/* Estrategia */}
-                  <div className="arch-block">
-                    <div className="arch-block-tag">Estrategia</div>
-                    <ul className="arch-block-list">
-                      {arch.estrategia.map((item, idx) => (
-                        <li key={idx}>{item}</li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  {/* Micros sugeridos */}
-                  <div className="arch-block">
-                    <div className="arch-block-tag">Familias de microcontroladores sugeridas</div>
-                    <div className="arch-tag-row">
-                      {arch.microcontroladores.map((m) => (
-                        <span key={m} className="arch-chip">
-                          {m}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Placas sugeridas */}
-                  <div className="arch-block">
-                    <div className="arch-block-tag">Placas de desarrollo típicas</div>
-                    <div className="arch-tag-row">
-                      {arch.placas.map((p) => (
-                        <span key={p} className="arch-chip arch-chip--board">
-                          {p}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Casos de uso */}
-                  <div className="arch-block">
-                    <div className="arch-block-tag">Casos de uso</div>
-                    <ul className="arch-block-list">
-                      {arch.casosDeUso.map((item, idx) => (
-                        <li key={idx}>{item}</li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  {arch.notas && (
-                    <p className="sheet-text-small arch-notes">
-                      {arch.notas}
-                    </p>
-                  )}
-                </div>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        {/* Resumen: micros y placas sugeridos */}
-        <section className="sheet-section">
-          <h2 className="sheet-section-title">
-            3. Microcontroladores y placas recomendadas (resumen)
-          </h2>
-          <p className="sheet-text">
-            Este resumen condensa los micros y placas que aparecen en las
-            arquitecturas recomendadas para el tipo de proyecto que elegiste.
-          </p>
-
-          <div className="arch-summary-grid">
-            <div className="arch-summary-column">
-              <h3 className="arch-summary-title">Familias de microcontroladores</h3>
-              <ul className="arch-summary-list">
-                {microsSugeridos.map((m) => (
-                  <li key={m} className="arch-summary-item">
-                    {m}
-                  </li>
-                ))}
-              </ul>
+                </article>
+              ))}
             </div>
-            <div className="arch-summary-column">
-              <h3 className="arch-summary-title">Placas de desarrollo</h3>
-              <ul className="arch-summary-list">
-                {placasSugeridas.map((p) => (
-                  <li key={p} className="arch-summary-item">
-                    {p}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
+          </section>
 
-          <div className="arch-tip-block">
-            <p className="sheet-text-small">
-              Podés combinar estas ideas como más te convenga. Por ejemplo:
-              usar una Raspberry Pi o Arduino UNO Q como cerebro de alto nivel
-              con dashboard, y varios ESP32 / Arduino / STM32 distribuidos como
-              módulos de I/O o control de motores.
+          {/* Resumen: micros y placas sugeridos */}
+          <section className="sheet-section">
+            <h2 className="sheet-section-title">
+              3. Microcontroladores y placas recomendadas (resumen)
+            </h2>
+            <p className="sheet-text">
+              Este resumen condensa los micros y placas que aparecen en las
+              arquitecturas recomendadas para el tipo de proyecto que elegiste.
             </p>
-          </div>
-        </section>
+
+            <div className="arch-summary-grid">
+              <div className="arch-summary-column">
+                <h3 className="arch-summary-title">Familias de microcontroladores</h3>
+                <ul className="arch-summary-list">
+                  {microsSugeridos.map((m) => (
+                    <li key={m} className="arch-summary-item">
+                      {m}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="arch-summary-column">
+                <h3 className="arch-summary-title">Placas de desarrollo</h3>
+                <ul className="arch-summary-list">
+                  {placasSugeridas.map((p) => (
+                    <li key={p} className="arch-summary-item">
+                      {p}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            <div className="arch-tip-block">
+              <p className="sheet-text-small">
+                Podés combinar estas ideas como más te convenga. Por ejemplo:
+                usar una Raspberry Pi o Arduino UNO Q como cerebro de alto nivel
+                con dashboard, y varios ESP32 / Arduino / STM32 distribuidos como
+                módulos de I/O o control de motores.
+              </p>
+            </div>
+          </section>
+        </div>
 
         <footer className="sheet-footer">
           <p className="sheet-text-small">
