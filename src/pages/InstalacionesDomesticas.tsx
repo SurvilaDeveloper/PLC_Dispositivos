@@ -3,6 +3,7 @@ import { useState } from "react";
 import DispositivosHogarCheatSheet from "../componentes/DispositivosHogarCheatSheet";
 import ReglamentacionCABA from "../componentes/ReglamentacionCABA";
 import CercoElectrico from "../componentes/CercoElectrico";
+import MarcoNormativoCerco from "../componentes/MarcoNormativoCerco";
 import "../installation-navigation.css";
 
 type DomesticSection = "dispositivos" | "reglamentacion" | "cerco";
@@ -78,7 +79,12 @@ const InstalacionesDomesticas: React.FC = () => {
 
       {selectedSection === "reglamentacion" && <ReglamentacionCABA />}
 
-      {selectedSection === "cerco" && <CercoElectrico />}
+      {selectedSection === "cerco" && (
+        <>
+          <CercoElectrico />
+          <MarcoNormativoCerco />
+        </>
+      )}
     </div>
   );
 };
