@@ -8,7 +8,6 @@ declare global {
   }
 }
 
-// Componente helper para fórmulas en bloque
 const Formula: React.FC<{ tex: string }> = ({ tex }) => <p>{tex}</p>;
 
 const PotenciaMotorTrifasico: React.FC = () => {
@@ -20,77 +19,94 @@ const PotenciaMotorTrifasico: React.FC = () => {
 
   return (
     <main className="page-wrapper">
-      <h1>Fórmulas de Potencia en Motores Trifásicos</h1>
+      <h1>Potencia en motores trifásicos</h1>
 
       <p>
-        Resumen de las ecuaciones más usadas para el cálculo de potencia en
-        motores trifásicos (sistema equilibrado).
+        Resumen de relaciones útiles para un sistema trifásico equilibrado en
+        régimen sinusoidal y para la potencia mecánica disponible en el eje.
       </p>
 
-      {/* 1. Potencia activa */}
-      <h2>1. Potencia activa trifásica</h2>
       <section className="formula-block">
-        <div className="tag">Potencia activa</div>
+        <div className="tag">Alcance</div>
+        <p>
+          Las expresiones con cos φ y el triángulo P–Q–S de esta hoja suponen
+          tensión y corriente sinusoidales. Con armónicos, el factor de potencia
+          total sigue siendo P/S, pero puede diferir del coseno del ángulo de la
+          componente fundamental.
+        </p>
+      </section>
+
+      <h2>1. Potencia activa eléctrica de entrada</h2>
+      <section className="formula-block">
+        <div className="tag">Sistema trifásico equilibrado</div>
         <Formula
-          tex={String.raw`$$ P = \sqrt{3} \cdot V_L \cdot I_L \cdot \cos\varphi $$`}
+          tex={String.raw`$$ P_{in} = \sqrt{3}\, V_L\, I_L\, \cos\varphi $$`}
         />
         <ul>
-          <li>{"$P$ : potencia activa (W o kW)"}</li>
-          <li>{"$V_L$ : tensión de línea (V)"}</li>
-          <li>{"$I_L$ : corriente de línea (A)"}</li>
-          <li>{"$\\cos\\varphi$ : factor de potencia"}</li>
+          <li>{"$P_{in}$ : potencia activa eléctrica absorbida (W o kW)"}</li>
+          <li>{"$V_L$ : tensión eficaz de línea (V)"}</li>
+          <li>{"$I_L$ : corriente eficaz de línea (A)"}</li>
+          <li>{"$\\varphi$ : ángulo de desplazamiento entre tensión y corriente, en el caso sinusoidal"}</li>
         </ul>
       </section>
 
-      {/* 2. Potencia aparente */}
-      <h2>2. Potencia aparente trifásica</h2>
+      <h2>2. Potencia aparente</h2>
       <section className="formula-block">
         <div className="tag">Potencia aparente</div>
-        <Formula tex={String.raw`$$ S = \sqrt{3} \cdot V_L \cdot I_L $$`} />
+        <Formula tex={String.raw`$$ S = \sqrt{3}\, V_L\, I_L $$`} />
         <ul>
           <li>{"$S$ : potencia aparente (VA o kVA)"}</li>
         </ul>
       </section>
 
-      {/* 3. Potencia reactiva */}
-      <h2>3. Potencia reactiva trifásica</h2>
+      <h2>3. Potencia reactiva</h2>
       <section className="formula-block">
-        <div className="tag">Potencia reactiva</div>
+        <div className="tag">Régimen sinusoidal</div>
         <Formula
-          tex={String.raw`$$ Q = \sqrt{3} \cdot V_L \cdot I_L \cdot \sin\varphi $$`}
+          tex={String.raw`$$ Q = \sqrt{3}\, V_L\, I_L\, \sin\varphi $$`}
         />
         <ul>
-          <li>{"$Q$ : potencia reactiva (VAr o kVAr)"}</li>
+          <li>{"$Q$ : potencia reactiva (var o kvar)"}</li>
+          <li>
+            Esta relación simple corresponde al modelo sinusoidal equilibrado.
+          </li>
         </ul>
       </section>
 
-      {/* 4. Relación entre S, P, Q */}
       <h2>4. Relación entre S, P y Q</h2>
       <section className="formula-block">
         <div className="tag">Triángulo de potencias</div>
         <Formula tex={String.raw`$$ S^2 = P^2 + Q^2 $$`} />
+        <p>
+          Esta representación es válida para el caso sinusoidal considerado en
+          esta hoja. Con distorsión armónica, la potencia aparente total no queda
+          descripta únicamente por ese triángulo.
+        </p>
       </section>
 
-      {/* 5. Factor de potencia */}
       <h2>5. Factor de potencia</h2>
       <section className="formula-block">
-        <div className="tag">Relaciones trigonométricas</div>
+        <div className="tag">Definición general y caso sinusoidal</div>
+        <Formula tex={String.raw`$$ PF = \frac{P}{S} $$`} />
         <Formula
-          tex={String.raw`$$ \cos\varphi = \frac{P}{S} \qquad\qquad \sin\varphi = \frac{Q}{S} $$`}
+          tex={String.raw`$$ \text{si las ondas son sinusoidales:}\qquad PF = \cos\varphi $$`}
         />
+        <p>
+          El factor de potencia no es el rendimiento del motor: describe cuánto
+          de la potencia aparente corresponde a potencia activa.
+        </p>
       </section>
 
-      {/* 6. Potencia mecánica */}
-      <h2>6. Potencia mecánica en el eje</h2>
+      <h2>6. Potencia mecánica de salida</h2>
 
-      <h3>6.1. Definición general</h3>
+      <h3>6.1. Potencia de eje</h3>
       <section className="formula-block">
         <div className="tag">Potencia mecánica</div>
-        <Formula tex={String.raw`$$ P_{mec} = T \cdot \omega_m $$`} />
+        <Formula tex={String.raw`$$ P_{out} = T_{eje}\, \omega_m $$`} />
         <ul>
-          <li>{"$P_{mec}$ : potencia mecánica (W)"}</li>
-          <li>{"$T$ : torque (N·m)"}</li>
-          <li>{"$\\omega_m$ : velocidad angular (rad/s)"}</li>
+          <li>{"$P_{out}$ : potencia mecánica entregada en el eje (W)"}</li>
+          <li>{"$T_{eje}$ : par mecánico de eje (N·m)"}</li>
+          <li>{"$\\omega_m$ : velocidad angular mecánica del rotor (rad/s)"}</li>
         </ul>
       </section>
 
@@ -103,37 +119,47 @@ const PotenciaMotorTrifasico: React.FC = () => {
         </ul>
       </section>
 
-      <h3>6.3. Fórmula práctica en kW</h3>
+      <h3>6.3. Fórmula práctica de potencia de eje</h3>
       <section className="formula-block">
-        <div className="tag">Ingeniería práctica</div>
+        <div className="tag">kW, N·m y rpm</div>
         <Formula
-          tex={String.raw`$$ P_{mec}[\text{kW}] = \frac{T[\text{N·m}] \cdot n[\text{rpm}]}{9550} $$`}
+          tex={String.raw`$$ P_{out}[\text{kW}] \approx \frac{T_{eje}[\text{N·m}]\, n[\text{rpm}]}{9550} $$`}
         />
+        <p>
+          El factor 9550 es una aproximación práctica derivada de la conversión
+          entre rpm y rad/s.
+        </p>
       </section>
 
-      {/* 7. Rendimiento */}
       <h2>7. Rendimiento del motor</h2>
-
-      <h3>7.1. Definición</h3>
       <section className="formula-block">
-        <div className="tag">Rendimiento</div>
+        <div className="tag">Entrada eléctrica → salida mecánica</div>
+        <Formula tex={String.raw`$$ \eta = \frac{P_{out}}{P_{in}} $$`} />
         <Formula
-          tex={String.raw`$$ \eta = \frac{P_{mec}}{P_{electrica}} $$`}
+          tex={String.raw`$$ \eta[\%] = \frac{P_{out}}{P_{in}}\,100 $$`}
         />
+        <ul>
+          <li>
+            {"$P_{in}$ es potencia activa eléctrica de entrada, no potencia aparente $S$."}
+          </li>
+          <li>
+            {"$P_{out}$ es la potencia mecánica útil disponible en el eje."}
+          </li>
+        </ul>
       </section>
 
-      <h3>7.2. Rendimiento en porcentaje</h3>
       <section className="formula-block">
-        <div className="tag">Porcentaje</div>
+        <div className="tag">Relación útil</div>
         <Formula
-          tex={String.raw`$$ \eta[\%] = \frac{P_{mec}}{P_{electrica}} \cdot 100 $$`}
+          tex={String.raw`$$ P_{out} = \eta\,\sqrt{3}\,V_L\,I_L\,\cos\varphi $$`}
         />
+        <p>
+          Esta forma combina las relaciones anteriores para un motor trifásico
+          equilibrado alimentado con ondas aproximadamente sinusoidales.
+        </p>
       </section>
     </main>
   );
 };
 
 export default PotenciaMotorTrifasico;
-
-
-

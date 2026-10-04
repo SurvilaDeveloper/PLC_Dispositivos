@@ -11,7 +11,6 @@ declare global {
   }
 }
 
-// Helper para fórmulas en bloque
 const Formula: React.FC<{ tex: string }> = ({ tex }) => <p>{tex}</p>;
 
 const CosenoPhi: React.FC = () => {
@@ -23,60 +22,37 @@ const CosenoPhi: React.FC = () => {
 
   return (
     <main className="page-wrapper">
-      <h1>Factor de Potencia: cos&nbsp;φ</h1>
+      <h1>Factor de potencia y cos&nbsp;φ</h1>
 
       <p>
-        {
-          "En sistemas de corriente alterna (AC), el factor de potencia es una medida de qué tan eficientemente se transforma la potencia eléctrica en potencia útil. Se lo representa como $\\cos\\varphi$."
-        }
+        El factor de potencia relaciona la potencia activa con la potencia
+        aparente. No es una medida de eficiencia de conversión de energía.
       </p>
+
+      <section className="formula-block">
+        <div className="tag">Distinción importante</div>
+        <Formula tex={String.raw`$$ PF = \frac{P}{S} $$`} />
+        <p>
+          Si tensión y corriente son sinusoidales, el factor de potencia coincide
+          con el factor de desplazamiento:
+        </p>
+        <Formula tex={String.raw`$$ PF = \cos\varphi $$`} />
+        <p>
+          Con cargas no lineales y armónicos, el factor de potencia total también
+          incluye el efecto de la distorsión y puede ser menor que cos φ de la
+          componente fundamental.
+        </p>
+      </section>
 
       <TrianguloPotenciasSVG />
 
-      {/* 1. Definición básica */}
-      <h2>1. Definición de factor de potencia</h2>
+      <h2>1. Triángulo de potencias</h2>
       <section className="formula-block">
-        <div className="tag">Definición</div>
-        <Formula
-          tex={String.raw`$$ \cos\varphi = \frac{P}{S} $$`}
-        />
-        <ul>
-          <li>{"$P$ : potencia activa (W o kW)"}</li>
-          <li>{"$S$ : potencia aparente (VA o kVA)"}</li>
-          <li>{"$\\cos\\varphi$ : factor de potencia (adimensional, entre 0 y 1)"}</li>
-        </ul>
-      </section>
-
-      <section className="formula-block">
-        <div className="tag">Triángulo de potencias</div>
-        <Formula
-          tex={String.raw`$$ S^2 = P^2 + Q^2 $$`}
-        />
-        <ul>
-          <li>{"$Q$ : potencia reactiva (VAr o kVAr)"}</li>
-          <li>{"$S$ : hipotenusa del triángulo, $P$ : cateto adyacente, $Q$ : cateto opuesto"}</li>
-          <li>{"En el triángulo, $\\cos\\varphi = \\dfrac{P}{S}$ y $\\sin\\varphi = \\dfrac{Q}{S}$."}</li>
-        </ul>
-      </section>
-
-      {/* 2. Interpretación física */}
-      <h2>2. Interpretación física</h2>
-      <section className="formula-block">
-        <div className="tag">Rango típico</div>
-        <Formula
-          tex={String.raw`$$ 0 \leq \cos\varphi \leq 1 $$`}
-        />
-        <ul>
-          <li>{"$\\cos\\varphi \\approx 1$ : casi toda la potencia es activa (muy buen factor de potencia)."} </li>
-          <li>{"$\\cos\\varphi$ bajo (por ejemplo 0,6–0,7) : mucha potencia reactiva circulando, más corriente para la misma $P$."}</li>
-        </ul>
-      </section>
-
-      <section className="formula-block">
-        <div className="tag">Relación con P, Q y S</div>
+        <div className="tag">Modelo sinusoidal</div>
+        <Formula tex={String.raw`$$ S^2 = P^2 + Q^2 $$`} />
         <Formula
           tex={String.raw`$$
-\cos\varphi = \frac{P}{S}, 
+PF = \cos\varphi = \frac{P}{S},
 \qquad
 \sin\varphi = \frac{Q}{S},
 \qquad
@@ -84,81 +60,124 @@ const CosenoPhi: React.FC = () => {
 $$`}
         />
         <ul>
-          <li>{"$\\varphi$ : ángulo de desfase entre tensión y corriente."}</li>
-          <li>{"Si la carga es inductiva (motores, transformadores), la corriente se atrasa: $\\varphi > 0$ y el factor de potencia es inductivo."}</li>
-          <li>{"Si la carga es capacitiva, la corriente se adelanta: factor de potencia capacitivo."}</li>
+          <li>{"$P$ : potencia activa (W o kW)"}</li>
+          <li>{"$Q$ : potencia reactiva (var o kvar)"}</li>
+          <li>{"$S$ : potencia aparente (VA o kVA)"}</li>
         </ul>
+        <p>
+          El triángulo P–Q–S de esta sección supone régimen sinusoidal. No debe
+          utilizarse sin más para representar toda la potencia aparente de una
+          carga fuertemente distorsionante.
+        </p>
       </section>
 
-      {/* 3. Cálculo a partir de V, I y φ */}
-      <h2>3. Cálculo de potencias con cos&nbsp;φ</h2>
+      <h2>2. Interpretación física</h2>
       <section className="formula-block">
-        <div className="tag">Sistema trifásico equilibrado</div>
+        <div className="tag">Corriente para una potencia activa dada</div>
+        <p>
+          En un sistema con tensión fija, un factor de potencia menor exige mayor
+          corriente RMS para transferir la misma potencia activa. Esa mayor
+          corriente puede aumentar pérdidas I²R y caída de tensión en la red.
+        </p>
+        <p>
+          Un factor de potencia bajo no significa por sí mismo que la carga
+          consuma más energía activa: describe cómo se relacionan potencia activa,
+          potencia aparente y corriente.
+        </p>
+      </section>
+
+      <h2>3. Potencias en un sistema trifásico equilibrado</h2>
+      <section className="formula-block">
+        <div className="tag">Régimen sinusoidal</div>
         <Formula
-          tex={String.raw`$$ P = \sqrt{3} \cdot V_L \cdot I_L \cdot \cos\varphi $$`}
+          tex={String.raw`$$ P = \sqrt{3}\,V_L\,I_L\,\cos\varphi $$`}
         />
+        <Formula tex={String.raw`$$ S = \sqrt{3}\,V_L\,I_L $$`} />
         <Formula
-          tex={String.raw`$$ S = \sqrt{3} \cdot V_L \cdot I_L $$`}
-        />
-        <Formula
-          tex={String.raw`$$ Q = \sqrt{3} \cdot V_L \cdot I_L \cdot \sin\varphi $$`}
+          tex={String.raw`$$ Q = \sqrt{3}\,V_L\,I_L\,\sin\varphi $$`}
         />
         <ul>
-          <li>{"$V_L$ : tensión de línea (V)"}</li>
-          <li>{"$I_L$ : corriente de línea (A)"}</li>
-          <li>{"$\\cos\\varphi$ permite pasar de $S$ a $P$ y de $S$ a $Q$."}</li>
+          <li>{"$V_L$ : tensión eficaz de línea (V)"}</li>
+          <li>{"$I_L$ : corriente eficaz de línea (A)"}</li>
         </ul>
       </section>
 
-      {/* 4. Corrección del factor de potencia */}
-      <h2>4. Corrección del factor de potencia</h2>
+      <h2>4. Cargas inductivas y capacitivas</h2>
+      <section className="formula-block">
+        <div className="tag">Desplazamiento</div>
+        <ul>
+          <li>
+            En una carga inductiva idealizada, la corriente fundamental se atrasa
+            respecto de la tensión.
+          </li>
+          <li>
+            En una carga capacitiva idealizada, la corriente fundamental se
+            adelanta respecto de la tensión.
+          </li>
+          <li>
+            El signo y la convención de Q deben mantenerse coherentes en todo el
+            cálculo.
+          </li>
+        </ul>
+      </section>
+
+      <h2>5. Corrección del factor de desplazamiento</h2>
       <p>
-        {
-          "En instalaciones industriales se suele instalar bancos de capacitores para corregir el factor de potencia de un valor inicial $\\cos\\varphi_1$ a un valor deseado $\\cos\\varphi_2$ más cercano a 1."
-        }
+        Los bancos de capacitores se utilizan habitualmente para compensar
+        potencia reactiva inductiva. La relación simple siguiente supone régimen
+        sinusoidal y una potencia activa aproximadamente constante.
       </p>
 
       <section className="formula-block">
         <div className="tag">Potencia reactiva a compensar</div>
         <Formula
-          tex={String.raw`$$ Q_1 = P \tan\varphi_1, \qquad Q_2 = P \tan\varphi_2 $$`}
+          tex={String.raw`$$ Q_1 = P\tan\varphi_1,
+\qquad
+Q_2 = P\tan\varphi_2 $$`}
         />
-        <Formula
-          tex={String.raw`$$ Q_c = Q_1 - Q_2 $$`}
-        />
+        <Formula tex={String.raw`$$ Q_c = Q_1 - Q_2 $$`} />
         <ul>
-          <li>{"$Q_1$ : potencia reactiva antes de la corrección."}</li>
-          <li>{"$Q_2$ : potencia reactiva después de la corrección."}</li>
-          <li>{"$Q_c$ : potencia reactiva que debe suministrar el banco de capacitores."}</li>
+          <li>{"$Q_c$ : potencia reactiva capacitiva requerida por el modelo"}</li>
+          <li>
+            En instalaciones con armónicos, la selección del banco debe considerar
+            resonancia, corrientes armónicas y posible necesidad de reactores o
+            filtrado; no basta con aplicar esta fórmula.
+          </li>
         </ul>
       </section>
 
       <section className="formula-block">
-        <div className="tag">Capacitancia equivalente (monofásico)</div>
-        <Formula
-          tex={String.raw`$$ Q_c = \omega \, C \, V^2 $$`}
-        />
+        <div className="tag">Capacitor monofásico ideal</div>
+        <Formula tex={String.raw`$$ Q_c = \omega C V^2 $$`} />
         <ul>
-          <li>{"$C$ : capacitancia equivalente (F)"}</li>
-          <li>{"$V$ : tensión (V)"}</li>
-          <li>{"$\\omega = 2\\pi f$ : pulsación (rad/s)"}</li>
+          <li>{"$C$ : capacitancia (F)"}</li>
+          <li>{"$V$ : tensión eficaz aplicada al capacitor (V)"}</li>
+          <li>{"$\\omega = 2\\pi f$ : pulsación eléctrica (rad/s)"}</li>
         </ul>
       </section>
 
-      {/* 5. Resumen práctico */}
-      <h2>5. Resumen práctico</h2>
+      <h2>6. Qué mirar en un motor</h2>
       <section className="formula-block">
-        <div className="tag">Puntos clave</div>
+        <div className="tag">Placa y punto de operación</div>
         <ul>
-          <li>{"$\\cos\\varphi$ cercano a 1 implica menor corriente para la misma potencia activa."}</li>
-          <li>{"Un factor de potencia bajo implica mayores pérdidas en líneas y transformadores."}</li>
-          <li>{"La corrección con capacitores reduce la potencia reactiva que debe suministrar la red."}</li>
-          <li>{"En motores trifásicos, el coseno de phi típico varía aproximadamente entre 0,8 y 0,9 a plena carga."}</li>
+          <li>
+            El factor de potencia de un motor depende de su diseño y del punto de
+            carga; no conviene asumir un único “valor típico” para todos los motores.
+          </li>
+          <li>
+            Para cálculos reales deben usarse los datos de placa, documentación del
+            fabricante o mediciones correspondientes al punto de funcionamiento.
+          </li>
+          <li>
+            El rendimiento η y el factor de potencia PF son magnitudes diferentes.
+          </li>
         </ul>
       </section>
-        <h2>Demo interactiva</h2>
-        <CosenoPhiInteractive />
-        <CalculadoraTrifasica />
+
+      <h2>Demo interactiva idealizada</h2>
+      <CosenoPhiInteractive />
+
+      <CalculadoraTrifasica />
     </main>
   );
 };
