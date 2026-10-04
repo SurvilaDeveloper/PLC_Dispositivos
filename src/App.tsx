@@ -1,33 +1,34 @@
-import { useEffect, useState, type MouseEvent } from 'react'
-import PLCComponentesMenu from './PLCComponentsMenu'
-import LadderPlcCheatSheet from './componentes/LadderCheatSheet'
-import InstalacionesDomesticas from './pages/InstalacionesDomesticas'
-import InstalacionesIndustriales from './pages/InstalacionesIndustriales'
-import PotenciaMotorTrifasico from './componentes/PotenciaMotorTrifasico'
-import MotorTrifasicoParVelocidad from './componentes/MotorTrifasicoParVelocidad'
-import CablePotenciaCobre from './componentes/CablePotenciaCobre'
-import RlcSerieCheatSheet from './componentes/RlcSerieCheatSheet'
-import CapacitorCheatSheet from './componentes/CapacitorCheatSheet'
-import InductorCheatSheet from './componentes/InductorCheatSheet'
-import EnsayosMotorTrifasico from './componentes/EnsayosMotorTrifasico'
-import CosenoPhi from './componentes/CosenoPhi'
-import ComponentesElectronicosCheatSheet from './componentes/ComponentesElectronicosCheatSheet'
-import TablaCorrienteCable from './componentes/TablaCorrienteCable'
+import { lazy, Suspense, useEffect, useState, type MouseEvent } from 'react'
 import SimbolosElectronicos from './componentes/simbolosElectronicos'
-import ResistenciaMateriales from './componentes/ResistenciaMateriales'
-import TransistorBjtCheatSheet from './componentes/TransistorBjtCheatSheet'
-import TransistorMosfetCheatSheet from './componentes/TransistorMosfetCheatSheet'
-import MosfetSourceFollowerCheatSheet from './componentes/MosfetSourceFollowerCheatSheet'
-import PmosCurrentMirrorCheatSheet from './componentes/PmosCurrentMirrorCheatSheet'
-import PmosActiveLoadDiffAmpCheatSheet from './componentes/PmosActiveLoadDiffAmpCheatSheet'
-import MicrocontroladoresCheatSheet from './componentes/MicrocontroladoresCheatSheet'
-import PlacasDesarrolloCheatSheet from './componentes/PlacasDesarrolloCheatSheet'
-import PlacasHibridasAvanzadas from './componentes/PlacasHibridasAvanzadas'
-import MatrizEleccionPlataforma from './componentes/MatrizEleccionPlataforma'
-import MatrizArquitecturaPlataformas from './componentes/MatrizArquitecturaPlataformas'
-import ArduinoCInstrucciones from './componentes/ArduinoCInstrucciones'
 import { ROUTES, routeTitle, useAppNavigation, type AppRoute } from './navigation'
 import { useLegacyAccessibility } from './legacyAccessibility'
+
+const PLCComponentesMenu = lazy(() => import('./PLCComponentsMenu'))
+const LadderPlcCheatSheet = lazy(() => import('./componentes/LadderCheatSheet'))
+const InstalacionesDomesticas = lazy(() => import('./pages/InstalacionesDomesticas'))
+const InstalacionesIndustriales = lazy(() => import('./pages/InstalacionesIndustriales'))
+const PotenciaMotorTrifasico = lazy(() => import('./componentes/PotenciaMotorTrifasico'))
+const MotorTrifasicoParVelocidad = lazy(() => import('./componentes/MotorTrifasicoParVelocidad'))
+const CablePotenciaCobre = lazy(() => import('./componentes/CablePotenciaCobre'))
+const RlcSerieCheatSheet = lazy(() => import('./componentes/RlcSerieCheatSheet'))
+const CapacitorCheatSheet = lazy(() => import('./componentes/CapacitorCheatSheet'))
+const InductorCheatSheet = lazy(() => import('./componentes/InductorCheatSheet'))
+const EnsayosMotorTrifasico = lazy(() => import('./componentes/EnsayosMotorTrifasico'))
+const CosenoPhi = lazy(() => import('./componentes/CosenoPhi'))
+const ComponentesElectronicosCheatSheet = lazy(() => import('./componentes/ComponentesElectronicosCheatSheet'))
+const TablaCorrienteCable = lazy(() => import('./componentes/TablaCorrienteCable'))
+const ResistenciaMateriales = lazy(() => import('./componentes/ResistenciaMateriales'))
+const TransistorBjtCheatSheet = lazy(() => import('./componentes/TransistorBjtCheatSheet'))
+const TransistorMosfetCheatSheet = lazy(() => import('./componentes/TransistorMosfetCheatSheet'))
+const MosfetSourceFollowerCheatSheet = lazy(() => import('./componentes/MosfetSourceFollowerCheatSheet'))
+const PmosCurrentMirrorCheatSheet = lazy(() => import('./componentes/PmosCurrentMirrorCheatSheet'))
+const PmosActiveLoadDiffAmpCheatSheet = lazy(() => import('./componentes/PmosActiveLoadDiffAmpCheatSheet'))
+const MicrocontroladoresCheatSheet = lazy(() => import('./componentes/MicrocontroladoresCheatSheet'))
+const PlacasDesarrolloCheatSheet = lazy(() => import('./componentes/PlacasDesarrolloCheatSheet'))
+const PlacasHibridasAvanzadas = lazy(() => import('./componentes/PlacasHibridasAvanzadas'))
+const MatrizEleccionPlataforma = lazy(() => import('./componentes/MatrizEleccionPlataforma'))
+const MatrizArquitecturaPlataformas = lazy(() => import('./componentes/MatrizArquitecturaPlataformas'))
+const ArduinoCInstrucciones = lazy(() => import('./componentes/ArduinoCInstrucciones'))
 
 type RouteItem = {
   route: AppRoute
@@ -162,8 +163,8 @@ const FORMULA_LINKS: readonly TopicItem[] = [
 const TABLE_LINKS: readonly TopicItem[] = [
   {
     route: ROUTES.cableCurrentTable,
-    title: 'Tabla de sección del cable',
-    description: 'Corriente admisible orientativa según sección del conductor de cobre.',
+    title: 'Comparación de secciones de cable',
+    description: 'Modelo didáctico de caída de tensión, densidad de corriente y pérdidas en cobre.',
   },
   {
     route: ROUTES.electronicSymbols,
@@ -304,6 +305,13 @@ function App() {
       </header>
 
       <main id="main-content" className="page-panel" tabIndex={-1}>
+        <Suspense
+          fallback={
+            <section className="route-index" role="status" aria-live="polite">
+              <p className="route-index-description">Cargando contenido…</p>
+            </section>
+          }
+        >
         {path === ROUTES.plcComponents && <PLCComponentesMenu />}
         {path === ROUTES.plcLadder && <LadderPlcCheatSheet />}
 
@@ -464,6 +472,7 @@ function App() {
             </a>
           </section>
         )}
+        </Suspense>
       </main>
 
       <footer className="main-footer">
