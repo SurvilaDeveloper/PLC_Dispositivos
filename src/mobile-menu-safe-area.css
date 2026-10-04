@@ -1,0 +1,29 @@
+/* Ajuste del menú móvil para barras dinámicas del navegador/sistema.
+   Se carga después de ui-accessibility.css para actuar como override puntual. */
+
+.nav-menu {
+    max-height: calc(100vh - 78px);
+    padding-bottom: calc(28px + env(safe-area-inset-bottom));
+    scroll-padding-bottom: calc(36px + env(safe-area-inset-bottom));
+    overscroll-behavior-y: contain;
+}
+
+@supports (height: 100dvh) {
+    .nav-menu {
+        max-height: calc(100dvh - 78px);
+    }
+}
+
+@media (max-width: 700px) {
+    .nav-menu {
+        max-height: calc(100vh - 66px);
+        padding-bottom: calc(64px + env(safe-area-inset-bottom));
+        scroll-padding-bottom: calc(72px + env(safe-area-inset-bottom));
+    }
+
+    @supports (height: 100dvh) {
+        .nav-menu {
+            max-height: calc(100dvh - 66px);
+        }
+    }
+}
