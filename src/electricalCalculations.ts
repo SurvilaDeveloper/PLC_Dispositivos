@@ -251,3 +251,249 @@ export function calculateInductionMotorParametersStar(
     },
   }
 }
+
+export const COPPER_RESISTIVITY_20C_OHM_MM2_PER_M = 0.017241
+export const COPPER_TEMPERATURE_COEFFICIENT_20C_PER_C = 0.00394
+
+export type CopperResistanceResult = {
+  resistivityAtTemperatureOhmMm2PerM: number
+  oneWayResistance20COhm: number
+  oneWayResistanceAtTemperatureOhm: number
+  twoWireLoopResistance20COhm: number
+  twoWireLoopResistanceAtTemperatureOhm: number
+}
+
+export function calculateCopperResistance(
+  sectionMm2: number,
+  oneWayLengthM: number,
+  temperatureC: number,
+): CalculationResult<CopperResistanceResult> {
+  if (!Number.isFinite(sectionMm2) || sectionMm2 <= 0) {
+    return { ok: false, error: 'La sección del conductor debe ser mayor que 0 mm².' }
+  }
+
+  if (!Number.isFinite(oneWayLengthM) || oneWayLengthM <= 0) {
+    return { ok: false, error: 'La longitud debe ser mayor que 0 m.' }
+  }
+
+  if (!Number.isFinite(temperatureC)) {
+    return { ok: false, error: 'La temperatura debe ser un número válido.' }
+  }
+
+  const temperatureFactor =
+    1 + COPPER_TEMPERATURE_COEFFICIENT_20C_PER_C * (temperatureC - 20)
+
+  if (temperatureFactor <= 0) {
+    return {
+      ok: false,
+      error: 'La temperatura ingresada queda fuera del rango útil de esta aproximación lineal.',
+    }
+  }
+
+  const resistivityAtTemperatureOhmMm2PerM =
+    COPPER_RESISTIVITY_20C_OHM_MM2_PER_M * temperatureFactor
+  const oneWayResistance20COhm =
+    (COPPER_RESISTIVITY_20C_OHM_MM2_PER_M * oneWayLengthM) / sectionMm2
+  const oneWayResistanceAtTemperatureOhm =
+    (resistivityAtTemperatureOhmMm2PerM * oneWayLengthM) / sectionMm2
+
+  return {
+    ok: true,
+    value: {
+      resistivityAtTemperatureOhmMm2PerM,
+      oneWayResistance20COhm,
+      oneWayResistanceAtTemperatureOhm,
+      twoWireLoopResistance20COhm: oneWayResistance20COhm * 2,
+      twoWireLoopResistanceAtTemperatureOhm:
+        oneWayResistanceAtTemperatureOhm * 2,
+    },
+  }
+}
+
+export type CableSystem = 'singlePhaseTwoWire' | 'threePhaseBalanced'
+
+export type CopperVoltageDropInput = {
+  system: CableSystem
+  nominalVoltageV: number
+  currentA: number
+  oneWayLengthM: number
+  sectionMm2: number
+  powerFactor: number
+  conductorTemperatureC: number
+}
+
+export type CopperVoltageDropResult = {
+  sectionMm2: number
+  currentDensityAPerMm2: number
+  oneWayResistanceOhm: number
+  voltageDropV: number
+  voltageDropPercent: number
+  resistiveLossW: number
+}
+
+export function calculateCopperVoltageDrop(
+  input: CopperVoltageDropInput,
+): CalculationResult<CopperVoltageDropResult> {
+  const {
+    system,
+    nominalVoltageV,
+    currentA,
+    oneWayLengthM,
+    sectionMm2,
+    powerFactor,
+    conductorTemperatureC,
+  } = input
+
+  if (!Number.isFinite(nominalVoltageV) || nominalVoltageV <= 0) {
+    return { ok: false, error: 'La tensión nominal debe ser mayor que 0 V.' }
+  }
+
+  if (!Number.isFinite(currentA) || currentA <= 0) {
+    return { ok: false, error: 'La corriente debe ser mayor que 0 A.' }
+  }
+
+  if (!Number.isFinite(powerFactor) || powerFactor <= 0 || powerFactor > 1) {
+    return {
+      ok: false,
+      error: 'El factor de potencia debe ser mayor que 0 y menor o igual que 1.',
+    }
+  }
+
+  const resistance = calculateCopperResistance(
+    sectionMm2,
+    oneWayLengthM,
+    conductorTemperatureC,
+  )
+
+  if (resistance.ok === false) {
+    return { ok: false, error: resistance.error }
+  }
+
+  const oneWayResistanceOhm =
+    resistance.value.oneWayResistanceAtTemperatureOhm
+
+  // Aproximación resistiva: se desprecia la reactancia del conductor.
+  const voltageDropV =
+    system === 'singlePhaseTwoWire'
+      ? 2 * currentA * oneWayResistanceOhm * powerFactor
+      : Math.sqrt(3) * currentA * oneWayResistanceOhm * powerFactor
+
+  const resistiveLossW =
+    system === 'singlePhaseTwoWire'
+      ? 2 * currentA ** 2 * oneWayResistanceOhm
+      : 3 * currentA ** 2 * oneWayResistanceOhm
+
+  return {
+    ok: true,
+    value: {
+      sectionMm2,
+      currentDensityAPerMm2: currentA / sectionMm2,
+      oneWayResistanceOhm,
+      voltageDropV,
+      voltageDropPercent: (voltageDropV / nominalVoltageV) * 100,
+      resistiveLossW,
+    },
+  }
+}
+
+export const COMMON_COPPER_SECTIONS_MM2 = [
+  1.5,
+  2.5,
+  4,
+  6,
+  10,
+  16,
+  25,
+  35,
+  50,
+  70,
+  95,
+  120,
+] as const
+
+export type CopperSectionSuggestionInput = Omit<
+  CopperVoltageDropInput,
+  'sectionMm2'
+> & {
+  maxVoltageDropPercent: number
+  maxCurrentDensityAPerMm2: number
+  candidateSectionsMm2?: readonly number[]
+}
+
+export type CopperSectionSuggestionResult = {
+  selected: CopperVoltageDropResult | null
+  evaluated: CopperVoltageDropResult[]
+  maxVoltageDropPercent: number
+  maxCurrentDensityAPerMm2: number
+}
+
+export function suggestCopperSection(
+  input: CopperSectionSuggestionInput,
+): CalculationResult<CopperSectionSuggestionResult> {
+  const {
+    maxVoltageDropPercent,
+    maxCurrentDensityAPerMm2,
+    candidateSectionsMm2 = COMMON_COPPER_SECTIONS_MM2,
+    ...voltageDropInput
+  } = input
+
+  if (
+    !Number.isFinite(maxVoltageDropPercent) ||
+    maxVoltageDropPercent <= 0
+  ) {
+    return {
+      ok: false,
+      error: 'El límite de caída de tensión debe ser mayor que 0 %.',
+    }
+  }
+
+  if (
+    !Number.isFinite(maxCurrentDensityAPerMm2) ||
+    maxCurrentDensityAPerMm2 <= 0
+  ) {
+    return {
+      ok: false,
+      error: 'El límite didáctico de densidad de corriente debe ser mayor que 0 A/mm².',
+    }
+  }
+
+  const sortedSections = [...candidateSectionsMm2]
+    .filter((section) => Number.isFinite(section) && section > 0)
+    .sort((a, b) => a - b)
+
+  if (sortedSections.length === 0) {
+    return { ok: false, error: 'No hay secciones candidatas válidas para evaluar.' }
+  }
+
+  const evaluated: CopperVoltageDropResult[] = []
+
+  for (const sectionMm2 of sortedSections) {
+    const result = calculateCopperVoltageDrop({
+      ...voltageDropInput,
+      sectionMm2,
+    })
+
+    if (result.ok === false) {
+      return { ok: false, error: result.error }
+    }
+
+    evaluated.push(result.value)
+  }
+
+  const selected =
+    evaluated.find(
+      (result) =>
+        result.currentDensityAPerMm2 <= maxCurrentDensityAPerMm2 &&
+        result.voltageDropPercent <= maxVoltageDropPercent,
+    ) ?? null
+
+  return {
+    ok: true,
+    value: {
+      selected,
+      evaluated,
+      maxVoltageDropPercent,
+      maxCurrentDensityAPerMm2,
+    },
+  }
+}
