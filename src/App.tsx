@@ -27,6 +27,7 @@ import MatrizEleccionPlataforma from './componentes/MatrizEleccionPlataforma'
 import MatrizArquitecturaPlataformas from './componentes/MatrizArquitecturaPlataformas'
 import ArduinoCInstrucciones from './componentes/ArduinoCInstrucciones'
 import { ROUTES, routeTitle, useAppNavigation, type AppRoute } from './navigation'
+import { useLegacyAccessibility } from './legacyAccessibility'
 
 type RouteItem = {
   route: AppRoute
@@ -174,6 +175,8 @@ const TABLE_LINKS: readonly TopicItem[] = [
 function App() {
   const { path, navigate, href, isKnownRoute } = useAppNavigation()
   const [menuOpen, setMenuOpen] = useState(false)
+
+  useLegacyAccessibility(path)
 
   const handleRouteClick = (
     event: MouseEvent<HTMLAnchorElement>,

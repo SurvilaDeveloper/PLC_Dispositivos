@@ -532,3 +532,36 @@ textarea {
         animation-iteration-count: 1 !important;
     }
 }
+
+/* ===== Patch 04B · compatibilidad accesible en páginas heredadas ===== */
+.link-item[role="link"] {
+    display: block;
+    padding: 6px 8px;
+    border-radius: 8px;
+    color: inherit;
+}
+
+.link-item[role="link"]:hover,
+.link-item[role="link"]:focus-visible {
+    background-color: #0f2664;
+    color: #f8fafc;
+    text-decoration: none;
+}
+
+.table-container {
+    max-width: 100%;
+    -webkit-overflow-scrolling: touch;
+}
+
+.dtable {
+    min-width: 680px;
+}
+
+.dtable th {
+    text-align: left;
+}
+
+.dtable img {
+    max-width: 100%;
+    height: auto;
+}
